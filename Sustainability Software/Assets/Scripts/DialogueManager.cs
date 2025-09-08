@@ -50,10 +50,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void OnChoiceSelected(int choiceIndex)
+    private async void OnChoiceSelected(int choiceIndex)
     {
         var choice = currentScenario.choices[choiceIndex];
-        clientText.text = choice.clientReaction;
+
+        // pdate resource bars first
         resourceBar.AddValue(choice.resourceReaction);
+
+        //Call LLM for dynamic client response
+        string llmResponse = await LLMService.SendChoiceAsync(currentScenario, choice);
+        clientText.text = llmResponse;
     }
 }
