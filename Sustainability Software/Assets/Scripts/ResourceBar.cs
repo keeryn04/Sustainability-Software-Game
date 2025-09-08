@@ -7,21 +7,32 @@ using UnityEngine.UI;
 public class ResourceBar : MonoBehaviour
 {
     [Header("UI Elements")]
-    public TextMeshProUGUI pillarLabel;
     public Image fillImage; //Use an Image with Fill type set to "Horizontal"
 
     [Header("Values")]
-    [Range(0f, 100f)] public float currentValue = 50f;
+    [Range(0f, 1f)] public float currentValue = 0f;
+    private float targetValue = 0f;
 
-    public void SetPillar(string pillarName)
+    [Header("Animation")]
+    public float fillSpeed = 2f;
+
+    void Update()
     {
-        pillarLabel.text = pillarName;
+        //Smoothly move towards the target value
+        if (Mathf.Abs(fillImage.fillAmount - targetValue) > 0.001f)
+        {
+            fillImage.fillAmount = Mathf.Lerp(
+                fillImage.fillAmount,
+                targetValue,
+                Time.deltaTime * fillSpeed
+            );
+        }
     }
 
     public void SetValue(float value)
     {
-        currentValue = Mathf.Clamp01(value);
-        fillImage.fillAmount = currentValue;
+        targetValue = Mathf.Clamp01(value);
+        currentValue = targetValue;
     }
 
     public void AddValue(float amount)

@@ -21,22 +21,26 @@ MonoBehaviour:
   - choiceText: Keep servers in the coal region and add more capacity.
     clientReaction: This keeps performance strong, but our emissions have skyrocketed.
       Investors may question our green commitments.
+    resourceReaction: -0.2
     reflection: Scaling in a coal-heavy region increased emissions by 80%. This shows
       how short-term performance can worsen environmental sustainability.
   - choiceText: Migrate to a region powered by renewable energy.
     clientReaction: "Great news for sustainability! I\u2019m worried some users may
       experience slower connections, though."
+    resourceReaction: 0.2
     reflection: By switching to renewables, emissions dropped by 60%. This demonstrates
       how infrastructure choices directly impact environmental sustainability.
   - choiceText: Implement video compression, caching, and efficient code to reduce
       server load.
     clientReaction: I love that this lowers energy use! But it does mean our developers
       are under pressure to optimize quickly.
+    resourceReaction: 0.1
     reflection: Optimizing software reduced energy use by ~30%. Efficiency-focused
       software design is a core principle of environmental sustainability.
   - choiceText: Buy carbon credits to offset emissions from coal servers.
     clientReaction: This improves our public image, but the underlying emissions
       problem remains.
+    resourceReaction: -0.3
     reflection: This improves our public image, but the underlying emissions problem
       remains.
   reflectionFeedback: In this lesson, you explored environmental strategies for sustainable

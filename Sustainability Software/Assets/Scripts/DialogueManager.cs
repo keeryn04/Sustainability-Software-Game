@@ -30,6 +30,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentScenario = scenario;
         clientText.text = scenario.clientBrief;
+        resourceBar.SetValue(0.5f);
 
         for (int i = 0; i < choiceButtons.Length; i++)
         {
@@ -53,6 +54,6 @@ public class DialogueManager : MonoBehaviour
     {
         var choice = currentScenario.choices[choiceIndex];
         clientText.text = choice.clientReaction;
-        resourceBar.AddValue(50);
+        resourceBar.AddValue(choice.resourceReaction);
     }
 }
