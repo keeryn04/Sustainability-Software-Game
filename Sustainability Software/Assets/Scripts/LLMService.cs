@@ -30,12 +30,31 @@ public static class LLMService
             if (www.result == UnityWebRequest.Result.Success)
                 return www.downloadHandler.text;
 
-            Debug.LogError("LLM call failed: " + www.error);
-            return "Error contacting LLM service.";
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                //Parse JSON response from Vercel
+                try
+                {
+                    PromptResponse response = JsonUtility.FromJson<PromptResponse>(www.downloadHandler.text);
+                    return response.text;
+                }
+                catch
+                {
+                    Debug.LogError("Failed to parse JSON from server: " + www.downloadHandler.text);
+                    return "Error: Invalid server response.";
+                }
+            }
+            else
+            {
+                Debug.LogError($"Error calling LLM service: {www.error}");
+                return "Error: Failed to contact service.";
+            }
         }
     }
 
     [System.Serializable]
     private class PromptRequest { public string prompt; }
+    [System.Serializable]
+    private class PromptResponse { public string text; }
 }
 
