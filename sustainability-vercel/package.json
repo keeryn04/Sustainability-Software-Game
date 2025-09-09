@@ -1,0 +1,9 @@
+{
+  "name": "sustainability-vercel-app",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Unity project build is static in /public'",
+    "start": "vercel dev"
+  }
+}

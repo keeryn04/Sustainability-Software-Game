@@ -1,24 +1,41 @@
 using System.Threading.Tasks;
-using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Networking;
+using System.Text;
 
 public static class LLMService
 {
-    private static string apiKey = "OPENAI_KEY"; //Still need to fix
+    private static string apiUrl = "/api/get-data"; //Vercel function
 
     public static async Task<string> SendChoiceAsync(ScenarioData scenario, ChoiceData choice)
     {
         string prompt = $@"
-        You are acting as a client in a sustainable software simulation.
         Scenario: {scenario.clientBrief}
         Player choice: {choice.choiceText}
-
-        Respond as the client would in a professional but realistic tone.
-        Highlight trade-offs (performance, cost, emissions, etc).
-        End with a follow-up question if appropriate.
+        Respond professionally and highlight trade-offs.
         ";
 
-        // Example pseudo-call
-        var response = await OpenAI.ChatAsync(prompt, apiKey);
-        return response.Text;
+        string jsonBody = JsonUtility.ToJson(new PromptRequest { prompt = prompt });
+
+        using (UnityWebRequest www = new UnityWebRequest(apiUrl, "POST"))
+        {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+            www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            var asyncOp = www.SendWebRequest();
+            while (!asyncOp.isDone) await Task.Yield();
+
+            if (www.result == UnityWebRequest.Result.Success)
+                return www.downloadHandler.text;
+
+            Debug.LogError("LLM call failed: " + www.error);
+            return "Error contacting LLM service.";
+        }
     }
+
+    [System.Serializable]
+    private class PromptRequest { public string prompt; }
 }
+
