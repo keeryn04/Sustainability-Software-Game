@@ -54,7 +54,7 @@ public class DialogueManager : MonoBehaviour
     {
         var choice = currentScenario.choices[choiceIndex];
 
-        // pdate resource bars first
+        //Update resource bars first
         resourceBar.AddValue(choice.resourceReaction);
 
         //Call LLM for dynamic client response
