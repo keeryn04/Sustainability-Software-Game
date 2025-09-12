@@ -3,15 +3,27 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
 using UnityEditor.Experimental.GraphView;
+using System;
 
 public static class LLMService
 {
     private static string apiKey = EnvLoader.Get("GEMINI_KEY");
-    private static string apiUrl = "https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText"; //EnvLoader.Get("GEMINI_URL");
+    private static string apiUrl = EnvLoader.Get("GEMINI_URL");
 
-    public static async Task<string> SendChoiceAsync(ScenarioData scenario, ChoiceData choice)
+    public static async Task<string> SendChoiceAsync(ScenarioData scenario, string choice)
     {
-        string prompt = $"Scenario: {scenario.clientBrief} Player choice: {choice.choiceText} Respond professionally and highlight trade-offs.";
+        string prompt =
+            "You are simulating a sustainability client meeting. " +
+            $"Scenario: {scenario.clientBrief} " +
+            $"Player's choice: {choice} " +
+            "Respond professionally in 1–4 sentences, summarizing the impact of the player's choice. " +
+            "Include both pros and cons, and ask a follow-up question. " +
+            "Then suggest 4 new actionable options the player could take to address the issues and question raised. " +
+            "Additionally, provide a numeric resourceImpact value between -0.5 and 0.5 that represents how the player's choice " +
+            "affects sustainability (negative = harmful, positive = helpful). " +
+            "Return your answer strictly in this JSON format (no extra text, no numbering in choices): " +
+            "{ \"clientResponse\": \"...\", \"choices\": [\"choice1\", \"choice2\", \"choice3\", \"choice4\"], \"resourceImpact\": 0.0 }";
+
 
         var chatRequest = new ChatRequest
         {
@@ -43,7 +55,9 @@ public static class LLMService
 
                 //Parse the text from the response
                 var response = JsonUtility.FromJson<OpenAIResponse>(rawJson);
-                return response.choices[0].message.content;
+                var textResponse = response.choices[0].message.content;
+
+                return textResponse;
             }
             else
             {
@@ -89,3 +103,13 @@ public static class LLMService
         public string content;
     }
 }
+
+/*{
+    "response": "Migrating to a region powered by renewable energy will significantly reduce your environmental impact by eliminating reliance on coal. This move will also align with your sustainability goals and enhance your company's reputation as a green technology company.",
+    "choices": [
+        "Invest in energy-efficient servers and data centers to reduce overall energy consumption.",
+        "Implement virtualization technology to optimize server utilization and reduce the number of physical servers required.",
+        "Utilize cloud services to leverage renewable energy sources and reduce the carbon footprint of your platform.",
+        "Partner with green energy providers to ensure a consistent and sustainable energy source for your operations."
+    ]
+}*/
