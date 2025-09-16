@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentScenario: {fileID: 11400000, guid: e71a0d95b44de8e4e81fe0de1979c964, type: 2}
-  resourceBar: {fileID: 0}
+  resourceBar: {fileID: 8231202174278058804, guid: bf9734ebb64c25a4687bdf7f4354ccb6, type: 3}
 --- !u!222 &2833271274961921287
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2

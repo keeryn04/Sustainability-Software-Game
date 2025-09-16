@@ -2,6 +2,7 @@ using System.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        LoadScenario(currentScenario);
+        if (resourceBar == null)
+            resourceBar = FindObjectOfType<ResourceBar>();
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); //Destroy duplicate instances
@@ -26,19 +29,26 @@ public class DialogueManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); //Persist across scenes
         }
     }
-
-    public void LoadScenario(ScenarioData currentScenario)
+    public static DialogueManager GetOrCreateInstance()
     {
-        //Initialize DialogueManager based on scenario
+        if (Instance == null)
+        {
+            GameObject obj = new GameObject("DialogueManager");
+            Instance = obj.AddComponent<DialogueManager>();
+        }
+        return Instance;
+    }
+
+    public void InitializeScenario(ScenarioData currentScenario)
+    {
         clientText.text = currentScenario.clientBrief;
         currentChoices = new string[currentScenario.choices.Length];
+        resourceBar.SetScenario(currentScenario);
 
         for (int i = 0; i < currentScenario.choices.Length; i++)
         {
             currentChoices[i] = currentScenario.choices[i].choiceText;
         }
-
-        resourceBar.SetValue(0.5f);
 
         for (int i = 0; i < choiceButtons.Length; i++)
         {
