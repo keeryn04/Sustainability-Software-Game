@@ -19,6 +19,7 @@ public static class LLMService
             "Respond professionally in 1–4 sentences, summarizing the impact of the player's choice. " +
             "Include both pros and cons, and ask a follow-up question. " +
             "Then suggest 4 new actionable options the player could take to address the issues and question raised. " +
+            "Ensure the answers have some good and some bad options. " +
             "Additionally, provide a numeric resourceImpact value between -0.5 and 0.5 that represents how the player's choice " +
             "affects sustainability (negative = harmful, positive = helpful). " +
             "Return your answer strictly in this JSON format (no extra text, no numbering in choices): " +

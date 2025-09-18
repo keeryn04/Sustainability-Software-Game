@@ -37,6 +37,11 @@ public class ResourceBar : MonoBehaviour
         currentValue = targetValue;
     }
 
+    public float GetValue()
+    {
+        return currentValue;
+    }
+
     public void AddValue(float amount)
     {
         SetValue(currentValue + amount);

@@ -34,8 +34,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        if (DialogueManager.Instance != null && pendingScenario != null)
+        if (DialogueManager.Instance != null && GameTracker.Instance != null && pendingScenario != null)
         {
+            GameTracker.Instance.StartGame();
             DialogueManager.Instance.InitializeScenario(pendingScenario);
             pendingScenario = null;
         }

@@ -6,19 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI clientText;
-    public Button[] choiceButtons;
-    public ScenarioData currentScenario;
+    [Header("Text Elements")]
+    [SerializeField] private TextMeshProUGUI objectiveText;
+    [SerializeField] private TextMeshProUGUI clientText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+    [Header("Scenario Elements")]
+    [SerializeField] private ScenarioData currentScenario;
+    [SerializeField] private string goalObjective;
+    [SerializeField] private float playerScore;
+
+    [Header("In-Engine Assignments")]
+    [SerializeField] private Button[] choiceButtons;
+    [SerializeField] private ResourceBar resourceBar;
+
     private string[] currentChoices;
-    public ResourceBar resourceBar;
 
     public static DialogueManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (resourceBar == null)
-            resourceBar = FindObjectOfType<ResourceBar>();
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); //Destroy duplicate instances
@@ -29,18 +36,10 @@ public class DialogueManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); //Persist across scenes
         }
     }
-    public static DialogueManager GetOrCreateInstance()
-    {
-        if (Instance == null)
-        {
-            GameObject obj = new GameObject("DialogueManager");
-            Instance = obj.AddComponent<DialogueManager>();
-        }
-        return Instance;
-    }
 
     public void InitializeScenario(ScenarioData currentScenario)
     {
+        objectiveText.text = "Objective: " + goalObjective;
         clientText.text = currentScenario.clientBrief;
         currentChoices = new string[currentScenario.choices.Length];
         resourceBar.SetScenario(currentScenario);
@@ -76,7 +75,7 @@ public class DialogueManager : MonoBehaviour
         string jsonResponse = await LLMService.SendChoiceAsync(currentScenario, playerChoice);
         LLMResponse parsed = JsonUtility.FromJson<LLMResponse>(jsonResponse);
 
-        //Update resource bars with LLM's resourceImpact
+        //Update resource bar with LLM's resourceImpact
         resourceBar.AddValue(parsed.resourceImpact);
         
         //Update choices
@@ -89,7 +88,16 @@ public class DialogueManager : MonoBehaviour
             choiceButtons[i].gameObject.SetActive(i < parsed.choices.Length);
             choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = parsed.choices[i];
         }
+
+        //Update overall score, decisions made, and check for end condition
+        GameTracker.Instance.RegisterDecision(parsed.resourceImpact);
+
+        //Update score
+        scoreText.text = "Score: " + playerScore.ToString();
     }
+
+    public void SetObjectiveText(string objective) { this.goalObjective = objective; }
+    public void SetPlayerScore(float playerScore) { this.playerScore = playerScore; }
 }
 
 [System.Serializable]
