@@ -13,14 +13,19 @@ public class GameTracker : MonoBehaviour
 
     [Header("Scenario Settings")]
     [SerializeField] private GoalData[] goals;
-    [SerializeField] private GoalData currentGoal;
-    [SerializeField] private float scoreThreshold;
-    [SerializeField] private float resourceThreshold;
+    private GoalData currentGoal;
+    private float scoreThreshold;
+    private float resourceThreshold;
     [SerializeField] private int decisionLimit;
 
-    [Header("In-Engine Assignments")]
+    [Header("UI Elements")]
     [SerializeField] private ResourceBar resourceBar;
 
+    //Getters
+    public float PlayerScore => playerScore;
+    public GoalData CurrentGoal => currentGoal;
+    public float ScoreThreshold => scoreThreshold;
+    public float ResourceThreshold => resourceThreshold;
 
     private void Awake()
     {
@@ -41,7 +46,6 @@ public class GameTracker : MonoBehaviour
         playerScore = 0f;
 
         currentGoal = goals[UnityEngine.Random.Range(0, goals.Length)];
-        DialogueManager.Instance.SetObjectiveText(currentGoal.objective);
         scoreThreshold = currentGoal.pointThreshold;
         resourceThreshold = currentGoal.resourceThreshold;
     }
@@ -51,8 +55,7 @@ public class GameTracker : MonoBehaviour
         decisionsMade++;
 
         //Add points to score
-        playerScore += Mathf.Max(0, resourceImpact * 100);
-        DialogueManager.Instance.SetPlayerScore(playerScore);
+        playerScore += Mathf.Max(0, resourceImpact * 1000);
 
         //Check if game ends
         if (decisionsMade > decisionLimit)
@@ -63,35 +66,21 @@ public class GameTracker : MonoBehaviour
 
     private void CheckEndConditions()
     {
-        if (currentGoal == null) return; //no goal, nothing to check
+        if (currentGoal == null) return;
 
-        bool success = false;
-
-        switch (currentGoal.goalType)
+        bool success = currentGoal.goalType switch
         {
-            case GoalType.PointLevel:
-                success = playerScore >= scoreThreshold;
-                break;
-            case GoalType.ResourceLevel:
-                success = resourceBar.GetValue() >= resourceThreshold;
-                break;
-            //More goal types here
-            default:
-                Debug.LogWarning("Unknown goal type: " + currentGoal.goalType);
-                return;
-        }
+            GoalType.PointLevel => playerScore >= scoreThreshold,
+            GoalType.ResourceLevel => resourceBar.GetValue() >= resourceThreshold,
+            _ => false
+        };
 
         EndScenario(success);
     }
 
     private void EndScenario(Boolean status)
     {
-        if (status == false)
-        {
-            Debug.Log("Fail");
-        } else
-        {
-            Debug.Log("Success!");
-        }
+        Debug.Log(status ? "Success!" : "Fail");
+        //TODO: Load end screen or feedback
     }
 }

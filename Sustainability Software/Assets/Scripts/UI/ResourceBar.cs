@@ -47,7 +47,7 @@ public class ResourceBar : MonoBehaviour
         SetValue(currentValue + amount);
     }
 
-    public void SetScenario(ScenarioData scenario)
+    public void SetResourceScenario(ScenarioData scenario)
     {
         if (scenario == null) return;
 

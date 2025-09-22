@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private ScenarioData[] scenarios;
-    private ScenarioData pendingScenario;
+    private ScenarioData currentScenario;
 
     public static MenuManager Instance { get; private set; }
     private void Awake()
@@ -23,58 +23,61 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //Getters
+    public ScenarioData CurrentScenario => currentScenario;
+
     public void LoadScenarioScene(ScenarioData scenario, string sceneName = "PlayingScene")
     {
-        pendingScenario = scenario; //Store scenario to pass later
+        if (scenario == null)
+        {
+            Debug.LogError("Scenario is null. Cannot load scene.");
+            return;
+        }
+
+        PrepareScenario(scenario);
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void PrepareScenario(ScenarioData scenario)
+    {
+        currentScenario = scenario;
+        GameTracker.Instance.StartGame();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        if (DialogueManager.Instance != null && GameTracker.Instance != null && pendingScenario != null)
+        if (DialogueManager.Instance != null)
         {
-            GameTracker.Instance.StartGame();
-            DialogueManager.Instance.InitializeScenario(pendingScenario);
-            pendingScenario = null;
+            DialogueManager.Instance.SetupUI();
         }
         else
         {
-            Debug.LogError("DialogueManager not found in scene or scenario is null.");
+            Debug.LogError("DialogueManager not found in scene.");
         }
     }
 
     public void LoadPillar(SustainabilityPillar pillar)
     {
-        ScenarioData scenario = GetRandomByPillar(pillar);
+        var scenario = GetRandomByPillar(pillar);
         if (scenario != null)
-        {
             LoadScenarioScene(scenario);
-        }
         else
-        {
             Debug.LogWarning($"No scenarios available for pillar {pillar}");
-        }
     }
 
-    //Wrappers to support enum
+    public ScenarioData GetRandomByPillar(SustainabilityPillar targetPillar)
+    {
+        var filtered = scenarios.Where(c => c.pillar == targetPillar).ToArray();
+        return filtered.Length == 0 ? null : filtered[Random.Range(0, filtered.Length)];
+    }
+
+    //Helpers for UI reference
     public void LoadEnvironmental() => LoadPillar(SustainabilityPillar.Environmental);
     public void LoadSocial() => LoadPillar(SustainabilityPillar.Social);
     public void LoadEconomic() => LoadPillar(SustainabilityPillar.Economic);
     public void LoadTechnical() => LoadPillar(SustainabilityPillar.Technical);
-
-    public ScenarioData GetRandomByPillar(SustainabilityPillar targetPillar)
-    {
-        var filtered = scenarios.Where(c => c.pillar == targetPillar).ToList();
-
-        if (filtered.Count == 0)
-        {
-            return null;
-        }
-
-        int index = Random.Range(0, filtered.Count);
-        return filtered[index];
-    }
 }
