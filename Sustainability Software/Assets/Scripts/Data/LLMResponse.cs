@@ -8,4 +8,5 @@ public class LLMResponse
     public string clientResponse;
     public string[] choices;
     public float resourceImpact;
+    public string reflection;
 }

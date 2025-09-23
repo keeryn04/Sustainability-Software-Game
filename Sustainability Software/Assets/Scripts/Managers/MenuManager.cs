@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private ScenarioData[] scenarios;
     private ScenarioData currentScenario;
+    private Boolean reflectionStatus = false;
 
     public static MenuManager Instance { get; private set; }
     private void Awake()
@@ -23,8 +25,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    //Getters
+    //Setters & Getters
     public ScenarioData CurrentScenario => currentScenario;
+    public bool ReflectionStatus
+    {
+        get => reflectionStatus;
+        set => reflectionStatus = value;
+    }
 
     public void LoadScenarioScene(ScenarioData scenario, string sceneName = "PlayingScene")
     {
@@ -34,32 +41,19 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
-        PrepareScenario(scenario);
+        currentScenario = scenario;
+        GameTracker.Instance.StartGame();
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //Directly load the scene, SceneInitializer handles setup
         SceneManager.LoadScene(sceneName);
     }
 
-    private void PrepareScenario(ScenarioData scenario)
+    public void LoadReflectionScene(string sceneName = "ReflectionScene")
     {
-        currentScenario = scenario;
-        GameTracker.Instance.StartGame();
+        SceneManager.LoadScene(sceneName);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.SetupUI();
-        }
-        else
-        {
-            Debug.LogError("DialogueManager not found in scene.");
-        }
-    }
-
+    //Fetches random pillar based on pillar type, and feeds info back to scene
     public void LoadPillar(SustainabilityPillar pillar)
     {
         var scenario = GetRandomByPillar(pillar);
@@ -72,7 +66,7 @@ public class MenuManager : MonoBehaviour
     public ScenarioData GetRandomByPillar(SustainabilityPillar targetPillar)
     {
         var filtered = scenarios.Where(c => c.pillar == targetPillar).ToArray();
-        return filtered.Length == 0 ? null : filtered[Random.Range(0, filtered.Length)];
+        return filtered.Length == 0 ? null : filtered[UnityEngine.Random.Range(0, filtered.Length)];
     }
 
     //Helpers for UI reference

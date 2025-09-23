@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     private GoalData currentGoal;
     private string[] currentChoices;
     private float playerScore;
+    private List<ChoiceData> playerDecisions = new List<ChoiceData>();
 
     //Singleton
     public static DialogueManager Instance { get; private set; }
@@ -38,8 +40,22 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    //Setters
-    public void SetupUI()
+    //Used by SceneInitializer to update UI elements in object
+    public void AssignUI(
+    TextMeshProUGUI newClientText,
+    TextMeshProUGUI newObjectiveText,
+    TextMeshProUGUI newScoreText,
+    Button[] newChoiceButtons,
+    ResourceBar newResourceBar)
+    {
+        clientText = newClientText;
+        objectiveText = newObjectiveText;
+        scoreText = newScoreText;
+        choiceButtons = newChoiceButtons;
+        resourceBar = newResourceBar;
+    }
+
+    public void SetupScenarioUI()
     {
         //Assign local variables for UI info
         currentGoal = GameTracker.Instance.CurrentGoal;
@@ -78,6 +94,28 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void SetupReflectionUI()
+    {
+        currentScenario = MenuManager.Instance.CurrentScenario;
+
+        if (currentScenario == null)
+        {
+            Debug.LogError("No scenario found for reflection scene.");
+            return;
+        }
+
+        string textToShow = currentScenario.reflectionFeedback + "\n\n";
+
+        foreach (var decision in playerDecisions)
+        {
+            textToShow += $"Choice: {decision.choiceText}\nReflection: {decision.reflection}\n\n";
+        }
+
+        clientText.text = "";
+        clientText.text = textToShow;
+        Debug.Log(textToShow);
+    }
+
     private async Task TypeText(string text)
     {
         //Lock buttons so unmatching inputs aren't accepted
@@ -110,19 +148,26 @@ public class DialogueManager : MonoBehaviour
         string jsonResponse = await LLMService.SendChoiceAsync(currentScenario, playerChoice);
         LLMResponse parsed = JsonUtility.FromJson<LLMResponse>(jsonResponse);
 
+        // Store choice in decisions list
+        playerDecisions.Add(new ChoiceData
+        {
+            choiceText = playerChoice,
+            reflection = parsed.reflection
+        });
+
         // Update resource bar
         resourceBar.AddValue(parsed.resourceImpact);
 
         // Update choices
         currentChoices = parsed.choices;
 
+        // Show response with typing effect
+        await TypeText(parsed.clientResponse);
+
         // Update game state
         GameTracker.Instance.RegisterDecision(parsed.resourceImpact);
         playerScore = GameTracker.Instance.PlayerScore; //keep UI in sync
         scoreText.text = playerScore.ToString();
-
-        // Show response with typing effect
-        await TypeText(parsed.clientResponse);
 
         for (int i = 0; i < choiceButtons.Length; i++)
         {

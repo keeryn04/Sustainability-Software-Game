@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameTracker : MonoBehaviour
@@ -40,6 +41,11 @@ public class GameTracker : MonoBehaviour
         }
     }
 
+    public void AssignUI(ResourceBar newResourceBar)
+    {
+        resourceBar = newResourceBar;
+    }
+
     public void StartGame()
     {
         decisionsMade = 0;
@@ -75,12 +81,14 @@ public class GameTracker : MonoBehaviour
             _ => false
         };
 
+        MenuManager.Instance.ReflectionStatus = true;
         EndScenario(success);
     }
 
     private void EndScenario(Boolean status)
     {
+        //float currentResourceValue = resourceBar.GetValue();
         Debug.Log(status ? "Success!" : "Fail");
-        //TODO: Load end screen or feedback
+        MenuManager.Instance.LoadReflectionScene();
     }
 }

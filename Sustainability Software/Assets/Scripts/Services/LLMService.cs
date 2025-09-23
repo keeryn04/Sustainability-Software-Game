@@ -16,14 +16,17 @@ public static class LLMService
             "You are simulating a sustainability client meeting. " +
             $"Scenario: {scenario.clientBrief} " +
             $"Player's choice: {choice} " +
-            "Respond professionally in 1–4 sentences, summarizing the impact of the player's choice. " +
-            "Include both pros and cons, and ask a follow-up question. " +
-            "Then suggest 4 new actionable options the player could take to address the issues and question raised. " +
-            "Ensure the answers have some good and some bad options. " +
-            "Additionally, provide a numeric resourceImpact value between -0.3 and 0.3 that represents how the player's choice " +
-            "affects sustainability (negative = harmful, positive = helpful). " +
-            "Return your answer strictly in this JSON format (no extra text, no numbering in choices): " +
-            "{ \"clientResponse\": \"...\", \"choices\": [\"choice1\", \"choice2\", \"choice3\", \"choice4\"], \"resourceImpact\": 0.0 }";
+            "Respond professionally in 1–4 sentences summarizing the outcome of the player's choice. " +
+            "Include both pros and cons, and suggest a follow-up action. " +
+            "Then provide a short, one-sentence reflection summarizing if the choice was positive or negative for the client. " +
+            "Finally, suggest 4 new actionable options the player could take next, " +
+            "and provide a numeric resourceImpact value between -0.4 and 0.4 indicating the choice's sustainability impact " +
+            "(negative = harmful, positive = helpful). " +
+            "Return your answer strictly in this JSON format (no extra text, no numbering): " +
+            "{ \"clientResponse\": \"...\", " +
+            "\"reflection\": \"...\", " +
+            "\"choices\": [\"choice1\", \"choice2\", \"choice3\", \"choice4\"], " +
+            "\"resourceImpact\": 0.0 }";
 
 
         var chatRequest = new ChatRequest

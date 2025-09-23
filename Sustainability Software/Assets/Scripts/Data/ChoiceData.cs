@@ -6,5 +6,5 @@ using UnityEngine;
 public class ChoiceData
 {
     public string choiceText;                    //Text shown to player
-    [TextArea] public string reflection;         //Pillar-specific reflection feedback
+    public string reflection;         //Pillar-specific reflection feedback
 }
