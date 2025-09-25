@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private Button[] choiceButtons;
     [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private RectTransform bubbleTransform;
 
     private ScenarioData currentScenario;
     private GoalData currentGoal;
@@ -94,7 +96,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void SetupReflectionUI()
+    public async void SetupReflectionUI()
     {
         currentScenario = MenuManager.Instance.CurrentScenario;
 
@@ -112,16 +114,18 @@ public class DialogueManager : MonoBehaviour
         }
 
         clientText.text = "";
-        clientText.text = textToShow;
-        Debug.Log(textToShow);
+        await TypeTextReview(textToShow);
     }
 
     private async Task TypeText(string text)
     {
         //Lock buttons so unmatching inputs aren't accepted
-        foreach (Button button in choiceButtons)
+        if (choiceButtons != null && choiceButtons.Length > 0)
         {
-            button.interactable = false;
+            foreach (Button button in choiceButtons)
+            {
+                button.interactable = false;
+            }
         }
 
         clientText.text = ""; //Clear previous text
@@ -134,10 +138,31 @@ public class DialogueManager : MonoBehaviour
         }
 
         //Reenable buttons after text is done
-        foreach (Button button in choiceButtons)
+        if (choiceButtons != null && choiceButtons.Length > 0)
         {
-            button.interactable = true;
+            foreach (Button button in choiceButtons)
+            {
+                button.interactable = true;
+            }
         }
+    }
+
+    private async Task TypeTextReview(string text)
+    {
+        clientText.text = "";
+
+        foreach (char c in text)
+        {
+            clientText.text += c;
+
+            //Smoothly rebuild layout each frame
+            LayoutRebuilder.ForceRebuildLayoutImmediate(bubbleTransform);
+
+            await Task.Delay((int)(typingSpeed * 1000));
+        }
+
+        //Final rebuild to ensure full text fits
+        LayoutRebuilder.ForceRebuildLayoutImmediate(bubbleTransform);
     }
 
     private async void OnChoiceSelected(int choiceIndex)
