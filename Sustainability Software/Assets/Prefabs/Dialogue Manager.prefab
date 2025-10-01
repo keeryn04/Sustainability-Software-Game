@@ -60,9 +60,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   resourceBar: {fileID: 8231202174278058804, guid: bf9734ebb64c25a4687bdf7f4354ccb6, type: 3}
-  bubbleContainer: {fileID: 0}
-  choiceBubblePrefab: {fileID: 8918023172311736331, guid: db195de6bcc55664e9a75fbbdd7d38a3, type: 3}
-  reflectionBubblePrefab: {fileID: 6214044759926962506, guid: fa1a140085c0cb8479a2173218ad7aef, type: 3}
+  speechBubble: {fileID: 0}
+  reflectionGrid: {fileID: 0}
+  typingAnimator: {fileID: 0}
+  textSounds:
+  - {fileID: 8300000, guid: 4ecfd77adfd4a1b48813983e9c11a2d4, type: 3}
+  - {fileID: 8300000, guid: 976ac7a2c5a03d94498f30882c092d74, type: 3}
+  - {fileID: 8300000, guid: a576bf9261b957e4ca657bb3ce59ddcb, type: 3}
+  audioSource: {fileID: 0}
 --- !u!222 &2833271274961921287
 CanvasRenderer:
   m_ObjectHideFlags: 0

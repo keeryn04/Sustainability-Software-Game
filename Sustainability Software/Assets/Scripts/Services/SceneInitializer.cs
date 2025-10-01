@@ -11,6 +11,10 @@ public class SceneInitializer : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public Button[] choiceButtons;
     public ResourceBar resourceBar;
+    public GameObject speechBubble;
+    public Transform reflectionGrid;
+    public Animator typingAnimator;
+    public AudioSource audioSource;
 
     private void OnEnable()
     {
@@ -32,7 +36,7 @@ public class SceneInitializer : MonoBehaviour
         //Update DialogueManager with UI elements in this scene
         if (DialogueManager.Instance != null)
         {
-            DialogueManager.Instance.AssignUI(clientText, objectiveText, scoreText, choiceButtons, resourceBar);
+            DialogueManager.Instance.AssignUI(clientText, objectiveText, scoreText, choiceButtons, resourceBar, typingAnimator, audioSource);
 
             //Decide whether this is a reflection or scenario scene
             if (MenuManager.Instance.CurrentScenario != null && MenuManager.Instance.ReflectionStatus == false)
@@ -41,6 +45,7 @@ public class SceneInitializer : MonoBehaviour
             }
             else
             {
+                DialogueManager.Instance.AssignReflectionUI(speechBubble, reflectionGrid);
                 DialogueManager.Instance.SetupReflectionUI();
             }
         }

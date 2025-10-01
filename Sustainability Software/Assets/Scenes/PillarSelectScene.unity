@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Tracker
       objectReference: {fileID: 0}
+    - target: {fileID: 6064092116915992942, guid: 47a91785d7d23b444afd712201438b4d, type: 3}
+      propertyPath: decisionLimit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8273152198270579272, guid: 47a91785d7d23b444afd712201438b4d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 790.21545

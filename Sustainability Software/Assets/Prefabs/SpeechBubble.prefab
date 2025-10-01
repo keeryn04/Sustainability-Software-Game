@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6232166067485569103}
   - component: {fileID: 6202166283804466321}
   m_Layer: 5
-  m_Name: ClientTextBox
+  m_Name: TextBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

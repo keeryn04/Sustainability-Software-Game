@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
+using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -18,7 +18,11 @@ public class DialogueManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private Button[] choiceButtons;
     [SerializeField] private ResourceBar resourceBar;
-    [SerializeField] private RectTransform bubbleTransform;
+    [SerializeField] private GameObject speechBubble;
+    [SerializeField] private Transform reflectionGrid;
+    [SerializeField] private Animator typingAnimator;
+    [SerializeField] private AudioClip[] textSounds;
+    [SerializeField] private AudioSource audioSource;
 
     private ScenarioData currentScenario;
     private GoalData currentGoal;
@@ -48,13 +52,25 @@ public class DialogueManager : MonoBehaviour
     TextMeshProUGUI newObjectiveText,
     TextMeshProUGUI newScoreText,
     Button[] newChoiceButtons,
-    ResourceBar newResourceBar)
+    ResourceBar newResourceBar,
+    Animator newTypingAnimator,
+    AudioSource newAudioSource)
     {
         clientText = newClientText;
         objectiveText = newObjectiveText;
         scoreText = newScoreText;
         choiceButtons = newChoiceButtons;
         resourceBar = newResourceBar;
+        typingAnimator = newTypingAnimator;
+        audioSource = newAudioSource;
+    }
+
+    public void AssignReflectionUI(
+    GameObject newSpeechBubble,
+    Transform newReflectionGrid)
+    {
+        speechBubble = newSpeechBubble;
+        reflectionGrid = newReflectionGrid;
     }
 
     public void SetupScenarioUI()
@@ -106,18 +122,33 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        string textToShow = currentScenario.reflectionFeedback + "\n\n";
+        string textToShow = currentScenario.reflectionFeedback;
+        clientText.text = "";
+        await TypeTextGeneral(textToShow, clientText);  
 
         foreach (var decision in playerDecisions)
         {
-            textToShow += $"Choice: {decision.choiceText}\nReflection: {decision.reflection}\n\n";
-        }
+            string decisionText = $"Choice: {decision.choiceText}\nReflection: {decision.reflection}";
 
-        clientText.text = "";
-        await TypeTextReview(textToShow);
+            //Spawn reflection bubble and position
+            GameObject reviewBubble = Instantiate(speechBubble, reflectionGrid);
+            reviewBubble.transform.localScale = Vector3.one;
+            reviewBubble.transform.localPosition = Vector3.zero;
+
+            //Get text box of review bubble and type in it
+            TextMeshProUGUI reviewTextBox = reviewBubble.GetComponentInChildren<TextMeshProUGUI>();
+            if (reviewTextBox != null)
+            {
+                await TypeTextGeneral(decisionText, reviewTextBox);
+            }
+            else
+            {
+                Debug.LogWarning("No TextMeshProUGUI found in prefab!");
+            }
+        }
     }
 
-    private async Task TypeText(string text)
+    private async Task TypeTextPlay(string text)
     {
         //Lock buttons so unmatching inputs aren't accepted
         if (choiceButtons != null && choiceButtons.Length > 0)
@@ -130,12 +161,25 @@ public class DialogueManager : MonoBehaviour
 
         clientText.text = ""; //Clear previous text
 
+        if (typingAnimator != null)
+            typingAnimator.SetBool("IsTyping", true);
+
         foreach (char c in text)
         {
-
             clientText.text += c;
+            if (textSounds.Length > 0 && Random.value < 0.3f)
+            {
+                int randomIndex = Random.Range(0, textSounds.Length);
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                audioSource.PlayOneShot(textSounds[randomIndex]);
+            }
+
             await Task.Delay((int)(typingSpeed * 1000));
         }
+
+        if (typingAnimator != null)
+            typingAnimator.SetBool("IsTyping", false);
+
 
         //Reenable buttons after text is done
         if (choiceButtons != null && choiceButtons.Length > 0)
@@ -147,27 +191,33 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private async Task TypeTextReview(string text)
+    private async Task TypeTextGeneral(string text, TextMeshProUGUI textBox)
     {
-        clientText.text = "";
+        textBox.text = ""; //Clear the bubble first
+
+        if (typingAnimator != null)
+            typingAnimator.SetBool("IsTyping", true);
 
         foreach (char c in text)
         {
-            clientText.text += c;
-
-            //Smoothly rebuild layout each frame
-            LayoutRebuilder.ForceRebuildLayoutImmediate(bubbleTransform);
+            textBox.text += c; 
+            if (textSounds.Length > 0 && Random.value < 0.5f)
+            {
+                int randomIndex = Random.Range(0, textSounds.Length);
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                audioSource.PlayOneShot(textSounds[randomIndex]);
+            }
 
             await Task.Delay((int)(typingSpeed * 1000));
         }
 
-        //Final rebuild to ensure full text fits
-        LayoutRebuilder.ForceRebuildLayoutImmediate(bubbleTransform);
+        if (typingAnimator != null)
+            typingAnimator.SetBool("IsTyping", false);
     }
 
     private async void OnChoiceSelected(int choiceIndex)
     {
-        string playerChoice = currentChoices[choiceIndex];
+        string playerChoice = choiceButtons[choiceIndex].GetComponentInChildren<TextMeshProUGUI>().text;
 
         // Get LLM response
         string jsonResponse = await LLMService.SendChoiceAsync(currentScenario, playerChoice);
@@ -187,7 +237,7 @@ public class DialogueManager : MonoBehaviour
         currentChoices = parsed.choices;
 
         // Show response with typing effect
-        await TypeText(parsed.clientResponse);
+        await TypeTextPlay(parsed.clientResponse);
 
         // Update game state
         GameTracker.Instance.RegisterDecision(parsed.resourceImpact);
