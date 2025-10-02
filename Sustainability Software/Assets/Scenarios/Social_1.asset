@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22ec04ac5cc5a146a4b255f68971fa0, type: 3}
+  m_Name: Social_1
+  m_EditorClassIdentifier: 
+  clientBrief: "I manage a mid-sized tech company, and morale is slipping. People
+    are overworked, some feel excluded, and I\u2019m worried we\u2019ll lose good
+    employees if we don\u2019t fix things soon. What steps should we take to improve
+    our workplace culture?"
+  choices:
+  - choiceText: Offer flexible hours and the option to work remotely.
+    reflection: Supports work-life balance and helps prevent burnout.
+  - choiceText: Run diversity, equity, and inclusion workshops.
+    reflection: Helps employees feel valued and improves team cohesion.
+  - choiceText: Launch a wellness program with counseling and fitness perks.
+    reflection: Directly addresses stress and supports employee health.
+  - choiceText: Start a mentorship program for junior staff.
+    reflection: Builds confidence, creates growth opportunities, and strengthens
+      loyalty.
+  reflectionFeedback: 'Healthy workplaces support people on multiple levels: balance,
+    inclusion, wellness, and growth. A mix of these approaches will improve morale
+    and reduce turnover.'
+  pillar: 1
+  resourceBarSprite: {fileID: 21300000, guid: dafedfaefdf991c418084136e786ad00, type: 3}

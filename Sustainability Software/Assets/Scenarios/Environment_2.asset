@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22ec04ac5cc5a146a4b255f68971fa0, type: 3}
+  m_Name: Environment_2
+  m_EditorClassIdentifier: 
+  clientBrief: "We run a neighborhood grocery store, and lately we\u2019ve been under
+    pressure to reduce our environmental footprint. Our energy bills are huge, and
+    we feel guilty about how much food we throw away. We don\u2019t know where to
+    start\u2014can you help us make the right choice?"
+  choices:
+  - choiceText: Install energy-efficient refrigeration units.
+    reflection: This reduces energy use and lowers carbon emissions long-term.
+  - choiceText: Start a composting program for unsold produce.
+    reflection: Keeps organic waste out of landfills and creates useful compost.
+  - choiceText: Switch to plastic-free packaging for all products.
+    reflection: Reduces plastic pollution, though it may increase costs.
+  - choiceText: Partner with local farms to donate excess food.
+    reflection: Helps the community and avoids food waste.
+  reflectionFeedback: 'Each option addresses sustainability in different ways: energy
+    efficiency reduces emissions, composting prevents landfill waste, and plastic-free
+    packaging reduces pollution.'
+  pillar: 0
+  resourceBarSprite: {fileID: 21300000, guid: 8461884c55250fd4684acf3aeb3c9b81, type: 3}

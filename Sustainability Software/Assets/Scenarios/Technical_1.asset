@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22ec04ac5cc5a146a4b255f68971fa0, type: 3}
+  m_Name: Technical_1
+  m_EditorClassIdentifier: 
+  clientBrief: "I\u2019m the operations manager at a logistics company, and our fleet
+    and data systems are a nightmare. Fuel use is high, our servers run 24/7, and
+    we can\u2019t seem to get accurate analytics to improve efficiency. We know technology
+    can help, but we\u2019re not sure where to invest first. Can you advise us?"
+  choices:
+  - choiceText: Upgrade our fleet with GPS tracking and route optimization software.
+    reflection: Cuts fuel use and delivery times, but requires training drivers and
+      staff.
+  - choiceText: Migrate our on-premise servers to a cloud provider with renewable
+      energy data centers.
+    reflection: Reduces energy demand and maintenance overhead, but involves data
+      security considerations.
+  - choiceText: Implement IoT sensors on vehicles and warehouses to monitor energy
+      and fuel consumption in real time.
+    reflection: Provides precise data for decision-making, though setup costs and
+      system integration are complex.
+  - choiceText: Develop a custom AI dashboard to analyze patterns and suggest sustainability
+      improvements.
+    reflection: Powerful insights, but requires strong data pipelines and technical
+      expertise to succeed.
+  reflectionFeedback: 'Technical sustainability often starts with data and efficiency:
+    route optimization saves fuel, cloud migration reduces emissions, IoT enables
+    monitoring, and AI delivers insights. The challenge is aligning technology investment
+    with organizational capacity.'
+  pillar: 3
+  resourceBarSprite: {fileID: 21300000, guid: 251c14eeb7cedb74a9ba9d3d14c6f001, type: 3}

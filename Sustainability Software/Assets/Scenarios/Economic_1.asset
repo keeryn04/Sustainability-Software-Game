@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22ec04ac5cc5a146a4b255f68971fa0, type: 3}
+  m_Name: Economic_1
+  m_EditorClassIdentifier: 
+  clientBrief: "We\u2019ve started a small clothing brand focused on eco-friendly
+    fabrics. Business is going well, but as we grow, it\u2019s getting harder to
+    stay profitable while keeping prices fair. We don\u2019t want to compromise our
+    values\u2014what do you suggest?"
+  choices:
+  - choiceText: Form partnerships with sustainable suppliers to reduce costs.
+    reflection: Maintains eco-values while scaling production efficiently.
+  - choiceText: Raise prices slightly to keep margins healthy.
+    reflection: Boosts profit, but risks turning away budget-conscious customers.
+  - choiceText: Diversify our product line with accessories and seasonal items.
+    reflection: Spreads risk and attracts different types of customers.
+  - choiceText: Apply for grants and funding aimed at sustainable businesses.
+    reflection: Provides financial support without shifting costs to customers.
+  reflectionFeedback: Economic sustainability is about balance. Partnerships and
+    grants ease financial strain, pricing helps with margins, and diversification
+    builds resilience. A combination can ensure growth without losing values.
+  pillar: 2
+  resourceBarSprite: {fileID: 21300000, guid: 36f9f0fa83c9aba4094481931386222e, type: 3}
