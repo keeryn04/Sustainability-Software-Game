@@ -17,6 +17,7 @@ public abstract class SimulationBase : MonoBehaviour
     public virtual void StopSimulation()
     {
         gameObject.SetActive(false);
+        SimulationManager.Instance.isSimulating = false;
         Debug.Log($"{SimulationName} stopped.");
     }
 

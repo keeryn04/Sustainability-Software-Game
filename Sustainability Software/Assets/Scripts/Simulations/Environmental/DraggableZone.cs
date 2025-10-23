@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class DraggableZone : MonoBehaviour, IDropHandler
 {
     [SerializeField] private string acceptedType;
+    [SerializeField] private RectTransform dropArea;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -15,11 +16,11 @@ public class DraggableZone : MonoBehaviour, IDropHandler
             if (item.itemType == acceptedType)
             {
                 Debug.Log($"Correctly sorted {item.name} into {acceptedType}");
-                item.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
             }
             else
             {
                 Debug.Log($"Incorrectly sorted {item.name} into {acceptedType}");
+                item.ResetToRandomPosition(dropArea);
             }
         }
     }

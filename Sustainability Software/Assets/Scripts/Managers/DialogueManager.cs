@@ -191,7 +191,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private async Task TypeTextGeneral(string text, TextMeshProUGUI textBox)
+    public async Task TypeTextGeneral(string text, TextMeshProUGUI textBox)
     {
         textBox.text = ""; //Clear the bubble first
 
