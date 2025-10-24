@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableZone : MonoBehaviour, IDropHandler
 {
@@ -15,11 +16,10 @@ public class DraggableZone : MonoBehaviour, IDropHandler
         {
             if (item.itemType == acceptedType)
             {
-                Debug.Log($"Correctly sorted {item.name} into {acceptedType}");
+                item.GetComponent<Image>().color = new Color32(175, 225, 175, 100);
             }
             else
             {
-                Debug.Log($"Incorrectly sorted {item.name} into {acceptedType}");
                 item.ResetToRandomPosition(dropArea);
             }
         }

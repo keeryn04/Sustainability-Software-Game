@@ -11,19 +11,16 @@ public abstract class SimulationBase : MonoBehaviour
     {
         SimulationManager.Instance.isSimulating = true;
         gameObject.SetActive(true);
-        Debug.Log($"{SimulationName} started.");
     }
 
     public virtual void StopSimulation()
     {
         gameObject.SetActive(false);
         SimulationManager.Instance.isSimulating = false;
-        Debug.Log($"{SimulationName} stopped.");
     }
 
     public virtual void Cleanup()
     {
         Destroy(gameObject);
-        Debug.Log($"{SimulationName} destroyed.");
     }
 }

@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SimulationManager : MonoBehaviour
 {
     public bool isSimulating { get; set; } = false;
     public RectTransform simulationContainer;
     public List<GameObject> simulationPrefabs;
+    [SerializeField] private GameObject simButtonClearPrefab;
+    [SerializeField] private RectTransform clearContainer;
 
+    private Button simClearButtonInstance;
+    private GameObject slideSimButton;
     private SimulationBase currentSimulation;
     public static SimulationManager Instance { get; private set; }
 
@@ -22,7 +27,7 @@ public class SimulationManager : MonoBehaviour
             Instance = this;
         }
     }
-        public void LoadSimulation(string simulationName)
+    public void LoadSimulation(string simulationName, GameObject triggerButton = null)
     {
         if (currentSimulation != null)
         {
@@ -49,6 +54,18 @@ public class SimulationManager : MonoBehaviour
 
             currentSimulation = instance.GetComponent<SimulationBase>();
             currentSimulation.StartSimulation();
+
+            //Assign Sim button for stop simulation
+            slideSimButton = triggerButton;
+
+            //Disable and hide button
+            if (slideSimButton != null)
+                slideSimButton.SetActive(false);
+
+            GameObject btnSimClear = Instantiate(simButtonClearPrefab, clearContainer);
+            simClearButtonInstance = btnSimClear.GetComponent<Button>();
+
+            simClearButtonInstance.onClick.AddListener(() => this.StopSimulation());
         }
         else
         {
@@ -57,5 +74,26 @@ public class SimulationManager : MonoBehaviour
     }
 
     public void StartSimulation() => currentSimulation?.StartSimulation();
-    public void StopSimulation() => currentSimulation?.StopSimulation();
+    public void StopSimulation()
+    {
+        if (currentSimulation != null)
+        {
+            currentSimulation.StopSimulation();
+            Destroy(currentSimulation.gameObject);
+            currentSimulation = null;
+            isSimulating = false;
+        }
+
+        //Destroy clear button
+        if (simClearButtonInstance != null)
+        {
+            Destroy(simClearButtonInstance.gameObject);
+            simClearButtonInstance = null;
+        }
+
+        //Reactivate sim button
+        if (slideSimButton != null)
+            slideSimButton.SetActive(true);
+    }
+
 }

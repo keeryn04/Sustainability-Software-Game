@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class SlideshowViewer : MonoBehaviour
@@ -11,10 +14,16 @@ public class SlideshowViewer : MonoBehaviour
     [SerializeField] private Button prevButton;
     [SerializeField] private SlideData slideshow;
 
+    [SerializeField] private RectTransform interactiveContainer;
+    [SerializeField] private GameObject simulationButtonPrefab;
+    [SerializeField] private GameObject hearMoreButtonPrefab;
+    [SerializeField] private TextMeshProUGUI hearMoreTextBox;
+
     [Header("UI Animation")]
     [SerializeField] private float progressFillSpeed = 0.3f;
 
     private int currentSlide = 0;
+    private List<GameObject> activeButtons = new List<GameObject>();
 
     public static SlideshowViewer Instance { get; private set; }
 
@@ -31,7 +40,7 @@ public class SlideshowViewer : MonoBehaviour
     }
     void Start()
     {
-        if (slideshow.slides.Length > 0)
+        if (slideshow.slides.Count > 0)
             ShowSlide(0);
 
         nextButton.onClick.AddListener(NextSlide);
@@ -40,14 +49,50 @@ public class SlideshowViewer : MonoBehaviour
 
     void ShowSlide(int index)
     {
-        currentSlide = Mathf.Clamp(index, 0, slideshow.slides.Length - 1);
-        slideImage.sprite = slideshow.slides[currentSlide];
-        StartCoroutine(SmoothFill((float)(currentSlide + 1) / slideshow.slides.Length));
+        currentSlide = Mathf.Clamp(index, 0, slideshow.slides.Count - 1);
+        var slide = slideshow.slides[currentSlide];
+
+        slideImage.sprite = slide.slideImage;
+        StartCoroutine(SmoothFill((float)(currentSlide + 1) / slideshow.slides.Count));
+
+        ClearButtons();
+
+        foreach (var element in slide.elements)
+        {
+            GameObject prefab = element.type == SlideData.InteractiveElement.ElementType.Simulation
+                ? simulationButtonPrefab
+                : hearMoreButtonPrefab;
+
+            GameObject button = Instantiate(prefab, interactiveContainer);
+            Button btn = button.GetComponent<Button>();
+
+            if (element.type == SlideData.InteractiveElement.ElementType.Simulation)
+            {
+                btn.onClick.AddListener(() =>
+                    SimulationManager.Instance.LoadSimulation(element.targetID, btn.gameObject));
+
+            }
+            else if (element.type == SlideData.InteractiveElement.ElementType.HearMore)
+            {
+                btn.onClick.AddListener(() =>
+                    HearMoreManager.Instance.LoadHearMore(element.targetID, hearMoreTextBox, btn));
+            }
+
+            activeButtons.Add(button);
+        }
     }
+
+    void ClearButtons()
+    {
+        foreach (var btn in activeButtons)
+            Destroy(btn);
+        activeButtons.Clear();
+    }
+
 
     public void NextSlide()
     {
-        if (currentSlide < slideshow.slides.Length - 1 && !SimulationManager.Instance.isSimulating)
+        if (currentSlide < slideshow.slides.Count - 1 && !SimulationManager.Instance.isSimulating)
             ShowSlide(currentSlide + 1);
     }
 
