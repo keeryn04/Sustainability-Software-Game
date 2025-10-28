@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 83.12001}
-  m_SizeDelta: {x: 980, y: 550}
+  m_AnchoredPosition: {x: 0.31, y: 83.12001}
+  m_SizeDelta: {x: 981.62, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435066839
 MonoBehaviour:
@@ -245,7 +245,7 @@ MonoBehaviour:
   progressBar: {fileID: 1438118285}
   nextButton: {fileID: 1489572327}
   prevButton: {fileID: 1466878327}
-  slideshow: {fileID: 11400000, guid: 5d62238f58f121646bab8f7333e1f427, type: 2}
+  slideshow: {fileID: 11400000, guid: ba64a81bc44d9ad4f8e5168fdd34841d, type: 2}
   interactiveContainer: {fileID: 1517471389}
   simulationButtonPrefab: {fileID: 1334394502439814988, guid: 38c79f7a71124624899f196bb62a4c67, type: 3}
   hearMoreButtonPrefab: {fileID: 4249445032758683505, guid: b939c738ac71e374ea48dd93c0bcd70c, type: 3}
@@ -380,8 +380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.43, y: 82.97}
-  m_SizeDelta: {x: 980, y: 550}
+  m_AnchoredPosition: {x: 0.30998, y: 82.97}
+  m_SizeDelta: {x: 981.62, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &623290160
 MonoBehaviour:
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.10980392}
+  m_Color: {r: 0.7150943, g: 0.9093359, b: 1, a: 0.10980392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -961,9 +961,6 @@ PrefabInstance:
       addedObject: {fileID: 1996139829}
     - targetCorrespondingSourceObject: {fileID: 678769015195633968, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1177793556}
-    - targetCorrespondingSourceObject: {fileID: 678769015195633968, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1279017317}
     - targetCorrespondingSourceObject: {fileID: 678769015195633968, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       insertIndex: -1
@@ -998,7 +995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2757810341163253020, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_PreferredWidth
-      value: 498.56
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_Pivot.x
@@ -1066,7 +1063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1245,17 +1242,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177793555}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 625869261}
-  m_Father: {fileID: 654833290}
+  m_Father: {fileID: 1279017317}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -409.99994, y: 177.89001}
+  m_AnchoredPosition: {x: -655.00006, y: 281.73}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1177793557
@@ -1377,6 +1374,7 @@ RectTransform:
   - {fileID: 435066838}
   - {fileID: 623290159}
   - {fileID: 591527228}
+  - {fileID: 1177793556}
   m_Father: {fileID: 654833290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -1541,6 +1539,15 @@ MonoBehaviour:
   hearMorePrefabs:
   - {fileID: 11400000, guid: 0f7849cfc6e4e5042b095317dfefc03e, type: 2}
   - {fileID: 11400000, guid: 934319ba741a4c249bb114f40960c74b, type: 2}
+  - {fileID: 11400000, guid: 2853b0509b546eb44b9229186c7393b1, type: 2}
+  - {fileID: 11400000, guid: 16497b48a1a3ae9459949d30bf1de530, type: 2}
+  - {fileID: 11400000, guid: e0cd7982ff314b94aa25e9ce4acb623d, type: 2}
+  - {fileID: 11400000, guid: 3567d45045a6981459571ff492cf5497, type: 2}
+  - {fileID: 11400000, guid: 00245967c09f1f54eab62b2ebf0b9241, type: 2}
+  - {fileID: 11400000, guid: 81ee2da7317b2b34f9634380589424af, type: 2}
+  - {fileID: 11400000, guid: 512588469fecc2547b510751ee3eaa3c, type: 2}
+  - {fileID: 11400000, guid: a9c66daced673f843b18584bb66512c5, type: 2}
+  - {fileID: 11400000, guid: 48bf5af5a9740ce4ba1d72a2619962ae, type: 2}
   hearMoreBubble: {fileID: 891174695}
   hearDuration: 3
 --- !u!4 &1442829237
@@ -1896,7 +1903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 254.11003, y: -258.39}
+  m_AnchoredPosition: {x: 655.16, y: 227}
   m_SizeDelta: {x: 100, y: 34.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1699345159
@@ -2122,7 +2129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5186831259610646690, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
       propertyPath: m_Pitch
-      value: 1.06296
+      value: 1.0307786
       objectReference: {fileID: 0}
     - target: {fileID: 5186831259610646690, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
       propertyPath: MaxDistance
@@ -2275,6 +2282,9 @@ MonoBehaviour:
   simulationContainer: {fileID: 623290159}
   simulationPrefabs:
   - {fileID: 2987577544203878633, guid: 96c3a2926c733dd4e866e356561b755a, type: 3}
+  - {fileID: 2987577544203878633, guid: 525fb2b982692f04f9ad3c66f9004361, type: 3}
+  - {fileID: 2987577544203878633, guid: b31013c078b06114eb8aedf8754c1bb9, type: 3}
+  - {fileID: 2987577544203878633, guid: 33e3e1a9bab92844ebdc90f385cbe727, type: 3}
   simButtonClearPrefab: {fileID: 4065669617537989924, guid: 854ce9be0f549bf41a285028d0fb4604, type: 3}
   clearContainer: {fileID: 1641499767}
 --- !u!1 &2127675419

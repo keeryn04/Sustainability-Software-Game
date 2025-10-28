@@ -92,13 +92,15 @@ public class SlideshowViewer : MonoBehaviour
 
     public void NextSlide()
     {
-        if (currentSlide < slideshow.slides.Count - 1 && !SimulationManager.Instance.isSimulating)
+        //Can't move to next slide if talking or simulating
+        if (currentSlide < slideshow.slides.Count - 1 && !SimulationManager.Instance.isSimulating && !HearMoreManager.Instance.isTalking)
             ShowSlide(currentSlide + 1);
     }
 
     public void PrevSlide()
     {
-        if (currentSlide > 0 && !SimulationManager.Instance.isSimulating)
+        //Can't move to past slide if talking or simulating
+        if (currentSlide > 0 && !SimulationManager.Instance.isSimulating && !HearMoreManager.Instance.isTalking)
             ShowSlide(currentSlide - 1);
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HearMoreManager : MonoBehaviour
 {
     public static HearMoreManager Instance { get; private set; }
-
+    public bool isTalking { get; set; } = false;
     [SerializeField] private List<HearMoreData> hearMorePrefabs;
     [SerializeField] private GameObject hearMoreBubble;
     [SerializeField] private float hearDuration = 3f;
@@ -33,10 +33,11 @@ public class HearMoreManager : MonoBehaviour
         triggerButton.interactable = false;
         HearMoreData hearMoreData = hearMorePrefabs
             .Find(p => p.HearMoreName == speechID);
-
+        isTalking = true;
         await DialogueManager.Instance.TypeTextGeneral(hearMoreData.HearMoreText, textBox);
         Invoke(nameof(HideSpeechBubble), hearDuration);
         triggerButton.interactable = true;
+        isTalking = false;
     }
 
     private void HideSpeechBubble() => hearMoreBubble.SetActive(false);

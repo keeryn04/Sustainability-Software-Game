@@ -40,6 +40,7 @@ public class SimulationManager : MonoBehaviour
         if (simPrefab != null)
         {
             GameObject instance = Instantiate(simPrefab, simulationContainer);
+            Debug.Log(instance.name);
 
             //Reset positioning
             RectTransform rt = instance.GetComponent<RectTransform>();

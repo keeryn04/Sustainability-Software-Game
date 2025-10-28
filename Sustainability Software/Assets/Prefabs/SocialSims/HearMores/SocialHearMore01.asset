@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db0df5408222c448ba882eb111f0f1e, type: 3}
+  m_Name: SocialHearMore01
+  m_EditorClassIdentifier: 
+  hearMoreName: SocialHearMore01
+  hearMoreText: "Accessibility and inclusion go beyond adding optional features \u2014
+    they\u2019re core to sustainable design because they expand who can benefit from
+    technology. When apps support multiple languages, screen readers, captions, or
+    high-contrast modes, they reduce digital inequality and increase social participation.
+    Inclusive software doesn\u2019t just help individuals; it strengthens entire
+    communities by ensuring no one is excluded due to ability, background, or technology
+    limitations."

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db0df5408222c448ba882eb111f0f1e, type: 3}
+  m_Name: SocialHearMore02
+  m_EditorClassIdentifier: 
+  hearMoreName: SocialHearMore02
+  hearMoreText: "Algorithmic decisions can deeply impact people\u2019s lives, so
+    fairness and transparency are essential parts of sustainable software. Biased
+    data or untested assumptions can silently exclude groups or reinforce discrimination.
+    Sustainable design means actively auditing datasets, explaining decision logic,
+    and including diverse perspectives during development \u2014 ensuring technology
+    supports equity rather than amplifying inequality."
