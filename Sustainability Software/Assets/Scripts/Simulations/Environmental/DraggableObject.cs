@@ -7,46 +7,45 @@ public class DraggableObject : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler,
     IPointerEnterHandler, IPointerExitHandler
 {
-    public string itemType;
-    public string itemDescription;
+    [SerializeField] protected string itemDescription;
     private RectTransform rectTransform;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
-    private Vector2 originalPosition;
-    void Awake()
+    public Vector2 originalPosition;
+    protected virtual void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         TooltipUI.Instance.ShowTooltip(itemDescription);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         TooltipUI.Instance.HideTooltip();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
         originalPosition = rectTransform.anchoredPosition;
-        canvasGroup.blocksRaycasts = false; 
+        canvasGroup.blocksRaycasts = false;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
     }
 
-    public void ResetToRandomPosition(RectTransform dropArea = null)
+    public virtual void ResetToRandomPosition(RectTransform dropArea = null)
     {
         RectTransform area = dropArea != null ? dropArea : rectTransform.parent as RectTransform;
 
@@ -56,7 +55,6 @@ public class DraggableObject : MonoBehaviour,
             return;
         }
 
-        // Get random anchored position inside the bounds
         float halfWidth = area.rect.width / 2f;
         float halfHeight = area.rect.height / 2f;
 

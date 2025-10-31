@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc7902a1d3ba414daae39e99db6aaad, type: 3}
+  m_Name: EconomicSlideshow
+  m_EditorClassIdentifier: 
+  slides:
+  - slideImage: {fileID: 21300000, guid: fff7e7bf9a483bf4789e438f727c244a, type: 3}
+    elements: []
+  - slideImage: {fileID: 21300000, guid: 7b2f6b8cf9911364a89af22d356f8032, type: 3}
+    elements: []
+  - slideImage: {fileID: 21300000, guid: f4ef501a959c0b242a782edfab90408c, type: 3}
+    elements: []
+  - slideImage: {fileID: 21300000, guid: 78647d8b406267d4f93c20791fec7ddc, type: 3}
+    elements:
+    - type: 1
+      targetID: EconomicHearMore01
+  - slideImage: {fileID: 21300000, guid: ff1947ea7176fdc4fb62db3f12864070, type: 3}
+    elements:
+    - type: 0
+      targetID: EconomicSim01
+  - slideImage: {fileID: 21300000, guid: e031ad9afef395242ae93e0c57a9560a, type: 3}
+    elements:
+    - type: 1
+      targetID: EconomicHearMore02
+  - slideImage: {fileID: 21300000, guid: faf5d9acdd724084c9c1e975803e87bd, type: 3}
+    elements:
+    - type: 1
+      targetID: EconomicHearMore03
+  - slideImage: {fileID: 21300000, guid: 74cc037d695d97543a9873f350917e05, type: 3}
+    elements:
+    - type: 1
+      targetID: EconomicHearMore04
+  - slideImage: {fileID: 21300000, guid: 30f8d66881e587c4c8c4855f0e071bc4, type: 3}
+    elements:
+    - type: 0
+      targetID: EconomicSim02
+  - slideImage: {fileID: 21300000, guid: 82067690184f2c5488730946f30074f0, type: 3}
+    elements: []

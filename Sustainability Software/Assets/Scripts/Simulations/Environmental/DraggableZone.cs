@@ -11,7 +11,7 @@ public class DraggableZone : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        var item = eventData.pointerDrag.GetComponent<DraggableObject>();
+        var item = eventData.pointerDrag.GetComponent<GreenItem>();
         if (item != null)
         {
             if (item.itemType == acceptedType)

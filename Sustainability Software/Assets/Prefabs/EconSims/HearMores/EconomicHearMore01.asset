@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db0df5408222c448ba882eb111f0f1e, type: 3}
+  m_Name: EconomicHearMore01
+  m_EditorClassIdentifier: 
+  hearMoreName: EconomicHearMore01
+  hearMoreText: "Economic sustainability in software means building systems that
+    remain financially healthy without sacrificing long-term stability or fairness.
+    It\u2019s about more than just cutting costs \u2014 it\u2019s about ensuring
+    that investments in development, maintenance, and support create lasting value.
+    Sustainable software avoids short-term decisions that may seem efficient but
+    lead to higher expenses and reduced flexibility later. "

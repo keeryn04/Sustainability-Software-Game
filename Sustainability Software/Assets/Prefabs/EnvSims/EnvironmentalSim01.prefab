@@ -999,7 +999,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 654011937867181999}
+      addedObject: {fileID: 4835170052820987342}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!224 &3185956197531210223 stripped
 RectTransform:
@@ -1011,7 +1011,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 425290641028871525}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &654011937867181999
+--- !u!114 &4835170052820987342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1020,11 +1020,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5059281820952075031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescription: Extending device lifespan with software updates
+  originalPosition: {x: 0, y: 0}
   itemType: GreenIT
-  itemDescription: Design software that runs well on older devices.
 --- !u!1001 &1739357871098981256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,7 +1180,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7349806969250506152}
+      addedObject: {fileID: 962773577816646620}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!224 &3599314093116083970 stripped
 RectTransform:
@@ -1191,7 +1192,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 1739357871098981256}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7349806969250506152
+--- !u!114 &962773577816646620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1200,11 +1201,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6625834450330584570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescription: Apps that encourage recycling or sustainable habits
+  originalPosition: {x: 0, y: 0}
   itemType: GreenByIT
-  itemDescription: Incentivize carpooling or bus routes through app design.
 --- !u!1001 &2200751544919659703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1359,7 +1361,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2681178721699163749}
+      addedObject: {fileID: 3676244192766880032}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!224 &3988647767815467069 stripped
 RectTransform:
@@ -1371,7 +1373,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 2200751544919659703}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2681178721699163749
+--- !u!114 &3676244192766880032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1380,12 +1382,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6726797062416267973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescription: Recycling or repurposing old hardware
+  originalPosition: {x: 0, y: 0}
   itemType: GreenIT
-  itemDescription: Schedule workloads at off-peak times to run compute jobs when
-    renewable share is high.
 --- !u!1001 &4247727988033168612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1540,7 +1542,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1572796036001981836}
+      addedObject: {fileID: 6955131389063782605}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!224 &1378897275403370606 stripped
 RectTransform:
@@ -1552,7 +1554,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 4247727988033168612}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1572796036001981836
+--- !u!114 &6955131389063782605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1561,11 +1563,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8728600115009407638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescription: Agricultural software that minimizes water or fertilizer use
+  originalPosition: {x: 0, y: 0}
   itemType: GreenByIT
-  itemDescription: Reduce commuting emissions by enabling remote learning or work..
 --- !u!1001 &6831612028342146421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1720,14 +1723,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2702762032723139380}
+      addedObject: {fileID: 8253773605353742570}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!1 &2098118216180890375 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 6831612028342146421}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2702762032723139380
+--- !u!114 &8253773605353742570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1736,11 +1739,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2098118216180890375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescription: Smart home systems that cut electricity waste
+  originalPosition: {x: 0, y: 0}
   itemType: GreenByIT
-  itemDescription: Shift appliance use to greener energy hours.
 --- !u!224 &8583552117850059263 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
@@ -1900,14 +1904,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 596644188733684277}
+      addedObject: {fileID: 5288052685751099120}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!1 &2563813430313962917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 6936879523042370519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &596644188733684277
+--- !u!114 &5288052685751099120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1916,11 +1920,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2563813430313962917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDescription: Powering servers with renewable energy
+  originalPosition: {x: 0, y: 0}
   itemType: GreenIT
-  itemDescription: Use fewer CPU cycles, resulting in less power per operation.
 --- !u!224 &5302033025016563549 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
@@ -2080,14 +2085,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6264315520847981237}
+      addedObject: {fileID: 8199373133206614375}
   m_SourcePrefab: {fileID: 100100000, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
 --- !u!1 &4123907792161812625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
   m_PrefabInstance: {fileID: 8857403847373971171}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6264315520847981237
+--- !u!114 &8199373133206614375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2096,12 +2101,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4123907792161812625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c332db69d1fce947b77cf62b8e6193c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e670dab6230774ea3299893a02cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: GreenIT
-  itemDescription: Encourage remote collaboration by replacing travel with online
-    meetings.
+  itemDescription: Supply chain platforms that track and reduce carbon emissions
+  originalPosition: {x: 0, y: 0}
+  itemType: GreenByIT
 --- !u!224 &5997655623804189289 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}

@@ -245,7 +245,7 @@ MonoBehaviour:
   progressBar: {fileID: 1438118285}
   nextButton: {fileID: 1489572327}
   prevButton: {fileID: 1466878327}
-  slideshow: {fileID: 11400000, guid: ba64a81bc44d9ad4f8e5168fdd34841d, type: 2}
+  slideshow: {fileID: 11400000, guid: a4507ed0107bfb64ab1d7f9124933bb4, type: 2}
   interactiveContainer: {fileID: 1517471389}
   simulationButtonPrefab: {fileID: 1334394502439814988, guid: 38c79f7a71124624899f196bb62a4c67, type: 3}
   hearMoreButtonPrefab: {fileID: 4249445032758683505, guid: b939c738ac71e374ea48dd93c0bcd70c, type: 3}
@@ -1548,6 +1548,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 512588469fecc2547b510751ee3eaa3c, type: 2}
   - {fileID: 11400000, guid: a9c66daced673f843b18584bb66512c5, type: 2}
   - {fileID: 11400000, guid: 48bf5af5a9740ce4ba1d72a2619962ae, type: 2}
+  - {fileID: 11400000, guid: 8e04e6e29d5e22346b0fd596ce668ca8, type: 2}
+  - {fileID: 11400000, guid: 7e6b6717f228846439568cd1f9257e35, type: 2}
+  - {fileID: 11400000, guid: 879c96fe36c85b4478ebfaab0919c3a3, type: 2}
+  - {fileID: 11400000, guid: 5fb75fd03859cb04f8e57bc804d27dab, type: 2}
   hearMoreBubble: {fileID: 891174695}
   hearDuration: 3
 --- !u!4 &1442829237
@@ -2129,7 +2133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5186831259610646690, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
       propertyPath: m_Pitch
-      value: 1.0307786
+      value: 0.93614733
       objectReference: {fileID: 0}
     - target: {fileID: 5186831259610646690, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
       propertyPath: MaxDistance
@@ -2285,6 +2289,8 @@ MonoBehaviour:
   - {fileID: 2987577544203878633, guid: 525fb2b982692f04f9ad3c66f9004361, type: 3}
   - {fileID: 2987577544203878633, guid: b31013c078b06114eb8aedf8754c1bb9, type: 3}
   - {fileID: 2987577544203878633, guid: 33e3e1a9bab92844ebdc90f385cbe727, type: 3}
+  - {fileID: 2987577544203878633, guid: 2ffaf70205a37f349bc6040fc2f8b223, type: 3}
+  - {fileID: 2987577544203878633, guid: 9d91f4a799b23664082a63f30839a87b, type: 3}
   simButtonClearPrefab: {fileID: 4065669617537989924, guid: 854ce9be0f549bf41a285028d0fb4604, type: 3}
   clearContainer: {fileID: 1641499767}
 --- !u!1 &2127675419

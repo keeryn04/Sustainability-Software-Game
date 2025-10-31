@@ -16,8 +16,5 @@ MonoBehaviour:
   hearMoreText: Technical sustainability is the ability of a system to keep functioning
     efficiently over time, even as technology, user needs, and environments change.
     It encompasses maintainability, which refers to how easily the system can be
-    updated or fixed; scalability, or how well the system can handle growth in users
-    or data; reliability, meaning how consistently the system performs as expected;
-    efficiency, which measures how effectively the system uses resources like time
-    and memory; and adaptability, or how smoothly the system adjusts to new conditions
-    or technologies.
+    updated or fixed, scalability, or how well the system can handle growth in users
+    or data and reliability, meaning how consistently the system performs as expected.

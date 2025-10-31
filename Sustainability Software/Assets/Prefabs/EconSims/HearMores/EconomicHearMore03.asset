@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db0df5408222c448ba882eb111f0f1e, type: 3}
+  m_Name: EconomicHearMore03
+  m_EditorClassIdentifier: 
+  hearMoreName: EconomicHearMore03
+  hearMoreText: "Sustainable processes keep both teams and budgets stable over time.
+    True planning doesn\u2019t stop at release \u2014 it accounts for maintenance,
+    updates, and user support throughout the software\u2019s lifecycle. By avoiding
+    the trap of short-term savings, organizations can maintain steady progress and
+    ensure the software remains reliable and cost-effective for years to come."

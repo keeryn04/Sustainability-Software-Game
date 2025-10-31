@@ -9,6 +9,7 @@ public class HearMoreData : ScriptableObject
 {
     [SerializeField] private string hearMoreName;
     public virtual string HearMoreName { get => hearMoreName; protected set => hearMoreName = value; }
+    [TextArea (2, 10)]
     [SerializeField] private string hearMoreText;
     public virtual string HearMoreText { get => hearMoreText; protected set => hearMoreText = value; }
 
