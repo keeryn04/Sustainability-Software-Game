@@ -6,7 +6,6 @@ using UnityEngine;
 public class Token : DraggableObject
 {
     public float fairnessEffect;
-    public float resilienceEffect;
     public float profitEffect;
 
     protected override void Awake()

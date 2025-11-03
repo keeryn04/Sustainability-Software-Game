@@ -12,6 +12,7 @@ public class DraggableObject : MonoBehaviour,
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     public Vector2 originalPosition;
+    public bool isDraggable = true;
     protected virtual void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -31,17 +32,20 @@ public class DraggableObject : MonoBehaviour,
 
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
+        if (!isDraggable) return;
         originalPosition = rectTransform.anchoredPosition;
         canvasGroup.blocksRaycasts = false;
     }
 
     public virtual void OnDrag(PointerEventData eventData)
     {
+        if (!isDraggable) return;
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public virtual void OnEndDrag(PointerEventData eventData)
     {
+        if (!isDraggable) return;
         canvasGroup.blocksRaycasts = true;
     }
 

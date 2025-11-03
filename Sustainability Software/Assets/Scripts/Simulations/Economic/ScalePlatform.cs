@@ -2,12 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class Bucket : MonoBehaviour, IDropHandler
+public class ScalePlatform : MonoBehaviour, IDropHandler
 {
-    public List<Token> tokensInBucket = new List<Token>();
+    public List<Token> tokensOnPlatform = new List<Token>();
     [SerializeField] private EconSimManager02 econManager;
     private float totalFairness = 0f;
-    private float totalResilience = 0f;
     private float totalProfit = 0f;
 
     public void OnDrop(PointerEventData eventData)
@@ -15,22 +14,21 @@ public class Bucket : MonoBehaviour, IDropHandler
         Token token = eventData.pointerDrag.GetComponent<Token>();
         if (token != null)
         {
-            tokensInBucket.Add(token);
+            tokensOnPlatform.Add(token);
 
             totalFairness += token.fairnessEffect;
-            totalResilience += token.resilienceEffect;
             totalProfit += token.profitEffect;
 
-            token.gameObject.SetActive(false); //Token consumed
+            token.isDraggable = false; //Token consumed
 
-            econManager.UpdateBucketTotals(totalFairness, totalResilience, totalProfit);
+            econManager.UpdateTotals(totalFairness, totalProfit);
         }
     }
 
     public void ResetBucket()
     {
-        econManager.ClearBucket(tokensInBucket);
-        tokensInBucket.Clear();
-        totalFairness = totalResilience = totalProfit = 0f;
+        econManager.ClearPlatform(tokensOnPlatform);
+        tokensOnPlatform.Clear();
+        totalFairness = totalProfit = 0f;
     }
 }
