@@ -8,11 +8,12 @@ using UnityEngine.UI;
 
 public class SlideshowViewer : MonoBehaviour
 {
+    [SerializeField] private List<SlideData> slideshows = new List<SlideData>();
     [SerializeField] private Image slideImage;
     [SerializeField] private Slider progressBar;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button prevButton;
-    [SerializeField] private SlideData slideshow;
+    public SlideData slideshow;
 
     [SerializeField] private RectTransform interactiveContainer;
     [SerializeField] private GameObject simulationButtonPrefab;
@@ -45,6 +46,15 @@ public class SlideshowViewer : MonoBehaviour
 
         nextButton.onClick.AddListener(NextSlide);
         prevButton.onClick.AddListener(PrevSlide);
+    }
+
+    public void SetSlideshow(SustainabilityPillar slideType)
+    {
+        SlideData newSlideshow = slideshows
+            .Find(s => s.slideshowType == slideType);
+        Debug.Log(newSlideshow);
+        Debug.Log(slideType);
+        slideshow = newSlideshow;
     }
 
     void ShowSlide(int index)

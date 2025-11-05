@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc7902a1d3ba414daae39e99db6aaad, type: 3}
   m_Name: SocialSlideshow
   m_EditorClassIdentifier: 
+  slideshowType: 1
   slides:
   - slideImage: {fileID: 21300000, guid: 202193e9c31d65247b9a8e4e02d88bd1, type: 3}
     elements: []

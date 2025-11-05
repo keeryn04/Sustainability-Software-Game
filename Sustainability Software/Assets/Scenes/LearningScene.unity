@@ -241,6 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edabbe9219458146b5d649a262246fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slideshows:
+  - {fileID: 11400000, guid: 12e3971c0b9f1e5428a9f202a8ca884d, type: 2}
+  - {fileID: 11400000, guid: a4507ed0107bfb64ab1d7f9124933bb4, type: 2}
+  - {fileID: 11400000, guid: 5d62238f58f121646bab8f7333e1f427, type: 2}
+  - {fileID: 11400000, guid: ba64a81bc44d9ad4f8e5168fdd34841d, type: 2}
   slideImage: {fileID: 435066839}
   progressBar: {fileID: 1438118285}
   nextButton: {fileID: 1489572327}
@@ -1059,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -616.99994
+      value: -617
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1809,37 +1814,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1501272249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1501272250}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1501272250
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501272249}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4664438, y: 0.5238349, z: 853.7331}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517471388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,4 +2346,3 @@ SceneRoots:
   - {fileID: 607427688}
   - {fileID: 654833289}
   - {fileID: 2127675422}
-  - {fileID: 1501272250}

@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneInitializer : MonoBehaviour
 {
-    [Header("Optional UI Elements (assign per scene)")]
+    [Header("Playing Scene")]
     public TextMeshProUGUI clientText;
     public TextMeshProUGUI objectiveText;
     public TextMeshProUGUI scoreText;
     public Button[] choiceButtons;
     public ResourceBar resourceBar;
+
+    [Header("Reflection Scene")]
     public GameObject speechBubble;
     public Transform reflectionGrid;
+
+    [Header("General")]
     public Animator typingAnimator;
     public AudioSource audioSource;
 

@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private ScenarioData[] scenarios;
     private ScenarioData currentScenario;
     private Boolean reflectionStatus = false;
+    private SustainabilityPillar pendingLearnType;
 
     public static MenuManager Instance { get; private set; }
     private void Awake()
@@ -33,6 +34,27 @@ public class MenuManager : MonoBehaviour
         set => reflectionStatus = value;
     }
 
+    public void LoadLearnScene(SustainabilityPillar learnType, string sceneName = "LearningScene")
+    {
+        // Store parameter so we can access it later
+        pendingLearnType = learnType;
+
+        // Subscribe to sceneLoaded before starting load
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Start loading the new scene
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Always unsubscribe right away to prevent duplicate triggers
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        // Now the scene is fully loaded, so SlideshowViewer should exist
+        SlideshowViewer.Instance.SetSlideshow(pendingLearnType);
+    }
+
     public void LoadScenarioScene(ScenarioData scenario, string sceneName = "PlayingScene")
     {
         if (scenario == null)
@@ -51,6 +73,11 @@ public class MenuManager : MonoBehaviour
     public void LoadReflectionScene(string sceneName = "ReflectionScene")
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene("PillarSelectScene");
     }
 
     //Fetches random pillar based on pillar type, and feeds info back to scene
@@ -74,4 +101,9 @@ public class MenuManager : MonoBehaviour
     public void LoadSocial() => LoadPillar(SustainabilityPillar.Social);
     public void LoadEconomic() => LoadPillar(SustainabilityPillar.Economic);
     public void LoadTechnical() => LoadPillar(SustainabilityPillar.Technical);
+
+    public void LoadEnvironmentalLearn() => LoadLearnScene(SustainabilityPillar.Environmental);
+    public void LoadSocialLearn() => LoadLearnScene(SustainabilityPillar.Social);
+    public void LoadEconomicLearn() => LoadLearnScene(SustainabilityPillar.Economic);
+    public void LoadTechnicalLearn() => LoadLearnScene(SustainabilityPillar.Technical);
 }

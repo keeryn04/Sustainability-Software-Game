@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewSlideshow", menuName = "Customs/Slideshow")]
 public class SlideData : ScriptableObject
 {
+    public SustainabilityPillar slideshowType;
     [Serializable]
     public class Slide
     {
