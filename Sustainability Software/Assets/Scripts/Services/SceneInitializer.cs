@@ -6,57 +6,78 @@ using UnityEngine.SceneManagement;
 public class SceneInitializer : MonoBehaviour
 {
     [Header("Playing Scene")]
-    public TextMeshProUGUI clientText;
-    public TextMeshProUGUI objectiveText;
-    public TextMeshProUGUI scoreText;
-    public Button[] choiceButtons;
-    public ResourceBar resourceBar;
+    [SerializeField] private TextMeshProUGUI clientText;
+    [SerializeField] private TextMeshProUGUI objectiveText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private Button[] choiceButtons;
+    [SerializeField] private ResourceBar resourceBar;
 
     [Header("Reflection Scene")]
-    public GameObject speechBubble;
-    public Transform reflectionGrid;
+    [SerializeField] private GameObject speechBubble;
+    [SerializeField] private Transform reflectionGrid;
 
     [Header("General")]
-    public Animator typingAnimator;
-    public AudioSource audioSource;
+    [SerializeField] private Animator typingAnimator;
+    [SerializeField] private AudioSource audioSource;
 
-    private void OnEnable()
+    public void InitializeScene(GameStage stage)
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        InitializeScene();
-    }
-
-    public void InitializeScene()
-    {
-        //Update DialogueManager with UI elements in this scene
-        if (DialogueManager.Instance != null)
+        switch (stage)
         {
-            DialogueManager.Instance.AssignUI(clientText, objectiveText, scoreText, choiceButtons, resourceBar, typingAnimator, audioSource);
+            case GameStage.Learning:
+                SetupLearningScene();
+                break;
 
-            //Decide whether this is a reflection or scenario scene
-            if (MenuManager.Instance.CurrentScenario != null && MenuManager.Instance.ReflectionStatus == false)
-            {
-                DialogueManager.Instance.SetupScenarioUI();
-            }
-            else
-            {
-                DialogueManager.Instance.AssignReflectionUI(speechBubble, reflectionGrid);
-                DialogueManager.Instance.SetupReflectionUI();
-            }
+            case GameStage.Playing:
+                SetupPlayingScene();
+                break;
+
+            case GameStage.Reflection:
+                SetupReflectionScene();
+                break;
+
+            default:
+                Debug.LogWarning("SceneInitializer called without a valid GameStage.");
+                break;
+        }
+    }
+
+    private void SetupLearningScene()
+    {
+        if (SlideshowViewer.Instance != null)
+        {
+            SlideshowViewer.Instance.SetSlideshow(MenuManager.Instance.PendingLearnType);
+        }
+    }
+
+    private void SetupPlayingScene()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AssignUI(resourceBar);
+            GameManager.Instance.StartScenario();
         }
 
-        if (GameTracker.Instance != null)
+        if (DialogueManager.Instance != null)
         {
-            GameTracker.Instance.AssignUI(resourceBar);
+            DialogueManager.Instance.AssignUI(
+                clientText,
+                objectiveText,
+                scoreText,
+                choiceButtons,
+                resourceBar,
+                typingAnimator,
+                audioSource
+            );
+        }
+    }
+
+    private void SetupReflectionScene()
+    {
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.AssignReflectionUI(speechBubble, reflectionGrid);
+            DialogueManager.Instance.BeginReflection(MenuManager.Instance.CurrentScenario);
         }
     }
 }

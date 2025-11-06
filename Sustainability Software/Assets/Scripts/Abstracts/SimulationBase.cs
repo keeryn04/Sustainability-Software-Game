@@ -9,14 +9,14 @@ public abstract class SimulationBase : MonoBehaviour
 
     public virtual void StartSimulation()
     {
-        SimulationManager.Instance.isSimulating = true;
+        SimulationManager.Instance.SetSimulating(true);
         gameObject.SetActive(true);
     }
 
     public virtual void StopSimulation()
     {
         gameObject.SetActive(false);
-        SimulationManager.Instance.isSimulating = false;
+        SimulationManager.Instance.SetSimulating(false);
     }
 
     public virtual void Cleanup()

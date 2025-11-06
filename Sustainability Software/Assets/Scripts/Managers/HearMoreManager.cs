@@ -1,12 +1,14 @@
 using System.Collections.Generic;
-using UnityEngine;
+using System.Threading.Tasks;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HearMoreManager : MonoBehaviour
 {
     public static HearMoreManager Instance { get; private set; }
-    public bool isTalking { get; set; } = false;
+
+    [Header("Hear More Settings")]
     [SerializeField] private List<HearMoreData> hearMorePrefabs;
     [SerializeField] private GameObject hearMoreBubble;
     [SerializeField] private float hearDuration = 3f;
@@ -18,27 +20,41 @@ public class HearMoreManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
 
         if (hearMoreBubble != null)
-        {
             hearMoreBubble.SetActive(false);
-        }
     }
 
-    //Called by SlideManager
     public async void LoadHearMore(string speechID, TextMeshProUGUI textBox, Button triggerButton = null)
     {
-        hearMoreBubble.SetActive(true);
-        triggerButton.interactable = false;
-        HearMoreData hearMoreData = hearMorePrefabs
-            .Find(p => p.HearMoreName == speechID);
-        isTalking = true;
-        await DialogueManager.Instance.TypeTextGeneral(hearMoreData.HearMoreText, textBox);
-        Invoke(nameof(HideSpeechBubble), hearDuration);
-        triggerButton.interactable = true;
-        isTalking = false;
-    }
+        if (hearMoreBubble == null || textBox == null) return;
 
-    private void HideSpeechBubble() => hearMoreBubble.SetActive(false);
+        // Disable button while talking
+        if (triggerButton != null)
+            triggerButton.interactable = false;
+
+        // Look up HearMore text
+        HearMoreData data = hearMorePrefabs.Find(p => p.HearMoreName == speechID);
+        if (data == null)
+        {
+            Debug.LogWarning($"HearMore ID '{speechID}' not found.");
+            triggerButton.interactable = true;
+            return;
+        }
+
+        hearMoreBubble.SetActive(true);
+
+        await DialogueManager.Instance.TypeText(data.HearMoreText, textBox);
+
+        // Wait for display duration
+        await Task.Delay((int)(hearDuration * 1000));
+
+        hearMoreBubble.SetActive(false);
+
+        // Re-enable button
+        if (triggerButton != null)
+            triggerButton.interactable = true;
+    }
 }

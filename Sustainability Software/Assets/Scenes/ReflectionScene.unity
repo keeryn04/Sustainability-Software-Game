@@ -400,6 +400,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &724625484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724625486}
+  - component: {fileID: 724625485}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &724625485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724625484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ddbe2d86f84ff45bd0bf876d859c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clientText: {fileID: 348247029}
+  objectiveText: {fileID: 0}
+  scoreText: {fileID: 0}
+  choiceButtons: []
+  resourceBar: {fileID: 0}
+  speechBubble: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
+  reflectionGrid: {fileID: 1930337647}
+  typingAnimator: {fileID: 2017753225}
+  audioSource: {fileID: 2017753223}
+  textSounds:
+  - {fileID: 8300000, guid: 4ecfd77adfd4a1b48813983e9c11a2d4, type: 3}
+  - {fileID: 8300000, guid: 976ac7a2c5a03d94498f30882c092d74, type: 3}
+  - {fileID: 8300000, guid: a576bf9261b957e4ca657bb3ce59ddcb, type: 3}
+  typingSpeed: 0.05
+--- !u!4 &724625486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724625484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.70002484, y: 0.7427834, z: 947.3994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733748214
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,3 +939,4 @@ SceneRoots:
   - {fileID: 1934614389}
   - {fileID: 491103179}
   - {fileID: 1733748216}
+  - {fileID: 724625486}

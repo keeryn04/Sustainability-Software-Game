@@ -41,7 +41,7 @@ public class SlideshowViewer : MonoBehaviour
     }
     void Start()
     {
-        if (slideshow.slides.Count > 0)
+        if (slideshow != null && slideshow.slides.Count > 0)
             ShowSlide(0);
 
         nextButton.onClick.AddListener(NextSlide);
@@ -52,8 +52,6 @@ public class SlideshowViewer : MonoBehaviour
     {
         SlideData newSlideshow = slideshows
             .Find(s => s.slideshowType == slideType);
-        Debug.Log(newSlideshow);
-        Debug.Log(slideType);
         slideshow = newSlideshow;
     }
 
@@ -103,16 +101,22 @@ public class SlideshowViewer : MonoBehaviour
     public void NextSlide()
     {
         //Can't move to next slide if talking or simulating
-        if (currentSlide < slideshow.slides.Count - 1 && !SimulationManager.Instance.isSimulating && !HearMoreManager.Instance.isTalking)
+        if (currentSlide < slideshow.slides.Count - 1 && CanChangeSlide())
             ShowSlide(currentSlide + 1);
     }
 
     public void PrevSlide()
     {
         //Can't move to past slide if talking or simulating
-        if (currentSlide > 0 && !SimulationManager.Instance.isSimulating && !HearMoreManager.Instance.isTalking)
+        if (currentSlide > 0 && CanChangeSlide())
             ShowSlide(currentSlide - 1);
     }
+
+    private bool CanChangeSlide()
+    {
+        return !SimulationManager.Instance.isSimulating && !DialogueManager.Instance.isTalking;
+    }
+
 
     IEnumerator SmoothFill(float targetValue)
     {
