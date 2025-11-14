@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [Header("Player Stats")]
     [SerializeField] private float playerScore = 0f;
     [SerializeField] private int decisionsMade = 0;
+    [SerializeField] public string gameStatus;
+    private bool gameSuccess = false;
 
     [Header("Scenario Settings")]
     [SerializeField] private GoalData[] goals;
@@ -74,14 +76,20 @@ public class GameManager : MonoBehaviour
     {
         if (currentGoal == null) return;
 
-        bool success = currentGoal.goalType switch
+        gameSuccess = currentGoal.goalType switch
         {
             GoalType.PointLevel => playerScore >= scoreThreshold,
             GoalType.ResourceLevel => resourceBar != null && resourceBar.GetValue() >= resourceThreshold,
             _ => false
         };
 
-        Debug.Log(success ? "Scenario Success!" : "Scenario Fail");
+        if (gameSuccess) { 
+            gameStatus = "Scenario Success"; 
+        } else { 
+            gameStatus = "Scenario Fail"; 
+        }
+
+        Debug.Log(gameSuccess ? "Scenario Success!" : "Scenario Fail");
 
         //Transition to Reflection stage via MenuManager
         MenuManager.Instance.LoadReflection();

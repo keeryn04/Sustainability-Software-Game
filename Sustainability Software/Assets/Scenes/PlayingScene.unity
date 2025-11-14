@@ -268,68 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1900831221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1900831223}
-  - component: {fileID: 1900831222}
-  m_Layer: 0
-  m_Name: DialogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1900831222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900831221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38ddbe2d86f84ff45bd0bf876d859c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectiveText: {fileID: 8555947566814617069}
-  clientText: {fileID: 1757437130623490864}
-  scoreText: {fileID: 4805769292831982990}
-  typingSpeed: 0.05
-  choiceButtons:
-  - {fileID: 1795252169}
-  - {fileID: 907234563}
-  - {fileID: 943313796}
-  - {fileID: 7253708}
-  resourceBar: {fileID: 1942781557}
-  speechBubble: {fileID: 4923759821903605290}
-  reflectionGrid: {fileID: 0}
-  typingAnimator: {fileID: 939487413}
-  textSounds:
-  - {fileID: 8300000, guid: 4ecfd77adfd4a1b48813983e9c11a2d4, type: 3}
-  - {fileID: 8300000, guid: 976ac7a2c5a03d94498f30882c092d74, type: 3}
-  - {fileID: 8300000, guid: a576bf9261b957e4ca657bb3ce59ddcb, type: 3}
-  audioSource: {fileID: 939487415}
---- !u!4 &1900831223
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900831221}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.501782, y: -6.014972, z: 586.3254}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1937487251
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +308,7 @@ MonoBehaviour:
   resourceBar: {fileID: 1942781557}
   speechBubble: {fileID: 4923759821903605290}
   reflectionGrid: {fileID: 0}
+  reflectionText: {fileID: 0}
   typingAnimator: {fileID: 939487413}
   audioSource: {fileID: 939487415}
 --- !u!4 &1937487253
@@ -1076,6 +1015,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7667360005935837876, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667360005935837876, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7774660979369733855, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_PreferredWidth
       value: 600
@@ -1098,15 +1045,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8580552502400210912, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 222.26001
+      value: 442.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580552502400210912, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 107.5
       objectReference: {fileID: 0}
     - target: {fileID: 8580552502400210912, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -770
+      value: -728.82
       objectReference: {fileID: 0}
     - target: {fileID: 8580552502400210912, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -60
+      value: -53.75
       objectReference: {fileID: 0}
     - target: {fileID: 8847820239379264349, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_fontSize
@@ -1148,5 +1099,4 @@ SceneRoots:
   - {fileID: 1647805963}
   - {fileID: 4923759821903605289}
   - {fileID: 1968474437}
-  - {fileID: 1900831223}
   - {fileID: 1937487253}

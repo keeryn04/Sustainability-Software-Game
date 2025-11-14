@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,10 +28,14 @@ public class HearMoreManager : MonoBehaviour
         if (hearMoreBubble != null)
             hearMoreBubble.SetActive(false);
     }
-
-    public async void LoadHearMore(string speechID, TextMeshProUGUI textBox, Button triggerButton = null)
+    public void LoadHearMore(string speechID, TextMeshProUGUI textBox, Button triggerButton = null)
     {
-        if (hearMoreBubble == null || textBox == null) return;
+        StartCoroutine(LoadHearMoreRoutine(speechID, textBox, triggerButton));
+    }
+
+    private IEnumerator LoadHearMoreRoutine(string speechID, TextMeshProUGUI textBox, Button triggerButton = null)
+    {
+        if (hearMoreBubble == null || textBox == null) yield break;
 
         // Disable button while talking
         if (triggerButton != null)
@@ -41,15 +47,15 @@ public class HearMoreManager : MonoBehaviour
         {
             Debug.LogWarning($"HearMore ID '{speechID}' not found.");
             triggerButton.interactable = true;
-            return;
+            yield break;
         }
 
         hearMoreBubble.SetActive(true);
 
-        await DialogueManager.Instance.TypeText(data.HearMoreText, textBox);
+        yield return StartCoroutine(DialogueManager.Instance.TypeText(data.HearMoreText, textBox));
 
-        // Wait for display duration
-        await Task.Delay((int)(hearDuration * 1000));
+        // After typing finishes, wait remaining duration
+        yield return new WaitForSeconds(hearDuration);
 
         hearMoreBubble.SetActive(false);
 

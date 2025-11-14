@@ -293,64 +293,6 @@ RectTransform:
   m_AnchoredPosition: {x: -283, y: -483.65002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &607427686
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 607427688}
-  - component: {fileID: 607427687}
-  m_Layer: 0
-  m_Name: DialogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &607427687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607427686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38ddbe2d86f84ff45bd0bf876d859c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clientText: {fileID: 0}
-  objectiveText: {fileID: 0}
-  scoreText: {fileID: 0}
-  choiceButtons: []
-  resourceBar: {fileID: 0}
-  speechBubble: {fileID: 891174695}
-  reflectionGrid: {fileID: 0}
-  typingAnimator: {fileID: 1996139831}
-  audioSource: {fileID: 1996139830}
-  textSounds:
-  - {fileID: 8300000, guid: 4ecfd77adfd4a1b48813983e9c11a2d4, type: 3}
-  - {fileID: 8300000, guid: 976ac7a2c5a03d94498f30882c092d74, type: 3}
-  - {fileID: 8300000, guid: a576bf9261b957e4ca657bb3ce59ddcb, type: 3}
-  typingSpeed: 0.05
---- !u!4 &607427688
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607427686}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.501782, y: -6.014972, z: 586.3254}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &623290158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -617
+      value: -616.99994
       objectReference: {fileID: 0}
     - target: {fileID: 3012949784766948490, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1885,6 +1827,7 @@ MonoBehaviour:
   resourceBar: {fileID: 0}
   speechBubble: {fileID: 0}
   reflectionGrid: {fileID: 0}
+  reflectionText: {fileID: 0}
   typingAnimator: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!4 &1624537512
@@ -2256,16 +2199,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8363235748822555063, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
   m_PrefabInstance: {fileID: 1996139828}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1996139830 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5186831259610646690, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
-  m_PrefabInstance: {fileID: 1996139828}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1996139831 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8355507023037982052, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
-  m_PrefabInstance: {fileID: 1996139828}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2114633400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,7 +2329,6 @@ SceneRoots:
   - {fileID: 533099757}
   - {fileID: 2114633401}
   - {fileID: 1442829237}
-  - {fileID: 607427688}
   - {fileID: 654833289}
   - {fileID: 2127675422}
   - {fileID: 1624537512}

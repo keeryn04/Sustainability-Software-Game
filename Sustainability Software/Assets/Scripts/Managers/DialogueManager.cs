@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
+using static System.Net.Mime.MediaTypeNames;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private Transform reflectionGrid;
+    [SerializeField] private TextMeshProUGUI reflectionTitle;
     [SerializeField] private Animator typingAnimator;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] textSounds;
@@ -33,11 +35,6 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance { get; private set; }
     public bool isTalking { get; private set; }
 
-    public void SetTalking(bool value)
-    {
-        isTalking = value;
-    }
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,6 +44,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -63,13 +61,15 @@ public class DialogueManager : MonoBehaviour
         audioSource = source;
     }
 
-    public void AssignReflectionUI(GameObject bubblePrefab, Transform grid)
+    public void AssignReflectionUI(TextMeshProUGUI reflectionFeedback, GameObject bubblePrefab, Transform grid, TextMeshProUGUI reflectionText)
     {
+        clientText = reflectionFeedback;
         speechBubble = bubblePrefab;
         reflectionGrid = grid;
+        reflectionTitle = reflectionText;
     }
 
-    public async Task TypeText(string text, TextMeshProUGUI targetBox)
+    public IEnumerator TypeText(string text, TextMeshProUGUI targetBox)
     {
         isTalking = true;
 
@@ -82,7 +82,7 @@ public class DialogueManager : MonoBehaviour
         {
             targetBox.text += c;
             PlayTextSound();
-            await Task.Delay((int)(typingSpeed * 1000));
+            yield return new WaitForSeconds(typingSpeed);
         }
 
         if (typingAnimator != null)
@@ -139,29 +139,49 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private async void OnChoiceSelected(int choiceIndex)
+    public void OnChoiceSelected(int choiceIndex)
     {
+        StartCoroutine(OnChoiceSelectedRoutine(choiceIndex));
+    }
+
+    private IEnumerator OnChoiceSelectedRoutine(int choiceIndex)
+    {
+        //Disable buttons
+        foreach (var btn in choiceButtons)
+        {
+            btn.interactable = false;
+        }
+
         string playerChoice = choiceButtons[choiceIndex].GetComponentInChildren<TextMeshProUGUI>().text;
 
         //LLM response
-        string jsonResponse = await LLMService.SendChoiceAsync(currentScenario, playerChoice);
+        var llmTask = LLMService.SendChoiceAsync(currentScenario, playerChoice);
+        yield return new WaitUntil(() => llmTask.IsCompleted);
+
+        if (llmTask.IsFaulted)
+        {
+            Debug.LogError("LLM task failed: " + llmTask.Exception);
+            yield break;
+        }
+
+        string jsonResponse = llmTask.Result;
         LLMResponse parsed = JsonUtility.FromJson<LLMResponse>(jsonResponse);
 
-        //Log and reflect choice
+        //Log choice
         playerDecisions.Add(new ChoiceData
         {
             choiceText = playerChoice,
             reflection = parsed.reflection
         });
 
-        //Update resources & score
+        //Update resources and score
         resourceBar?.AddValue(parsed.resourceImpact);
         GameManager.Instance.RegisterDecision(parsed.resourceImpact);
         playerScore = GameManager.Instance.PlayerScore;
         if (scoreText != null) scoreText.text = playerScore.ToString();
 
         //Show dialogue response
-        await TypeText(parsed.clientResponse, clientText);
+        yield return StartCoroutine(TypeText(parsed.clientResponse, clientText));
 
         //Refresh available choices
         currentChoices = parsed.choices;
@@ -175,9 +195,15 @@ public class DialogueManager : MonoBehaviour
                     choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = parsed.choices[i];
             }
         }
+
+        //Enable buttons if done talking
+        foreach (var btn in choiceButtons)
+        {
+            btn.interactable = true;
+        }
     }
 
-    public async void BeginReflection(ScenarioData scenario)
+    public void BeginReflection(ScenarioData scenario)
     {
         currentScenario = scenario;
         if (scenario == null)
@@ -186,7 +212,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        await TypeText(scenario.reflectionFeedback, clientText);
+        reflectionTitle.text = GameManager.Instance.gameStatus;
+
+        StartCoroutine(TypeText(scenario.reflectionFeedback, clientText));
 
         foreach (var decision in playerDecisions)
         {
@@ -197,7 +225,7 @@ public class DialogueManager : MonoBehaviour
             if (bubbleText != null)
             {
                 string text = $"Choice: {decision.choiceText}\nReflection: {decision.reflection}";
-                await TypeText(text, bubbleText);
+                StartCoroutine(TypeText(text, bubbleText));
             }
         }
     }

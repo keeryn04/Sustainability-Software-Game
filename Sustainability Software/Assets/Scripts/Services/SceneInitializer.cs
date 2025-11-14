@@ -13,8 +13,10 @@ public class SceneInitializer : MonoBehaviour
     [SerializeField] private ResourceBar resourceBar;
 
     [Header("Reflection Scene")]
+    [SerializeField] private TextMeshProUGUI reflectionFeedbackText;
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private Transform reflectionGrid;
+    [SerializeField] private TextMeshProUGUI reflectionText;
 
     [Header("General")]
     [SerializeField] private Animator typingAnimator;
@@ -52,12 +54,6 @@ public class SceneInitializer : MonoBehaviour
 
     private void SetupPlayingScene()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AssignUI(resourceBar);
-            GameManager.Instance.StartScenario();
-        }
-
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.AssignUI(
@@ -70,13 +66,19 @@ public class SceneInitializer : MonoBehaviour
                 audioSource
             );
         }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AssignUI(resourceBar);
+            GameManager.Instance.StartScenario();
+        }
     }
 
     private void SetupReflectionScene()
     {
         if (DialogueManager.Instance != null)
         {
-            DialogueManager.Instance.AssignReflectionUI(speechBubble, reflectionGrid);
+            DialogueManager.Instance.AssignReflectionUI(reflectionFeedbackText, speechBubble, reflectionGrid, reflectionText);
             DialogueManager.Instance.BeginReflection(MenuManager.Instance.CurrentScenario);
         }
     }
