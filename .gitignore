@@ -1,1 +1,5 @@
 Sustainability Software/.env
+Sustainability Software/Assets/Scripts/Services/LLMService.cs
+Sustainability Software/Assets/Scripts/Services/LLMService.cs.meta
+Sustainability Software/Assets/Scripts/EnvLoader.cs
+Sustainability Software/Assets/Scripts/EnvLoader.cs.meta
