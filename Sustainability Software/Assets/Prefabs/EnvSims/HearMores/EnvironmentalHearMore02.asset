@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db0df5408222c448ba882eb111f0f1e, type: 3}
+  m_Name: EnvironmentalHearMore02
+  m_EditorClassIdentifier: 
+  hearMoreName: EnvironmentalHearMore02
+  hearMoreText: The software layer impacts energy use through algorithms, code efficiency,
+    and resource management, so designing lightweight, optimized programs and minimizing
+    unnecessary computations can significantly reduce overall energy consumption.

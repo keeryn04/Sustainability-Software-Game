@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ResourceGoal_2
   m_EditorClassIdentifier: 
   goalType: 1
-  objective: Keep Your Resource Level Over the Threshold!
+  objective: Keep Your Resource Level Over the 40% Threshold!
   resourceThreshold: 0.4
   pointThreshold: 0

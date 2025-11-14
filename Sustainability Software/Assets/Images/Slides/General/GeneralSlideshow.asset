@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc7902a1d3ba414daae39e99db6aaad, type: 3}
+  m_Name: GeneralSlideshow
+  m_EditorClassIdentifier: 
+  slides:
+  - {fileID: 21300000, guid: cc088ba8ace6039468eebc9a07cd01aa, type: 3}
+  - {fileID: 21300000, guid: 5854eac85ec34754d98d0d6bbd50cfcf, type: 3}
+  - {fileID: 21300000, guid: 37a5f165c3d0708468047ce6aa8ca315, type: 3}
+  - {fileID: 21300000, guid: 61a878bd23066394b99bc4075d1bd07c, type: 3}
+  - {fileID: 21300000, guid: ba5b2f9748176ca4a817243558c4be20, type: 3}
+  - {fileID: 21300000, guid: 209ea1b3da7f9604098447c35ac9b031, type: 3}
+  - {fileID: 21300000, guid: 50644485cc7275449a0f777a5dbea177, type: 3}
+  - {fileID: 21300000, guid: 3c035f7142991db46adf15fe1409fc83, type: 3}
+  - {fileID: 21300000, guid: 180183867fc833b4188faff3989af2ac, type: 3}
+  - {fileID: 21300000, guid: 8b9aa929929e0d44e9b35bdd5616134f, type: 3}
+  - {fileID: 21300000, guid: f797992b47434594f8872a93f7d02901, type: 3}

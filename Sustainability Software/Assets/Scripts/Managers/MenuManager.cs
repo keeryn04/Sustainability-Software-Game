@@ -1,77 +1,110 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Marks what scene the game is currently on
+public enum GameStage
+{
+    None,
+    Learning,
+    Playing,
+    Reflection
+}
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private ScenarioData[] scenarios;
-    private ScenarioData currentScenario;
-    private Boolean reflectionStatus = false;
-
     public static MenuManager Instance { get; private set; }
+    [SerializeField] private ScenarioData[] scenarios;
+
+    private ScenarioData currentScenario;
+    private SustainabilityPillar pendingLearnType;
+    private GameStage currentStage = GameStage.None;
+
+    public GameStage CurrentStage => currentStage;
+    public ScenarioData CurrentScenario => currentScenario;
+    public SustainabilityPillar PendingLearnType => pendingLearnType;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); //Destroy duplicate instances
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); //Persist across scenes
-        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    //Setters & Getters
-    public ScenarioData CurrentScenario => currentScenario;
-    public bool ReflectionStatus
+    public void LoadLearning(SustainabilityPillar learnType)
     {
-        get => reflectionStatus;
-        set => reflectionStatus = value;
+        pendingLearnType = learnType;
+        currentStage = GameStage.Learning;
+
+        SceneManager.sceneLoaded += OnSceneInitialized;
+        SceneManager.LoadScene("LearningScene");
     }
 
-    public void LoadScenarioScene(ScenarioData scenario, string sceneName = "PlayingScene")
+    public void LoadPlaying(ScenarioData scenario)
     {
         if (scenario == null)
         {
-            Debug.LogError("Scenario is null. Cannot load scene.");
+            Debug.LogError("Cannot load null scenario.");
             return;
         }
 
         currentScenario = scenario;
-        GameTracker.Instance.StartGame();
+        currentStage = GameStage.Playing;
 
-        //Directly load the scene, SceneInitializer handles setup
-        SceneManager.LoadScene(sceneName);
+        SceneManager.sceneLoaded += OnSceneInitialized;
+        SceneManager.LoadScene("PlayingScene");
     }
 
-    public void LoadReflectionScene(string sceneName = "ReflectionScene")
+    private ScenarioData RandomScenario(SustainabilityPillar pillar)
     {
-        SceneManager.LoadScene(sceneName);
+        var filtered = scenarios.Where(s => s.pillar == pillar).ToArray();
+        if (filtered.Length == 0)
+        {
+            Debug.LogWarning($"No scenarios found for pillar {pillar}");
+            return null;
+        }
+        return filtered[UnityEngine.Random.Range(0, filtered.Length)];
     }
 
-    //Fetches random pillar based on pillar type, and feeds info back to scene
-    public void LoadPillar(SustainabilityPillar pillar)
+    public void LoadReflection()
     {
-        var scenario = GetRandomByPillar(pillar);
-        if (scenario != null)
-            LoadScenarioScene(scenario);
+        currentStage = GameStage.Reflection;
+
+        SceneManager.sceneLoaded += OnSceneInitialized;
+        SceneManager.LoadScene("ReflectionScene");
+    }
+
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene("PillarSelectScene");
+    }
+
+    private void OnSceneInitialized(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneInitialized;
+
+        SceneInitializer initializer = FindObjectOfType<SceneInitializer>();
+        if (initializer != null)
+        {
+            initializer.InitializeScene(currentStage);
+        }
         else
-            Debug.LogWarning($"No scenarios available for pillar {pillar}");
+        {
+            Debug.LogWarning("SceneInitializer not found in loaded scene.");
+        }
     }
 
-    public ScenarioData GetRandomByPillar(SustainabilityPillar targetPillar)
-    {
-        var filtered = scenarios.Where(c => c.pillar == targetPillar).ToArray();
-        return filtered.Length == 0 ? null : filtered[UnityEngine.Random.Range(0, filtered.Length)];
-    }
-
-    //Helpers for UI reference
-    public void LoadEnvironmental() => LoadPillar(SustainabilityPillar.Environmental);
-    public void LoadSocial() => LoadPillar(SustainabilityPillar.Social);
-    public void LoadEconomic() => LoadPillar(SustainabilityPillar.Economic);
-    public void LoadTechnical() => LoadPillar(SustainabilityPillar.Technical);
+    public void LoadEnvironmentalLearn() => LoadLearning(SustainabilityPillar.Environmental);
+    public void LoadSocialLearn() => LoadLearning(SustainabilityPillar.Social);
+    public void LoadEconomicLearn() => LoadLearning(SustainabilityPillar.Economic);
+    public void LoadTechnicalLearn() => LoadLearning(SustainabilityPillar.Technical);
+    public void PlayEnvironmentalScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Environmental));
+    public void PlaySocialScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Social));
+    public void PlayEconomicScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Economic));
+    public void PlayTechnicalScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Technical));
 }

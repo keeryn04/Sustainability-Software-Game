@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db0df5408222c448ba882eb111f0f1e, type: 3}
+  m_Name: TechnicalHearMore03
+  m_EditorClassIdentifier: 
+  hearMoreName: TechnicalHearMore03
+  hearMoreText: "Technical sustainability includes resource efficiency \u2014 using
+    memory, bandwidth, and CPU wisely. Bloated or redundant code wastes not only
+    energy but also developer time. Even small optimizations \u2014 like smarter
+    caching or reducing unnecessary API calls \u2014 make systems leaner, faster,
+    and more environmentally friendly."

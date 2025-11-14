@@ -1,16 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class GameTracker : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static GameTracker Instance { get; private set; }
+    public static GameManager Instance { get; private set; }
 
     [Header("Player Stats")]
     [SerializeField] private float playerScore = 0f;
     [SerializeField] private int decisionsMade = 0;
+    [SerializeField] public string gameStatus;
+    private bool gameSuccess = false;
 
     [Header("Scenario Settings")]
     [SerializeField] private GoalData[] goals;
@@ -22,7 +21,6 @@ public class GameTracker : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private ResourceBar resourceBar;
 
-    //Getters
     public float PlayerScore => playerScore;
     public GoalData CurrentGoal => currentGoal;
     public float ScoreThreshold => scoreThreshold;
@@ -41,12 +39,12 @@ public class GameTracker : MonoBehaviour
         }
     }
 
-    public void AssignUI(ResourceBar newResourceBar)
+    public void AssignUI(ResourceBar bar)
     {
-        resourceBar = newResourceBar;
+        resourceBar = bar;
     }
 
-    public void StartGame()
+    public void StartScenario()
     {
         decisionsMade = 0;
         playerScore = 0f;
@@ -54,41 +52,46 @@ public class GameTracker : MonoBehaviour
         currentGoal = goals[UnityEngine.Random.Range(0, goals.Length)];
         scoreThreshold = currentGoal.pointThreshold;
         resourceThreshold = currentGoal.resourceThreshold;
+
+        resourceBar?.SetResourceScenario(MenuManager.Instance.CurrentScenario);
+        DialogueManager.Instance.BeginScenario(MenuManager.Instance.CurrentScenario, currentGoal);
     }
 
     public void RegisterDecision(float resourceImpact)
     {
         decisionsMade++;
 
-        //Add points to score
+        // Add points to score
         playerScore += Mathf.Max(0, resourceImpact * 1000);
+        resourceBar?.AddValue(resourceImpact);
 
-        //Check if game ends
-        if (decisionsMade > decisionLimit)
+        // Check if scenario ends
+        if (decisionsMade >= decisionLimit)
         {
-            CheckEndConditions();
+            EndScenario();
         }
     }
 
-    private void CheckEndConditions()
+    private void EndScenario()
     {
         if (currentGoal == null) return;
 
-        bool success = currentGoal.goalType switch
+        gameSuccess = currentGoal.goalType switch
         {
             GoalType.PointLevel => playerScore >= scoreThreshold,
-            GoalType.ResourceLevel => resourceBar.GetValue() >= resourceThreshold,
+            GoalType.ResourceLevel => resourceBar != null && resourceBar.GetValue() >= resourceThreshold,
             _ => false
         };
 
-        MenuManager.Instance.ReflectionStatus = true;
-        EndScenario(success);
-    }
+        if (gameSuccess) { 
+            gameStatus = "Scenario Success"; 
+        } else { 
+            gameStatus = "Scenario Fail"; 
+        }
 
-    private void EndScenario(Boolean status)
-    {
-        //float currentResourceValue = resourceBar.GetValue();
-        Debug.Log(status ? "Success!" : "Fail");
-        MenuManager.Instance.LoadReflectionScene();
+        Debug.Log(gameSuccess ? "Scenario Success!" : "Scenario Fail");
+
+        //Transition to Reflection stage via MenuManager
+        MenuManager.Instance.LoadReflection();
     }
 }

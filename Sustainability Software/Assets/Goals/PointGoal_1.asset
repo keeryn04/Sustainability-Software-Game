@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PointGoal_1
   m_EditorClassIdentifier: 
   goalType: 0
-  objective: Answer Questions to Get Over the Point Limit
+  objective: Answer Questions to Get Over 400 Points
   resourceThreshold: 0
   pointThreshold: 400
