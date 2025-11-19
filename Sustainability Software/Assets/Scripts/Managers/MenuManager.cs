@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public enum GameStage
 {
     None,
+    Menu,
     Learning,
     Playing,
     Reflection
@@ -81,7 +82,13 @@ public class MenuManager : MonoBehaviour
 
     public void LoadMenuScene()
     {
-        SceneManager.LoadScene("PillarSelectScene");
+        //No menu movement if talking
+        if (!DialogueManager.Instance.isTalking)
+        {
+            currentStage = GameStage.Menu;
+
+            SceneManager.LoadScene("PillarSelectScene");
+        } 
     }
 
     private void OnSceneInitialized(Scene scene, LoadSceneMode mode)

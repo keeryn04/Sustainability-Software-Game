@@ -203,19 +203,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 24586300}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlayTechnicalScenario
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &24586300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,19 +457,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 175941452}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlaySocialScenario
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &175941452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,19 +1000,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 578376141}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlayEconomicScenario
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &578376141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,6 +1428,58 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a12b60aa94ccf4e4ea8913219228d424, type: 3}
+--- !u!1 &886448543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 886448545}
+  - component: {fileID: 886448544}
+  m_Layer: 0
+  m_Name: MenuInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &886448544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886448543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e9e352f4ce19f4a9a5d06a8dae63bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentalPlayButton: {fileID: 1952725531}
+  socialPlayButton: {fileID: 175941451}
+  economicPlayButton: {fileID: 578376140}
+  technicalPlayButton: {fileID: 24586299}
+  environmentalLearnButton: {fileID: 1699618230}
+  socialLearnButton: {fileID: 1221749372}
+  economicLearnButton: {fileID: 2080509165}
+  technicalLearnButton: {fileID: 231518148}
+--- !u!4 &886448545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886448543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.27016392, y: -1.5794499, z: 1816.0433}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1221749370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,19 +1956,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1952725532}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlayEnvironmentalScenario
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1952725532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2465,3 +2469,4 @@ SceneRoots:
   - {fileID: 1477320313}
   - {fileID: 1383608408}
   - {fileID: 644683694}
+  - {fileID: 886448545}
