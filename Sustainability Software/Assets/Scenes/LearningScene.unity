@@ -246,6 +246,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a4507ed0107bfb64ab1d7f9124933bb4, type: 2}
   - {fileID: 11400000, guid: 5d62238f58f121646bab8f7333e1f427, type: 2}
   - {fileID: 11400000, guid: ba64a81bc44d9ad4f8e5168fdd34841d, type: 2}
+  - {fileID: 11400000, guid: 996f548b882e204459a47f641f863798, type: 2}
   slideImage: {fileID: 435066839}
   progressBar: {fileID: 1438118285}
   nextButton: {fileID: 1489572327}

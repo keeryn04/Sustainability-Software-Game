@@ -106,6 +106,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void LoadGeneralLearn() => LoadLearning(SustainabilityPillar.General);
     public void LoadEnvironmentalLearn() => LoadLearning(SustainabilityPillar.Environmental);
     public void LoadSocialLearn() => LoadLearning(SustainabilityPillar.Social);
     public void LoadEconomicLearn() => LoadLearning(SustainabilityPillar.Economic);
