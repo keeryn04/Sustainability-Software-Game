@@ -712,19 +712,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 231518149}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: LoadTechnicalLearn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &231518149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,19 +1550,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1221749373}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: LoadSocialLearn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1221749373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,17 +1707,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd493ffd71394774ca43462bbcc539b1, type: 3}
---- !u!114 &1477320314 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7113586430903955898, guid: cd493ffd71394774ca43462bbcc539b1, type: 3}
-  m_PrefabInstance: {fileID: 1477320313}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5950878af15e634d8444aca3ef6d55a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1699618228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,19 +1789,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1699618231}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: LoadEnvironmentalLearn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1699618231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2340,19 +2293,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2080509166}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477320314}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: LoadEconomicLearn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2080509166
 MonoBehaviour:
   m_ObjectHideFlags: 0
