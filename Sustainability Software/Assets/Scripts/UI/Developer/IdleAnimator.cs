@@ -23,19 +23,10 @@ public class IdleAnimator : MonoBehaviour
     {
         while (true)
         {
-            //Wait a random time
             float waitTime = Random.Range(minWait, maxWait);
             yield return new WaitForSeconds(waitTime);
 
-            //Pick a random idle animation
-            int randomIdle = Random.Range(0, 1); //REMEMBER TO ADJUST FOR MORE IDLE ANIMS
-
-            switch (randomIdle)
-            {
-                case 0:
-                    animator.SetTrigger("IdleBlink");
-                    break;
-            }
+            animator.SetTrigger("IdleBlink");
         }
     }
 }

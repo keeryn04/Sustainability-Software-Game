@@ -18,12 +18,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private ScenarioData[] scenarios;
 
     private ScenarioData currentScenario;
-    private SustainabilityPillar pendingLearnType;
     private GameStage currentStage = GameStage.None;
+    private SustainabilityPillar currentPillar = SustainabilityPillar.General;
 
     public GameStage CurrentStage => currentStage;
     public ScenarioData CurrentScenario => currentScenario;
-    public SustainabilityPillar PendingLearnType => pendingLearnType;
+    public SustainabilityPillar CurrentPillar => currentPillar;
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadLearning(SustainabilityPillar learnType)
     {
-        pendingLearnType = learnType;
+        currentPillar = learnType; //Store current pillar type
         currentStage = GameStage.Learning;
 
         SceneManager.sceneLoaded += OnSceneInitialized;
@@ -55,6 +55,7 @@ public class MenuManager : MonoBehaviour
         }
 
         currentScenario = scenario;
+        currentPillar = scenario.pillar; //Store current pillar type
         currentStage = GameStage.Playing;
 
         SceneManager.sceneLoaded += OnSceneInitialized;

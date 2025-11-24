@@ -48,7 +48,7 @@ public class SceneInitializer : MonoBehaviour
     {
         if (SlideshowViewer.Instance != null)
         {
-            SlideshowViewer.Instance.SetSlideshow(MenuManager.Instance.PendingLearnType);
+            SlideshowViewer.Instance.SetSlideshow(MenuManager.Instance.CurrentPillar);
         }
 
         DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
