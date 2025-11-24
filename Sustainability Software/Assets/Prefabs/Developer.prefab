@@ -227,3 +227,4 @@ MonoBehaviour:
   appearanceSets:
   - {fileID: 11400000, guid: b0137c856e6ecfb42be1ba9eb90ca9e3, type: 2}
   - {fileID: 11400000, guid: c1ded36a1585db841af51da24cb657e6, type: 2}
+  - {fileID: 11400000, guid: cf44c23d014281d41bac5b7e1a816377, type: 2}

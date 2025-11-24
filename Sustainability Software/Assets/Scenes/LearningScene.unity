@@ -1042,27 +1042,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 142.91003
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -71.45502
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1204,7 +1204,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -655.00006, y: 281.73}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -847.39, y: -563.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1177793557
 MonoBehaviour:
@@ -2119,6 +2119,10 @@ PrefabInstance:
       propertyPath: MaxDistance
       value: 79.25568
       objectReference: {fileID: 0}
+    - target: {fileID: 7224317488297597069, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
+      propertyPath: appearanceSets.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: cf44c23d014281d41bac5b7e1a816377, type: 2}
     - target: {fileID: 8363235748822555063, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
