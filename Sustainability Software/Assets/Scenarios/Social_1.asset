@@ -29,5 +29,5 @@ MonoBehaviour:
   reflectionFeedback: 'Healthy workplaces support people on multiple levels: balance,
     inclusion, wellness, and growth. A mix of these approaches will improve morale
     and reduce turnover.'
-  pillar: 1
+  pillar: 2
   resourceBarSprite: {fileID: 21300000, guid: dafedfaefdf991c418084136e786ad00, type: 3}

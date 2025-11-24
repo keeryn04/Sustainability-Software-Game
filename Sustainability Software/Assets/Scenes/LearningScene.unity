@@ -1833,8 +1833,8 @@ MonoBehaviour:
   speechBubble: {fileID: 0}
   reflectionGrid: {fileID: 0}
   reflectionText: {fileID: 0}
-  typingAnimator: {fileID: 0}
-  audioSource: {fileID: 0}
+  typingAnimator: {fileID: 1996139831}
+  audioSource: {fileID: 1996139830}
 --- !u!4 &1624537512
 Transform:
   m_ObjectHideFlags: 0
@@ -2207,6 +2207,16 @@ PrefabInstance:
 --- !u!224 &1996139829 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8363235748822555063, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
+  m_PrefabInstance: {fileID: 1996139828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1996139830 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5186831259610646690, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
+  m_PrefabInstance: {fileID: 1996139828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1996139831 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8355507023037982052, guid: 3efc480bdb6a1ac4590af2df4b17b15a, type: 3}
   m_PrefabInstance: {fileID: 1996139828}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2114633400

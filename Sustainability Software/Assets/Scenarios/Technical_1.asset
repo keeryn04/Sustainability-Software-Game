@@ -36,5 +36,5 @@ MonoBehaviour:
     route optimization saves fuel, cloud migration reduces emissions, IoT enables
     monitoring, and AI delivers insights. The challenge is aligning technology investment
     with organizational capacity.'
-  pillar: 3
+  pillar: 4
   resourceBarSprite: {fileID: 21300000, guid: 251c14eeb7cedb74a9ba9d3d14c6f001, type: 3}
