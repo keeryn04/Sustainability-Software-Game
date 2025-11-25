@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
 using static System.Net.Mime.MediaTypeNames;
+using static Unity.VisualScripting.Member;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -50,13 +51,17 @@ public class DialogueManager : MonoBehaviour
 
     //Used by SceneInitializer to update UI elements in object
     public void AssignUI(TextMeshProUGUI client, TextMeshProUGUI objective, TextMeshProUGUI score,
-                         Button[] choices, ResourceBar bar, Animator animator, AudioSource source)
+                         Button[] choices, ResourceBar bar)
     {
         clientText = client;
         objectiveText = objective;
         scoreText = score;
         choiceButtons = choices;
         resourceBar = bar;
+    }
+
+    public void AssignDeveloperUI(Animator animator, AudioSource source)
+    {
         typingAnimator = animator;
         audioSource = source;
     }

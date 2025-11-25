@@ -48,8 +48,10 @@ public class SceneInitializer : MonoBehaviour
     {
         if (SlideshowViewer.Instance != null)
         {
-            SlideshowViewer.Instance.SetSlideshow(MenuManager.Instance.PendingLearnType);
+            SlideshowViewer.Instance.SetSlideshow(MenuManager.Instance.CurrentPillar);
         }
+
+        DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
     }
 
     private void SetupPlayingScene()
@@ -61,10 +63,10 @@ public class SceneInitializer : MonoBehaviour
                 objectiveText,
                 scoreText,
                 choiceButtons,
-                resourceBar,
-                typingAnimator,
-                audioSource
+                resourceBar
             );
+
+            DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
         }
 
         if (GameManager.Instance != null)

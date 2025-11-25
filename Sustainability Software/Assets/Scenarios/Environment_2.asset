@@ -28,5 +28,5 @@ MonoBehaviour:
   reflectionFeedback: 'Each option addresses sustainability in different ways: energy
     efficiency reduces emissions, composting prevents landfill waste, and plastic-free
     packaging reduces pollution.'
-  pillar: 0
+  pillar: 1
   resourceBarSprite: {fileID: 21300000, guid: 8461884c55250fd4684acf3aeb3c9b81, type: 3}

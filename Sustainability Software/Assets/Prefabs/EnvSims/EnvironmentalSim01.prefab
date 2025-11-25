@@ -147,7 +147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.35995483, y: 219.79}
+  m_AnchoredPosition: {x: -0.35999, y: -220.03}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7452292113773916809
@@ -371,7 +371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0020751953, y: 220.10698}
+  m_AnchoredPosition: {x: 0, y: -219.72}
   m_SizeDelta: {x: 247.6768, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1890722937750435360
@@ -1025,6 +1025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Extending device lifespan with software updates
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenIT
 --- !u!1001 &1739357871098981256
 PrefabInstance:
@@ -1206,6 +1207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Apps that encourage recycling or sustainable habits
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenByIT
 --- !u!1001 &2200751544919659703
 PrefabInstance:
@@ -1387,6 +1389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Recycling or repurposing old hardware
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenIT
 --- !u!1001 &4247727988033168612
 PrefabInstance:
@@ -1568,6 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Agricultural software that minimizes water or fertilizer use
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenByIT
 --- !u!1001 &6831612028342146421
 PrefabInstance:
@@ -1744,6 +1748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Smart home systems that cut electricity waste
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenByIT
 --- !u!224 &8583552117850059263 stripped
 RectTransform:
@@ -1925,6 +1930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Powering servers with renewable energy
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenIT
 --- !u!224 &5302033025016563549 stripped
 RectTransform:
@@ -2106,6 +2112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: Supply chain platforms that track and reduce carbon emissions
   originalPosition: {x: 0, y: 0}
+  isDraggable: 1
   itemType: GreenByIT
 --- !u!224 &5997655623804189289 stripped
 RectTransform:

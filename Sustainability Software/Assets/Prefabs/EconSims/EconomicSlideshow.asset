@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc7902a1d3ba414daae39e99db6aaad, type: 3}
   m_Name: EconomicSlideshow
   m_EditorClassIdentifier: 
-  slideshowType: 2
+  slideshowType: 3
   slides:
   - slideImage: {fileID: 21300000, guid: fff7e7bf9a483bf4789e438f727c244a, type: 3}
     elements: []

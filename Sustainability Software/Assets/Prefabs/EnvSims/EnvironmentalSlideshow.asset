@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc7902a1d3ba414daae39e99db6aaad, type: 3}
   m_Name: EnvironmentalSlideshow
   m_EditorClassIdentifier: 
+  slideshowType: 1
   slides:
   - slideImage: {fileID: 21300000, guid: 4a89f82074eb3714d83a0e615e40a04a, type: 3}
     elements: []
@@ -22,27 +23,22 @@ MonoBehaviour:
   - slideImage: {fileID: 21300000, guid: cb88a2e0884097e4795b31a01b70ef62, type: 3}
     elements:
     - type: 0
-      position: {x: 586.7599, y: -239.3}
       targetID: EnvironmentalSim01
   - slideImage: {fileID: 21300000, guid: 9dc569dae5803b14883cf2cd1b2b1e03, type: 3}
     elements:
     - type: 1
-      position: {x: 586.7599, y: -239.3}
       targetID: EnvironmentalHearMore01
   - slideImage: {fileID: 21300000, guid: 258315d86def81d449ba530dc313d267, type: 3}
     elements:
     - type: 1
-      position: {x: 586.7599, y: -239.3}
       targetID: EnvironmentalHearMore02
   - slideImage: {fileID: 21300000, guid: d5170e8bdcc244545a03707542ff5de4, type: 3}
     elements:
     - type: 1
-      position: {x: 586.7599, y: -239.3}
       targetID: EnvironmentalHearMore03
   - slideImage: {fileID: 21300000, guid: c0bee3d44d1e19445bee372708f31ba5, type: 3}
     elements:
     - type: 1
-      position: {x: 586.7599, y: -239.3}
       targetID: EnvironmentalHearMore04
   - slideImage: {fileID: 21300000, guid: 0a772038329c74d45bb4376ea746fd10, type: 3}
     elements: []
