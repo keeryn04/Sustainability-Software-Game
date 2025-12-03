@@ -48,3 +48,5 @@ MonoBehaviour:
     elements: []
   - slideImage: {fileID: 21300000, guid: a048afbe81c2dee4cb41f64038de6825, type: 3}
     elements: []
+  - slideImage: {fileID: 21300000, guid: d52628cf5fa78784a905e4eb3a811ca0, type: 3}
+    elements: []
