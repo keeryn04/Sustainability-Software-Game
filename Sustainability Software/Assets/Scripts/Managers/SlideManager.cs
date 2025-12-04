@@ -26,6 +26,8 @@ public class SlideshowViewer : MonoBehaviour
     private int currentSlide = 0;
     private List<GameObject> activeButtons = new List<GameObject>();
 
+    public int CurrentSlideIndex => currentSlide;
+
     public static SlideshowViewer Instance { get; private set; }
 
     private void Awake()

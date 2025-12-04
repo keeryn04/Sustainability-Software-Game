@@ -1,13 +1,8 @@
-using System.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
-using static System.Net.Mime.MediaTypeNames;
-using static Unity.VisualScripting.Member;
 
 public class DialogueManager : MonoBehaviour
 {
