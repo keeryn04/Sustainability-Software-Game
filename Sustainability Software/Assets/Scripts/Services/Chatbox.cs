@@ -18,6 +18,8 @@ public class ChatBox : MonoBehaviour
     private void Awake()
     {
         sendButton.onClick.AddListener(OnSendClicked);
+        if (speechBubble != null)
+            speechBubble.SetActive(false);
     }
 
     private void OnSendClicked()
