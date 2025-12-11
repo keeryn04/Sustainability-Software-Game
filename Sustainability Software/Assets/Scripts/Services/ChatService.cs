@@ -13,9 +13,17 @@ public static class ChatService
         string context)
     {
         //Build the system prompt based on mode
-        string systemPrompt = mode == GameStage.Learning
-            ? $"You are a software sustainability tutor. Base answers off the following learning context:\n\n{context}\n\nKeep explanations simple, correct, and educational. Keep your answer 1-3 sentences."
-            : $"You are a stakeholder in a software sustainability meeting. Stay fully in character.\nUse ONLY the client brief:\n\nClient Brief:\n{context}\n\n Respond realistically. Keep your answer 1-3 sentences.";
+        string systemPrompt = mode switch
+        {
+            GameStage.Learning =>
+                $"You are a software sustainability tutor. Base answers off the following learning context:\n\n{context}\n\nKeep explanations simple, correct, and educational. Keep your answer 1-3 sentences.",
+
+            GameStage.Reflection =>
+                $"You are guiding the player through reflective analysis. Use ONLY the reflection context below:\n\nReflection Context:\n{context}\n\nYour goal is to help the player understand the impact of their previous choices. Provide thoughtful, concise insights. Keep your answer 1-3 sentences.",
+
+            _ =>
+                $"You are a stakeholder in a software sustainability meeting. Stay fully in character.\nUse ONLY the client brief:\n\nClient Brief:\n{context}\n\nRespond realistically. Keep your answer 1-3 sentences."
+        };
 
         //Build the message list
         List<ChatMessage> messages = new List<ChatMessage>();

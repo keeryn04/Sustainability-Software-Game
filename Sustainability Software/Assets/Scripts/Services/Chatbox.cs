@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,6 +49,12 @@ public class ChatBox : MonoBehaviour
         {
             context = MenuManager.Instance.CurrentScenario.clientBrief;
             currentStage = GameStage.Playing;
+        }
+        else if (MenuManager.Instance.CurrentStage == GameStage.Reflection)
+        {
+            List<ChoiceData> contextList = DialogueManager.Instance.PlayerDecisions;
+            context = string.Join("\n", contextList.Select(d => $"Choice: {d.choiceText}\nReflection: {d.reflection}"));
+            currentStage = GameStage.Reflection;
         }
 
         botTextBox.text = "";
