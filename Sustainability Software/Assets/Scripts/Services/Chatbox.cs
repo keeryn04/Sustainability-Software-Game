@@ -57,9 +57,6 @@ public class ChatBox : MonoBehaviour
             currentStage = GameStage.Reflection;
         }
 
-        botTextBox.text = "";
-        speechBubble.SetActive(true);
-
         //Wait for the bot to finish typing
         yield return StartCoroutine(GetBotResponseCoroutine(currentStage, userMessage, context, botTextBox));
 
@@ -88,6 +85,8 @@ public class ChatBox : MonoBehaviour
 
     public IEnumerator GetBotResponseCoroutine(GameStage currentStage, string userMessage, string context, TextMeshProUGUI targetBox)
     {
+        speechBubble.SetActive(false);
+
         Task<string> botTask = ChatService.SendChatAsync(currentStage, userMessage, context);
 
         //Wait until the task is done
@@ -101,7 +100,9 @@ public class ChatBox : MonoBehaviour
 
         string botResponse = botTask.Result;
 
-        //Use your TypeText coroutine to animate the response
+        speechBubble.SetActive(true);
+        targetBox.text = "";
+
         yield return StartCoroutine(DialogueManager.Instance.TypeText(botResponse, targetBox));
     }
 }
