@@ -89,8 +89,6 @@ public class GameManager : MonoBehaviour
             gameStatus = "Scenario Fail"; 
         }
 
-        Debug.Log(gameSuccess ? "Scenario Success!" : "Scenario Fail");
-
         //Transition to Reflection stage via MenuManager
         MenuManager.Instance.LoadReflection();
     }
