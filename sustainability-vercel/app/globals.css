@@ -86,7 +86,8 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
   background-color: var(--panel-background);
 }
