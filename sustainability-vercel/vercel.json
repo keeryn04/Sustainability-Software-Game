@@ -1,26 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/$1" }
-  ],
-  "headers": [
+  "builds": [
     {
-      "source": "/unity/(.*)\\.wasm",
-      "headers": [
-        { "key": "Content-Type", "value": "application/wasm" },
-        { "key": "Content-Encoding", "value": "gzip" }
-      ]
-    },
-    {
-      "source": "/unity/(.*)\\.data",
-      "headers": [
-        { "key": "Content-Encoding", "value": "gzip" }
-      ]
-    },
-    {
-      "source": "/unity/(.*)\\.js",
-      "headers": [
-        { "key": "Content-Encoding", "value": "gzip" }
-      ]
+      "src": "package.json",
+      "use": "@vercel/next"
     }
   ]
 }
