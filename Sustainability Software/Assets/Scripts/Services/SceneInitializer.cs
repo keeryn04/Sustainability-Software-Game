@@ -81,7 +81,8 @@ public class SceneInitializer : MonoBehaviour
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.AssignReflectionUI(reflectionFeedbackText, speechBubble, reflectionGrid, reflectionText);
-            DialogueManager.Instance.BeginReflection(MenuManager.Instance.CurrentScenario);
+            DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
+            StartCoroutine(DialogueManager.Instance.BeginReflection());
         }
     }
 }

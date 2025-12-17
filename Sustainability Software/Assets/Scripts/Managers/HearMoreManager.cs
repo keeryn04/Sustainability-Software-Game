@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -62,5 +61,19 @@ public class HearMoreManager : MonoBehaviour
         // Re-enable button
         if (triggerButton != null)
             triggerButton.interactable = true;
+    }
+
+    public string GetHearMoreText(string speechID)
+    {
+        if (hearMorePrefabs == null) return "";
+
+        HearMoreData data = hearMorePrefabs.Find(p => p.HearMoreName == speechID);
+        if (data == null)
+        {
+            Debug.LogWarning($"HearMore ID '{speechID}' not found.");
+            return "";
+        }
+
+        return data.HearMoreText;
     }
 }

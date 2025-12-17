@@ -1,13 +1,8 @@
-using System.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
-using static System.Net.Mime.MediaTypeNames;
-using static Unity.VisualScripting.Member;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -35,6 +30,7 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager Instance { get; private set; }
     public bool isTalking { get; private set; }
+    public List<ChoiceData> PlayerDecisions => playerDecisions;
 
     private void Awake()
     {
@@ -182,6 +178,11 @@ public class DialogueManager : MonoBehaviour
         //Update resources and score
         resourceBar?.AddValue(parsed.resourceImpact);
         GameManager.Instance.RegisterDecision(parsed.resourceImpact);
+        if (MenuManager.Instance.CurrentStage == GameStage.Reflection) //If game is over
+        {
+            yield break; 
+        }
+
         playerScore = GameManager.Instance.PlayerScore;
         if (scoreText != null) scoreText.text = playerScore.ToString();
 
@@ -208,19 +209,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void BeginReflection(ScenarioData scenario)
+    public IEnumerator BeginReflection()
     {
-        currentScenario = scenario;
-        if (scenario == null)
-        {
-            Debug.LogError("No scenario for reflection.");
-            return;
-        }
-
         reflectionTitle.text = GameManager.Instance.gameStatus;
 
-        StartCoroutine(TypeText(scenario.reflectionFeedback, clientText));
+        yield return StartCoroutine(TypeText(currentScenario.reflectionFeedback, clientText));
 
+        yield return StartCoroutine(DisplayReflectionsSequentially(playerDecisions));
+    }
+
+    public IEnumerator DisplayReflectionsSequentially(List<ChoiceData> playerDecisions)
+    {
         foreach (var decision in playerDecisions)
         {
             GameObject bubble = Instantiate(speechBubble, reflectionGrid);
@@ -230,7 +229,9 @@ public class DialogueManager : MonoBehaviour
             if (bubbleText != null)
             {
                 string text = $"Choice: {decision.choiceText}\nReflection: {decision.reflection}";
-                StartCoroutine(TypeText(text, bubbleText));
+
+                //Wait for last bubble to finish before starting next
+                yield return StartCoroutine(TypeText(text, bubbleText));
             }
         }
     }
