@@ -4,56 +4,55 @@ import { useState } from "react";
 import AboutUsModal from "../app/components/AboutUsModal";
 
 export default function PlayPage() {
-  const [activeTab, setActiveTab] = useState<"about" | "how">("about");
   const [openAboutUs, setOpenAboutUs] = useState(false);
 
   return (
     <main className="app-container">
       {/* Header */}
       <header className="app-header">
-        <h1>Sustainability Software Game</h1>
+        <h1>Sim Sustain</h1>
+        <div className="header-buttons">
+          <button onClick={() => setOpenAboutUs(true)}>
+            About Us
+          </button>
+        </div>
       </header>
 
       {/* Content */}
       <div className="app-content">
         {/* Info Panel */}
         <aside className="info-panel">
-          <div className="header-buttons">
-            <button onClick={() => setActiveTab("about")}>About</button>
-            <button onClick={() => setActiveTab("how")}>How to Use</button>
-            <button
-              onClick={() => setOpenAboutUs(true)}
-              className="modal-open-button"
-            >
-              About Us
-            </button>
-          </div>
-          
-          {activeTab === "about" && (
-            <>
-              <h2>About</h2>
-              <p>
-                ___ is an interactive simulation tool designed 
-                to explore complex trade-offs in decision-making related to sustainability. 
-                Users navigate scenarios that involve environmental, economic, and social factors, 
-                making choices that influence outcomes across multiple systems. The tool aims 
-                to foster systems thinking, critical analysis, and awareness of long-term 
-                consequences in policy, industry, and personal decision-making.  
-                It’s ideal for students, researchers, and practitioners interested in sustainability, 
-                software-assisted learning, and decision science.
-              </p>
-            </>
-          )}
-          {activeTab === "how" && (
-            <>
-              <h2>How to Use</h2>
-              <ol>
-                <li>Read the scenario.</li>
-                <li>Make decisions as prompted.</li>
-                <li>Observe the outcomes.</li>
-              </ol>
-            </>
-          )}
+          <h2>How to Use</h2>
+          <ol>
+            <li>
+              <strong>Learning Mode: </strong> 
+              <br />
+              This stage provides guidance, explanations, and context. You can learn about the different 
+              pillars of software sustainability, try out simulations to see the effects of your decisions, 
+              and ask questions about software sustainability. The goal is to solidify your understanding of sustainability 
+              principles and decision-making strategies.
+            </li>
+            <li>
+              <strong>Playing Mode: </strong> 
+              <br />
+              In this stage, you interact directly with the simulation. You read scenarios, make decisions, 
+              and observe the immediate outcomes of your choices in the system. This stage is meant to 
+              immerse you in real-world trade-offs and help you explore sustainability challenges firsthand.
+            </li>
+            <li>
+              <strong>Reflection: </strong> 
+              <br />
+              Finally, you reflect on your decisions and the insights gained from the simulation. 
+              You can compare different approaches, consider alternative strategies, and consolidate 
+              key lessons. This stage encourages critical thinking and helps you connect the simulation 
+              experience to real-world applications.
+            </li>
+          </ol>
+          <p>
+            Each stage builds on your knowledge to ensure that your experience is interactive, educational, 
+            and reflective. The combination of decision-making, learning feedback, and reflection helps 
+            deepen your understanding of complex sustainability systems.
+          </p>
         </aside>
 
         {/* Unity Embed */}
