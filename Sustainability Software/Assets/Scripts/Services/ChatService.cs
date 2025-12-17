@@ -40,93 +40,47 @@ public static class ChatService
                 "Do not discuss anything outside of software sustainability. Politely decline unrelated questions."
         };
 
-        //Build the message list
-        List<ChatMessage> messages = new List<ChatMessage>();
+        string prompt = $"{systemPrompt}\n\nUser Message: {userMessage}";
 
-        messages.Add(new ChatMessage { role = "system", content = systemPrompt });
+        string apiUrl = "/api/get-data";
 
-        messages.Add(new ChatMessage { role = "user", content = userMessage });
+        string jsonBody = JsonUtility.ToJson(new PromptRequest { prompt = prompt });
 
-        //Convert to request
-        ChatRequest chatRequest = new ChatRequest
-        {
-            model = "gpt-3.5-turbo",
-            messages = messages.ToArray(),
-            max_tokens = 300
-        };
-
-        string jsonBody = JsonUtility.ToJson(chatRequest);
-
-        //Send to OpenAI API
-        using (UnityWebRequest www =
-               new UnityWebRequest("https://api.openai.com/v1/chat/completions", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest(apiUrl, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
-            www.SetRequestHeader("Authorization", "Bearer " + EnvLoader.Get("OPENAI_API_KEY"));
 
             var asyncOp = www.SendWebRequest();
             while (!asyncOp.isDone) await Task.Yield();
 
             if (www.result == UnityWebRequest.Result.Success)
             {
-                string rawJson = www.downloadHandler.text;
-
                 try
                 {
-                    var response = JsonUtility.FromJson<OpenAIResponse>(rawJson);
-                    return response.choices[0].message.content;
+                    //Parse JSON response from Vercel
+                    PromptResponse response = JsonUtility.FromJson<PromptResponse>(www.downloadHandler.text);
+                    return response.text;
                 }
                 catch
                 {
-                    Debug.LogError("ChatService JSON parse error: " + rawJson);
-                    return "Error: Invalid response format.";
+                    Debug.LogError("Failed to parse JSON from server: " + www.downloadHandler.text);
+                    return "Error: Invalid server response.";
                 }
             }
             else
             {
-                Debug.LogError($"ChatService error: {www.responseCode} - {www.error}");
-                Debug.LogError("Response body: " + www.downloadHandler.text);
-                return "Error: Chat request failed.";
+                Debug.LogError($"Error calling LLM service: {www.error}");
+                return "Error: Failed to contact service.";
             }
         }
     }
 
-    //Response classes
     [System.Serializable]
-    private class OpenAIResponse
-    {
-        public Choice[] choices;
-    }
+    private class PromptRequest { public string prompt; }
 
     [System.Serializable]
-    private class Choice
-    {
-        public Message message;
-    }
-
-    [System.Serializable]
-    private class Message
-    {
-        public string role;
-        public string content;
-    }
-
-    //Request classes
-    [System.Serializable]
-    public class ChatRequest
-    {
-        public string model;
-        public ChatMessage[] messages;
-        public int max_tokens;
-    }
-
-    [System.Serializable]
-    public class ChatMessage
-    {
-        public string role;
-        public string content;
-    }
+    private class PromptResponse { public string text; }
 }

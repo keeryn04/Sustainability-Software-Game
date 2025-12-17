@@ -33,6 +33,12 @@ public class ChatBox : MonoBehaviour
         if (string.IsNullOrEmpty(userMessage))
             yield break;
 
+        if (userMessage.Length > 400)
+        {
+            Debug.LogWarning("Message too long, skipping request.");
+            yield break;
+        }
+
         inputField.text = "";
         inputField.interactable = false;
         sendButton.interactable = false;

@@ -12,8 +12,8 @@ export default function AboutUsModal({ isOpen, onClose }: AboutUsModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="info-modal-overlay" onClick={onClose}>
-      <div className="info-modal" onClick={(e) => e.stopPropagation()}>
+    <div className="about-modal-overlay" onClick={onClose}>
+      <div className="about-modal" onClick={(e) => e.stopPropagation()}>
         <h2>About Us</h2>
 
         <div className="about-section">
@@ -78,7 +78,7 @@ export default function AboutUsModal({ isOpen, onClose }: AboutUsModalProps) {
           </div>
         </div>
 
-        <div className="info-modal-actions">
+        <div className="about-modal-actions">
           <button className="close-button" onClick={onClose}>
             Close
           </button>
