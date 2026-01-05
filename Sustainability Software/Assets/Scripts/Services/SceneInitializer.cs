@@ -38,6 +38,10 @@ public class SceneInitializer : MonoBehaviour
                 SetupReflectionScene();
                 break;
 
+            case GameStage.Quiz:
+                SetupQuizScene();
+                break;
+
             default:
                 Debug.LogWarning("SceneInitializer called without a valid GameStage.");
                 break;
@@ -83,6 +87,14 @@ public class SceneInitializer : MonoBehaviour
             DialogueManager.Instance.AssignReflectionUI(reflectionFeedbackText, speechBubble, reflectionGrid, reflectionText);
             DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
             StartCoroutine(DialogueManager.Instance.BeginReflection());
+        }
+    }
+
+    private void SetupQuizScene()
+    {
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
         }
     }
 }
