@@ -13,6 +13,7 @@ public class MainMenuInitializer : MonoBehaviour
     [SerializeField] private Button economicLearnButton;
     [SerializeField] private Button technicalLearnButton;
     [SerializeField] private Button generalLearnButton;
+    [SerializeField] private Button quizButton;
 
 
     private void Start()
@@ -27,6 +28,7 @@ public class MainMenuInitializer : MonoBehaviour
         economicLearnButton.onClick.RemoveAllListeners();
         technicalLearnButton.onClick.RemoveAllListeners();
         generalLearnButton.onClick.RemoveAllListeners();
+        quizButton.onClick.RemoveAllListeners();
 
         //Assign persistent MenuManager methods
         environmentalPlayButton.onClick.AddListener(MenuManager.Instance.PlayEnvironmentalScenario);
@@ -39,5 +41,7 @@ public class MainMenuInitializer : MonoBehaviour
         economicLearnButton.onClick.AddListener(MenuManager.Instance.LoadEconomicLearn);
         technicalLearnButton.onClick.AddListener(MenuManager.Instance.LoadTechnicalLearn);
         generalLearnButton.onClick.AddListener(MenuManager.Instance.LoadGeneralLearn);
+
+        quizButton.onClick.AddListener(MenuManager.Instance.LoadQuizScene);
     }
 }
