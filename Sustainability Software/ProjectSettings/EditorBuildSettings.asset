@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ReflectionScene.unity
     guid: d0283f78eba31f1489c74a1cd70d4b58
+  - enabled: 1
+    path: Assets/Scenes/QuizScene.unity
+    guid: 42cbb6725282bea4f98a4a93a06c810d
   m_configObjects: {}
