@@ -42,3 +42,5 @@ MonoBehaviour:
       targetID: EnvironmentalHearMore04
   - slideImage: {fileID: 21300000, guid: 0a772038329c74d45bb4376ea746fd10, type: 3}
     elements: []
+  - slideImage: {fileID: 21300000, guid: aa4a4eeb824fd7442a8023e23bf9699c, type: 3}
+    elements: []

@@ -10,7 +10,8 @@ public enum GameStage
     Menu,
     Learning,
     Playing,
-    Reflection
+    Reflection,
+    Quiz
 }
 public class MenuManager : MonoBehaviour
 {
@@ -81,10 +82,18 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("ReflectionScene");
     }
 
+    public void LoadQuizScene()
+    {
+        currentStage = GameStage.Quiz;
+
+        SceneManager.sceneLoaded += OnSceneInitialized;
+        SceneManager.LoadScene("QuizScene");
+    }
+
     public void LoadMenuScene()
     {
-        //No menu movement if talking
-        if (!DialogueManager.Instance.isTalking)
+        //No menu movement if talking, and don't load if already there
+        if (!DialogueManager.Instance.isTalking && currentStage != GameStage.Menu)
         {
             currentStage = GameStage.Menu;
 
@@ -116,4 +125,5 @@ public class MenuManager : MonoBehaviour
     public void PlaySocialScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Social));
     public void PlayEconomicScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Economic));
     public void PlayTechnicalScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Technical));
-}
+    public void LoadQuiz() => LoadQuizScene();
+    }

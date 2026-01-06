@@ -14,12 +14,35 @@ public class ChatBox : MonoBehaviour
     [SerializeField] private TextMeshProUGUI botTextBox;
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private float waitDuration = 2f;
-
     private void Awake()
     {
         sendButton.onClick.AddListener(OnSendClicked);
         if (speechBubble != null)
             speechBubble.SetActive(false);
+
+        //Subscribe to dialogue talking state
+        DialogueManager.Instance.OnTalkingStateChanged += OnTalkingStateChanged;
+
+        //Set initial state
+        SetInputsInteractable(!DialogueManager.Instance.isTalking);
+    }
+
+    private void OnDestroy()
+    {
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.OnTalkingStateChanged -= OnTalkingStateChanged;
+    }
+
+    private void OnTalkingStateChanged(bool isTalking)
+    {
+        //Disable inputs while talking, enable when done
+        SetInputsInteractable(!isTalking);
+    }
+
+    private void SetInputsInteractable(bool interactable)
+    {
+        inputField.interactable = interactable;
+        sendButton.interactable = interactable;
     }
 
     private void OnSendClicked()
@@ -34,8 +57,7 @@ public class ChatBox : MonoBehaviour
             yield break;
 
         inputField.text = "";
-        inputField.interactable = false;
-        sendButton.interactable = false;
+        inputField.ActivateInputField();
 
         GameStage currentStage = GameStage.None;
         string context = "";
@@ -57,18 +79,12 @@ public class ChatBox : MonoBehaviour
             currentStage = GameStage.Reflection;
         }
 
-        //Wait for the bot to finish typing
+        //Wait for bot response
         yield return StartCoroutine(GetBotResponseCoroutine(currentStage, userMessage, context, botTextBox));
 
         //Keep bubble visible for additional duration
         yield return new WaitForSeconds(waitDuration);
-
         speechBubble.SetActive(false);
-
-        //Re-enable inputs
-        inputField.interactable = true;
-        sendButton.interactable = true;
-        inputField.ActivateInputField();
     }
     private string GetHearMoreText()
     {
