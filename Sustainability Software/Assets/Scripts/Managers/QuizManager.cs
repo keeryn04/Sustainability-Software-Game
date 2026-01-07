@@ -11,18 +11,46 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI explanationText;
     [SerializeField] private GameObject explanationBubble;
     [SerializeField] private float hearDuration = 3f;
+    [SerializeField] private string currentTopic;
 
     private QuizService.Quiz currentQuiz;
     private int currentIndex = 0;
 
-    public string topic = "Software Sustainability";
+    public List<string> topics = new List<string>
+    {
+        //Environmental Sustainability
+        "Energy-Efficient Software Design",
+        "Reducing Carbon Footprint in Cloud Computing",
+        "Green Software Engineering Practices",
+        "Optimizing Software for Lower Energy Consumption",
+
+        //Economic Sustainability
+        "Cost-Efficient Software Architecture",
+        "Long-Term Maintainability and Technical Debt",
+        "Sustainable Software Business Models",
+        "Balancing Performance and Infrastructure Costs",
+
+        //Social Sustainability
+        "Ethical Software Development",
+        "Inclusive and Accessible Software Design",
+        "User Privacy and Data Responsibility",
+        "Social Impact of Software Systems",
+
+        //Technical Sustainability
+        "Modular and Maintainable Software Systems",
+        "Scalable and Sustainable Software Architectures",
+        "Refactoring for Long-Term Code Health",
+        "Designing Software for Longevity"
+    };
 
     async void Start()
     {
+        currentTopic = topics[Random.Range(0, topics.Count)];
+
         //Subscribe to isTalking changes
         DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
 
-        currentQuiz = await QuizService.GenerateQuizAsync(topic, 5);
+        currentQuiz = await QuizService.GenerateQuizAsync(currentTopic, 5);
         if (currentQuiz == null || currentQuiz.questions.Count == 0)
         {
             questionText.text = "Failed to load quiz.";

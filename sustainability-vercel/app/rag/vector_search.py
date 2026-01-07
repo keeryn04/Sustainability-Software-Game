@@ -41,7 +41,7 @@ def clean_text(text):
     return text.strip()
 
 #Load PDFs, split them into chunks, and clean each chunk
-def get_chunks_for_embedding(pdf_folder="papers", chunk_size=600, chunk_overlap=150):
+def get_chunks_for_embedding(pdf_folder="papers", chunk_size=800, chunk_overlap=150):
     docs = []
     #Load each PDF in the folder
     for filename in os.listdir(pdf_folder):

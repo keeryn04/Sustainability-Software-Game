@@ -48,7 +48,7 @@ def generate_quiz():
         You are an educational quiz generator for a software sustainability game.
 
         Rules:
-        - Use ONLY the provided context
+        - Base questions and answers on the provided context
         - Generate conceptual questions (not trivia)
         - Each question must have exactly 4 options
         - Only ONE option is correct
@@ -75,7 +75,6 @@ def generate_quiz():
 
         user_message = f"""
         Generate {num_questions} quiz questions.
-        If the context does not support {num_questions} questions, generate fewer.
         """.strip()
 
         #Call OpenAI
