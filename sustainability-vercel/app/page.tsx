@@ -10,7 +10,8 @@ export default function PlayPage() {
     <main className="app-container">
       {/* Header */}
       <header className="app-header">
-        <h1>Sim Sustain</h1>
+        <img src="../app/images/sena.png"></img>
+        <h1>Sena</h1>
         <div className="header-buttons">
           <button onClick={() => setOpenAboutUs(true)}>
             About Us
