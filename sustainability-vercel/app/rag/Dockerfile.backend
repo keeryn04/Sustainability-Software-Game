@@ -25,7 +25,7 @@ COPY app.py database_connector.py ./
 COPY models ./models
 
 RUN mkdir -p rag_helpers
-COPY rag/paper_query.py ./rag/
+COPY rag_helpers/paper_query.py ./rag/
 RUN touch ./rag/__init__.py
 
 # Internal port only
