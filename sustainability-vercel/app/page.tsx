@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState } from "react";
 import AboutUsModal from "../app/components/AboutUsModal";
 import senaPhoto from './images/sena.png';
