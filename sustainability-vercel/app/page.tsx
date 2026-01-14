@@ -14,8 +14,8 @@ export default function PlayPage() {
         <Image
             src={senaPhoto}
             alt="Sena Logo"
-            width={200}
-            height={200}
+            width={80}
+            height={80}
           />
         <h1>Sena</h1>
         <div className="header-buttons">

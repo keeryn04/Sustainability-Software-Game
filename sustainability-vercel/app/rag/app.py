@@ -21,6 +21,10 @@ app.config["SESSION_COOKIE_SECURE"] = True  #Only over HTTPS
 app.secret_key = FLASK_SECRET_KEY
 CORS(app, origins=[APP_URL]) #Allows access from frontend
 
+@app.route("/", methods=["GET"])
+def root():
+    return {"status": "ok"}
+
 @app.route("/query", methods=["POST"])
 def query():
     try:
