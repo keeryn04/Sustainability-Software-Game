@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AboutUsModal from "../app/components/AboutUsModal";
+import senaPhoto from './images/sena.png';
 
 export default function PlayPage() {
   const [openAboutUs, setOpenAboutUs] = useState(false);
@@ -10,7 +11,12 @@ export default function PlayPage() {
     <main className="app-container">
       {/* Header */}
       <header className="app-header">
-        <img src="../app/images/sena.png"></img>
+        <Image
+            src={senaPhoto}
+            alt="Sena Logo"
+            width={200}
+            height={200}
+          />
         <h1>Sena</h1>
         <div className="header-buttons">
           <button onClick={() => setOpenAboutUs(true)}>
