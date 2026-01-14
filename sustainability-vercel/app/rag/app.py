@@ -1,7 +1,6 @@
 from flask_cors import CORS
 from dotenv import load_dotenv
-import requests
-from flask import Flask, json, request, jsonify
+from flask import Flask, request, jsonify
 from rag_helpers.paper_query import query_papers
 import os
 
