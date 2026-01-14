@@ -1,8 +1,8 @@
 from flask_cors import CORS
 from dotenv import load_dotenv
-from waitress import serve
-from flask import Flask, request, jsonify
-from vector_search import query_papers
+import requests
+from flask import Flask, json, request, jsonify
+from rag_helpers.paper_query import query_papers
 import os
 
 #Get env variables
@@ -24,28 +24,24 @@ CORS(app, origins=[APP_URL]) #Allows access from frontend
 
 @app.route("/query", methods=["POST"])
 def query():
-    auth = request.headers.get("Authorization")
-    if API_KEY and auth != f"Bearer {API_KEY}":
-        return jsonify({"error": "Unauthorized"}), 401
+    try:
+        auth = request.headers.get("Authorization")
+        if API_KEY and auth != f"Bearer {API_KEY}":
+            return jsonify({"error": "Unauthorized"}), 401
 
-    data = request.json
-    query_text = data.get("query")
-    top_k = data.get("top_k", 5)
+        data = request.json
+        query_text = data.get("query")
+        top_k = data.get("top_k", 5)
 
-    if not query_text:
-        return jsonify({"error": "Missing query"}), 400
+        if not query_text:
+            return jsonify({"error": "Missing query"}), 400
 
-    results = query_papers(query_text, top_k=top_k)
+        #Get RAG context
+        contexts = query_papers(query, top_k)
+        context_text = "\n".join(f"({i+1}) {c.page_content}" for i, c in enumerate(contexts))
 
-    return jsonify({
-        "contexts": [
-            {
-                "text": doc.page_content,
-                "similarity": doc.metadata["similarity"]
-            }
-            for doc in results
-        ]
-    })
+        return jsonify({"contexts": context_text})
 
-if __name__ == '__main__':
-    serve(app, host="0.0.0.0", port=5000, threads=6, debug=True, timeout=120)
+    except Exception as e:
+        print("Context Generation error:", e)
+        return jsonify({"error": str(e)}), 500

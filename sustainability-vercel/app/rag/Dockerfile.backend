@@ -16,9 +16,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir \
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    -r requirements.txt
 
-COPY . .
+#Copy only runtime files
+COPY app.py database_connector.py ./
+COPY models ./models
+
+RUN mkdir -p rag_helpers
+COPY rag/paper_query.py ./rag/
+RUN touch ./rag/__init__.py
 
 # Internal port only
 EXPOSE 5000
