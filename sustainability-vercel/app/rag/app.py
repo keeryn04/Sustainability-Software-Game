@@ -19,7 +19,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_COOKIE_SAMESITE"] = None  #Allows cross-site cookies
 app.config["SESSION_COOKIE_SECURE"] = True  #Only over HTTPS
 app.secret_key = FLASK_SECRET_KEY
-CORS(app)
+CORS(app, origins=[APP_URL])
 
 @app.route("/", methods=["GET"])
 def root():

@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     const { query, numQuestions } = await request.json();
 
     //RAG context from AWS
-    const ragResponse = await fetch(process.env.RAG_API_URL!, {
+    const ragResponse = await fetch(`${process.env.RAG_API_URL!}/query`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
