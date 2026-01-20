@@ -239,6 +239,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 482444821493455187, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_text
+      value: Loading...
+      objectReference: {fileID: 0}
+    - target: {fileID: 482444821493455187, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_fontSize
       value: 16
       objectReference: {fileID: 0}
@@ -395,6 +399,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1305467136579031010, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_text
+      value: Loading...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305467136579031010, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_fontSize
       value: 16
       objectReference: {fileID: 0}
@@ -544,11 +552,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2881660491499833534, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0025634766
+      value: 0.0026855469
       objectReference: {fileID: 0}
     - target: {fileID: 2881660491499833534, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2893781275442383497, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_AnchorMax.y
@@ -617,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 3655066305583055053, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689750996676247730, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_text
+      value: Loading...
       objectReference: {fileID: 0}
     - target: {fileID: 3689750996676247730, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_fontSize
@@ -737,6 +749,10 @@ PrefabInstance:
     - target: {fileID: 6118556951986989439, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_Name
       value: QuestionBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511459230707905216, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
+      propertyPath: m_text
+      value: Loading...
       objectReference: {fileID: 0}
     - target: {fileID: 6511459230707905216, guid: 47274b6322bb7b642bb3121cd9d4bbe8, type: 3}
       propertyPath: m_fontSize
@@ -1352,7 +1368,8 @@ MonoBehaviour:
   - {fileID: 329686323}
   - {fileID: 329686322}
   explanationText: {fileID: 1893593932}
-  topic: Software Sustainability
+  explanationBubble: {fileID: 1893593933}
+  waitDuration: 3
 --- !u!1001 &1893593930
 PrefabInstance:
   m_ObjectHideFlags: 0

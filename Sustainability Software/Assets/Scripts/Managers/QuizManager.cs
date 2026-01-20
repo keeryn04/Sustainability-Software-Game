@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
-    public TextMeshProUGUI questionText;
-    public List<Button> optionButtons;
-    public TextMeshProUGUI explanationText;
+    [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private List<Button> optionButtons;
+    [SerializeField] private TextMeshProUGUI explanationText;
+    [SerializeField] private GameObject explanationBubble;
+    [SerializeField] private int waitDuration = 3;
 
     private QuizService.Quiz currentQuiz;
     private int currentIndex = 0;
@@ -77,22 +79,27 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    void CheckAnswer(int selectedIndex)
+    private IEnumerator CheckAnswer(int selectedIndex)
     {
         var question = currentQuiz.questions[currentIndex];
+        explanationBubble.SetActive(true);
         if (selectedIndex == question.correctIndex)
         {
-            StartCoroutine(DialogueManager.Instance.TypeText("Correct! " + question.explanation, explanationText));
+            yield return StartCoroutine(DialogueManager.Instance.TypeText("Correct! " + question.explanation, explanationText));
         }
         else
         {
-            StartCoroutine(DialogueManager.Instance.TypeText("Incorrect. " + question.explanation, explanationText));
+            yield return StartCoroutine(DialogueManager.Instance.TypeText("Incorrect. " + question.explanation, explanationText));
         }
+
+        yield return new WaitForSeconds(waitDuration);
+
+        explanationBubble.SetActive(false);
 
         NextQuestion();
     }
 
-    void NextQuestion()
+    private void NextQuestion()
     {
         currentIndex++;
 
