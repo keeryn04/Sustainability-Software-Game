@@ -30,8 +30,29 @@ public class QuizManager : MonoBehaviour
 
     void DisplayQuestion()
     {
+        if (currentQuiz == null ||
+        currentQuiz.questions == null ||
+        currentQuiz.questions.Count == 0)
+        {
+            Debug.LogError("Quiz data missing or empty");
+            return;
+        }
+
+        if (currentIndex < 0 || currentIndex >= currentQuiz.questions.Count)
+        {
+            Debug.LogError($"Invalid question index: {currentIndex}");
+            return;
+        }
+
         explanationText.text = "";
         var question = currentQuiz.questions[currentIndex];
+
+        if (question.options == null)
+        {
+            Debug.LogError("Question options are null");
+            return;
+        }
+
         questionText.text = question.question;
 
         for (int i = 0; i < optionButtons.Count; i++)
