@@ -40,10 +40,9 @@ def query():
             return jsonify({"error": "Missing query"}), 400
 
         #Get RAG context
-        contexts = query_papers(query, top_k)
-        context_text = "\n".join(f"({i+1}) {c.page_content}" for i, c in enumerate(contexts))
+        contexts = query_papers(query_text, top_k)
 
-        return jsonify({"contexts": context_text})
+        return jsonify({"contexts": contexts})
 
     except Exception as e:
         print("Context Generation error:", e)

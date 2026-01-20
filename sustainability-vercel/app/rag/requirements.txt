@@ -3,7 +3,7 @@ flask-cors
 python-dotenv
 supabase
 gunicorn
-sentence-transformers==2.2.2
+sentence-transformers==2.6.1
 cryptography
 onnxruntime
 huggingface_hub==0.16.4

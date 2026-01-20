@@ -1,7 +1,7 @@
 import os
 import re
 import nltk
-from paper_query import get_model
+from sentence_transformers import SentenceTransformer
 from langchain_community.document_loaders import UnstructuredPDFLoader
 from langchain.text_splitter import SpacyTextSplitter
 from database_connector import get_db_connection
@@ -11,6 +11,8 @@ nltk.download('punkt_tab')
 nltk.download('averaged_perceptron_tagger_eng')
 
 db = get_db_connection()
+MODEL_PATH = "models/all-MiniLM-L6-v2"
+model = SentenceTransformer(MODEL_PATH, device="cpu")
 
 #Clean unwanted text from research papers
 def clean_text(text):
@@ -40,7 +42,6 @@ def get_chunks_for_embedding(pdf_folder="papers", chunk_size=600, chunk_overlap=
 
 #Upload chunks and their vector embeddings to Supabase
 def upload_chunks_to_supabase(texts, metadata):
-    model = get_model()
     for i, text in enumerate(texts):
         embedding = model.encode(text).tolist()
         db.table("paper_chunks").insert({
