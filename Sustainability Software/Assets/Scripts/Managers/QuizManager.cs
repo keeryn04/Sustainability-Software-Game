@@ -70,7 +70,7 @@ public class QuizManager : MonoBehaviour
                 optionButtons[i].gameObject.SetActive(true);
                 int index = i;
                 optionButtons[i].onClick.RemoveAllListeners();
-                optionButtons[i].onClick.AddListener(() => CheckAnswer(index));
+                optionButtons[i].onClick.AddListener(() => StartCoroutine(CheckAnswer(index)));
             }
             else
             {
