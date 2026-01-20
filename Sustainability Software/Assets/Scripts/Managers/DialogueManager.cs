@@ -58,6 +58,17 @@ public class DialogueManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        OnTalkingStateChanged += HandleTalkingStateChanged;
+    }
+
+    private void HandleTalkingStateChanged(bool isTalking)
+    {
+        //Disable buttons when talking, enable after
+        foreach (var btn in choiceButtons)
+        {
+            btn.interactable = !isTalking;
+        }
     }
 
     //Used by SceneInitializer to update UI elements in object
@@ -162,12 +173,6 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator OnChoiceSelectedRoutine(int choiceIndex)
     {
-        //Disable buttons
-        foreach (var btn in choiceButtons)
-        {
-            btn.interactable = false;
-        }
-
         string playerChoice = choiceButtons[choiceIndex].GetComponentInChildren<TextMeshProUGUI>().text;
 
         //LLM response
@@ -215,12 +220,6 @@ public class DialogueManager : MonoBehaviour
                 if (active)
                     choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = parsed.choices[i];
             }
-        }
-
-        //Enable buttons if done talking
-        foreach (var btn in choiceButtons)
-        {
-            btn.interactable = true;
         }
     }
 
