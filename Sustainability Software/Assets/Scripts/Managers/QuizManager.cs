@@ -38,6 +38,26 @@ public class QuizManager : MonoBehaviour
         DisplayQuestion();
     }
 
+    private void OnEnable()
+    {
+        DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.Instance.OnTalkingStateChanged -= HandleTalkingStateChanged;
+    }
+
+    private void HandleTalkingStateChanged(bool isTalking)
+    {
+        //Disable buttons when talking, enable after
+        foreach (var btn in optionButtons)
+        {
+            btn.interactable = !isTalking;
+        }
+    }
+
+
     void DisplayQuestion()
     {
         if (currentQuiz == null || currentQuiz.questions == null || currentQuiz.questions.Count == 0)
@@ -82,6 +102,11 @@ public class QuizManager : MonoBehaviour
     private IEnumerator CheckAnswer(int selectedIndex)
     {
         var question = currentQuiz.questions[currentIndex];
+
+        //Deactivate option buttons
+        foreach (var btn in optionButtons)
+            btn.gameObject.SetActive(false);
+
         explanationBubble.SetActive(true);
         if (selectedIndex == question.correctIndex)
         {
