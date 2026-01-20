@@ -52,8 +52,9 @@ public class QuizManager : MonoBehaviour
 
         explanationText.text = "";
         var question = currentQuiz.questions[currentIndex];
+        questionText.text = question.question;
 
-        if(question.options == null || question.options.Count == 0)
+        if (question.options == null || question.options.Count == 0)
     {
             Debug.LogError("Question options are null or empty");
             return;
@@ -81,11 +82,11 @@ public class QuizManager : MonoBehaviour
         var question = currentQuiz.questions[currentIndex];
         if (selectedIndex == question.correctIndex)
         {
-            DialogueManager.Instance.TypeText("Correct! " + question.explanation, explanationText);
+            StartCoroutine(DialogueManager.Instance.TypeText("Correct! " + question.explanation, explanationText));
         }
         else
         {
-            DialogueManager.Instance.TypeText("Incorrect. " + question.explanation, explanationText);
+            StartCoroutine(DialogueManager.Instance.TypeText("Incorrect. " + question.explanation, explanationText));
         }
 
         NextQuestion();
