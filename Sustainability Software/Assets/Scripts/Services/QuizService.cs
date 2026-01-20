@@ -73,22 +73,20 @@ public class QuizService : MonoBehaviour
         public int numQuestions;
     }
 
-    //Response wrapper classes
     [System.Serializable]
     public class QuizResponse
     {
         public Quiz quiz;
-        public string error;
     }
 
     [System.Serializable]
     public class Quiz
     {
-        public List<QuizQuestion> questions;
+        public List<Question> questions;
     }
 
     [System.Serializable]
-    public class QuizQuestion
+    public class Question
     {
         public string question;
         public List<string> options;

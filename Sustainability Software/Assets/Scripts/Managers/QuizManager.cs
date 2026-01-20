@@ -13,10 +13,18 @@ public class QuizManager : MonoBehaviour
     private QuizService.Quiz currentQuiz;
     private int currentIndex = 0;
 
-    public string topic = "Software Sustainability";
+    private List<string> topics = new List<string>
+    {
+        "Reducing energy consumption in software systems",
+        "Maintainable and scalable software architectures",
+        "Cost efficiency and resource optimization in software",
+        "Accessibility and user well-being in software"             
+    };
 
     async void Start()
     {
+        string topic = topics[Random.Range(0, topics.Count)];
+
         currentQuiz = await QuizService.GenerateQuizAsync(topic, 5);
 
         if (currentQuiz == null || currentQuiz.questions.Count == 0)
