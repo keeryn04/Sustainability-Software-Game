@@ -38,9 +38,7 @@ public class QuizManager : MonoBehaviour
 
     void DisplayQuestion()
     {
-        if (currentQuiz == null ||
-        currentQuiz.questions == null ||
-        currentQuiz.questions.Count == 0)
+        if (currentQuiz == null || currentQuiz.questions == null || currentQuiz.questions.Count == 0)
         {
             Debug.LogError("Quiz data missing or empty");
             return;
@@ -55,19 +53,17 @@ public class QuizManager : MonoBehaviour
         explanationText.text = "";
         var question = currentQuiz.questions[currentIndex];
 
-        if (question.options == null)
-        {
-            Debug.LogError("Question options are null");
+        if(question.options == null || question.options.Count == 0)
+    {
+            Debug.LogError("Question options are null or empty");
             return;
         }
-
-        questionText.text = question.question;
 
         for (int i = 0; i < optionButtons.Count; i++)
         {
             if (i < question.options.Count)
             {
-                optionButtons[i].GetComponentInChildren<Text>().text = question.options[i];
+                optionButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = question.options[i];
                 optionButtons[i].gameObject.SetActive(true);
                 int index = i;
                 optionButtons[i].onClick.RemoveAllListeners();
