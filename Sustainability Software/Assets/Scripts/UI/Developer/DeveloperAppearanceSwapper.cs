@@ -6,16 +6,19 @@ public class DeveloperAppearanceSwapper : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private DeveloperAppearanceSet[] appearanceSets;
+    [SerializeField] private SustainabilityPillar pillarOverride;
 
     private void Awake()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
+
         if (MenuManager.Instance != null)
         {
-
+            if (pillarOverride == SustainabilityPillar.None)
+                ApplyAppearance(MenuManager.Instance.CurrentPillar);
+            else ApplyAppearance(pillarOverride);
         }
-        ApplyAppearance(MenuManager.Instance.CurrentPillar);
     }
 
     private void ApplyAppearance(SustainabilityPillar pillar)

@@ -38,7 +38,7 @@ public class QuizManager : MonoBehaviour
         {
             if (i < question.options.Count)
             {
-                optionButtons[i].GetComponentInChildren<Text>().text = question.options[i];
+                optionButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = question.options[i];
                 optionButtons[i].gameObject.SetActive(true);
                 int index = i;
                 optionButtons[i].onClick.RemoveAllListeners();

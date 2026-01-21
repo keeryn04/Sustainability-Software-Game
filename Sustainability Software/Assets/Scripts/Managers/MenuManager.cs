@@ -11,7 +11,8 @@ public enum GameStage
     Learning,
     Playing,
     Reflection,
-    Quiz
+    Quiz,
+    Challenge
 }
 public class MenuManager : MonoBehaviour
 {
@@ -90,6 +91,14 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("QuizScene");
     }
 
+    public void LoadChallengeScene()
+    {
+        currentStage = GameStage.Challenge;
+
+        SceneManager.sceneLoaded += OnSceneInitialized;
+        SceneManager.LoadScene("ChallengeScene");
+    }
+
     public void LoadMenuScene()
     {
         //No menu movement if talking
@@ -126,4 +135,5 @@ public class MenuManager : MonoBehaviour
     public void PlayEconomicScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Economic));
     public void PlayTechnicalScenario() => LoadPlaying(RandomScenario(SustainabilityPillar.Technical));
     public void LoadQuiz() => LoadQuizScene();
+    public void LoadChallenge() => LoadChallengeScene();
 }
