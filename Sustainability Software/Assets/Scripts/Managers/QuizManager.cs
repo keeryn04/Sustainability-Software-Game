@@ -25,7 +25,23 @@ public class QuizManager : MonoBehaviour
             return;
         }
 
+        DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
+
         DisplayQuestion();
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.Instance.OnTalkingStateChanged -= HandleTalkingStateChanged;
+    }
+
+    private void HandleTalkingStateChanged(bool isTalking)
+    {
+        //Disable buttons when talking, enable after
+        foreach (var btn in optionButtons)
+        {
+            btn.interactable = !isTalking;
+        }
     }
 
     void DisplayQuestion()

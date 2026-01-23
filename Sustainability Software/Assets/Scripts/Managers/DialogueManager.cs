@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -29,8 +30,21 @@ public class DialogueManager : MonoBehaviour
     private List<ChoiceData> playerDecisions = new List<ChoiceData>();
 
     public static DialogueManager Instance { get; private set; }
-    public bool isTalking { get; private set; }
     public List<ChoiceData> PlayerDecisions => playerDecisions;
+    private bool _isTalking;
+    public bool isTalking
+    {
+        get => _isTalking;
+        private set
+        {
+            if (_isTalking != value)
+            {
+                _isTalking = value;
+                OnTalkingStateChanged?.Invoke(_isTalking); //Notify observers
+            }
+        }
+    }
+    public event Action<bool> OnTalkingStateChanged;
 
     private void Awake()
     {
@@ -42,6 +56,16 @@ public class DialogueManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        OnTalkingStateChanged += HandleTalkingStateChanged;
+    }
+    private void HandleTalkingStateChanged(bool isTalking)
+    {
+        //Disable buttons when talking, enable after
+        foreach (var btn in choiceButtons)
+        {
+            btn.interactable = !isTalking;
         }
     }
 
@@ -97,10 +121,10 @@ public class DialogueManager : MonoBehaviour
         if (textSounds == null || textSounds.Length == 0 || audioSource == null)
             return;
 
-        if (Random.value < 0.3f)
+        if (UnityEngine.Random.value < 0.3f)
         {
-            int i = Random.Range(0, textSounds.Length);
-            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            int i = UnityEngine.Random.Range(0, textSounds.Length);
+            audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             audioSource.PlayOneShot(textSounds[i]);
         }
     }

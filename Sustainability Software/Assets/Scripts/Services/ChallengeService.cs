@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -8,9 +9,16 @@ using UnityEngine.Networking;
 public class ChallengeService : MonoBehaviour
 {
     private static readonly string apiUrl = EnvLoader.Get("CHALLENGE_API_URL");
+    private const bool USE_MOCK_QUIZ = true;
 
     public static async Task<Quiz> GenerateChallengeAsync(string topic, int numQuestions = 5)
     {
+        if (USE_MOCK_QUIZ)
+        {
+            await Task.Yield(); // keeps async behavior consistent
+            return CreateMockQuiz(numQuestions);
+        }
+
         if (string.IsNullOrEmpty(topic))
         {
             Debug.LogError("ChallengeService: Topic cannot be empty.");
@@ -63,6 +71,81 @@ public class ChallengeService : MonoBehaviour
         }
     }
 
+    private static Quiz CreateMockQuiz(int numQuestions)
+    {
+        var quiz = new Quiz
+        {
+            questions = new List<BossQuestion>()
+        };
+
+        quiz.questions.Add(new BossQuestion
+        {
+            bossQuestion = "The boss is worried that the new feature will increase server costs. How should the team respond?",
+            strategies = new Strategy[]
+            {
+            new Strategy
+            {
+                id = "Attack",
+                description = "Profile the feature’s resource usage and optimize hot paths to reduce unnecessary computation."
+            },
+            new Strategy
+            {
+                id = "Defend",
+                description = "Scale up infrastructure immediately to avoid any performance issues."
+            }
+            },
+            correctDeveloper = "Economic",
+            correctStrategyId = "Attack",
+            explanation = "Optimizing resource usage reduces costs and improves sustainability without over-provisioning infrastructure."
+        });
+
+        quiz.questions.Add(new BossQuestion
+        {
+            bossQuestion = "Users report slow load times on older devices. What is the most sustainable approach?",
+            strategies = new Strategy[]
+            {
+            new Strategy
+            {
+                id = "Attack",
+                description = "Implement lightweight assets and lazy loading to improve performance on low-end devices."
+            },
+            new Strategy
+            {
+                id = "Defend",
+                description = "Recommend users upgrade to newer hardware."
+            }
+            },
+            correctDeveloper = "Technical",
+            correctStrategyId = "Attack",
+            explanation = "Supporting older devices reduces electronic waste and makes the software more inclusive."
+        });
+
+        quiz.questions.Add(new BossQuestion
+        {
+            bossQuestion = "The codebase is becoming hard to maintain as the team grows. What should be prioritized?",
+            strategies = new Strategy[]
+            {
+            new Strategy
+            {
+                id = "Attack",
+                description = "Continue adding features to stay competitive."
+            },
+            new Strategy
+            {
+                id = "Defend",
+                description = "Refactor the codebase and establish clear coding standards."
+            }
+            },
+            correctDeveloper = "Technical",
+            correctStrategyId = "Defend",
+            explanation = "Maintainable code reduces long-term technical debt and energy spent on fixes."
+        });
+
+        quiz.questions = quiz.questions.Take(numQuestions).ToList();
+
+        return quiz;
+    }
+
     [Serializable]
     private class QuizRequest
     {
@@ -86,7 +169,7 @@ public class ChallengeService : MonoBehaviour
     [Serializable]
     public class Strategy
     {
-        public string id;          // "A" or "B"
+        public string id;          // "Attack" or "Defend"
         public string description;
     }
 

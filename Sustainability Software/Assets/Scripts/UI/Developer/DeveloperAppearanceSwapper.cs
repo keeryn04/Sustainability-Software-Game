@@ -6,7 +6,7 @@ public class DeveloperAppearanceSwapper : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private DeveloperAppearanceSet[] appearanceSets;
-    [SerializeField] private SustainabilityPillar pillarOverride;
+    public SustainabilityPillar pillarOverride;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class DeveloperAppearanceSwapper : MonoBehaviour
         }
     }
 
-    private void ApplyAppearance(SustainabilityPillar pillar)
+    public void ApplyAppearance(SustainabilityPillar pillar)
     {
         foreach (var set in appearanceSets)
         {
@@ -32,6 +32,6 @@ public class DeveloperAppearanceSwapper : MonoBehaviour
             }
         }
 
-        Debug.LogWarning($"No appearance set found for pillar {pillar}");
+        Debug.LogWarning($"{name}: No appearance set found for pillar {pillar}");
     }
 }

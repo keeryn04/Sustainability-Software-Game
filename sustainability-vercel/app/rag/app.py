@@ -128,19 +128,19 @@ def challenge():
     Your role is to generate boss-style challenges that test strategic understanding of sustainability pillars.
 
     Developers and their pillars:
-    - environmental: focuses on environmental sustainability
-    - social: focuses on social sustainability
-    - economic: focuses on economic sustainability
-    - technical: focuses on software and technical sustainability
+    - Environmental: focuses on environmental sustainability
+    - Social: focuses on social sustainability
+    - Economic: focuses on economic sustainability
+    - Technical: focuses on software and technical sustainability
 
     Rules:
     - Use ONLY the provided context
     - Generate conceptual, scenario-based boss questions (not trivia)
     - Each question represents a challenge posed by a boss (Use first person)
-    - For each question, generate EXACTLY TWO strategic response options
+    - For each question, generate EXACTLY TWO response options
     - The player must choose:
     1) ONE developer
-    2) ONE strategy (A or B)
+    2) ONE strategy (Attack or Defend)
     - Only ONE developer + strategy combination is correct
     - Ensure the question focuses on one developer type
     - Include a brief explanation justifying the correct choice
@@ -154,11 +154,11 @@ def challenge():
         {
         "bossQuestion": string,
         "strategies": [
-            { "id": "A", "description": string },
-            { "id": "B", "description": string }
+            { "id": "Attack", "description": string },
+            { "id": "Defend", "description": string }
         ],
         "correctDeveloper": "environmental" | "social" | "economic" | "technical",
-        "correctStrategyId": "A" | "B",
+        "correctStrategyId": "Attack" | "Defend",
         "explanation": string
         }
     ]
