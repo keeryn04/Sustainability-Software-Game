@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 public class QuizService : MonoBehaviour
 {
     public int numQuestions = 5;
-    private static string apiUrl = "/api/generate-test";
+    private static string apiUrl = "/api/generate-quiz";
 
     public Action<Quiz> OnQuizLoaded;
     public Action<string> OnQuizError;
