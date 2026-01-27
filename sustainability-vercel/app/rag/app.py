@@ -25,7 +25,7 @@ CORS(app, origins=[APP_URL])
 def test():
     return jsonify({"status": "All Good!"})
 
-@app.route("/api/generate-test", methods=["POST"])
+@app.route("/query", methods=["POST"])
 def query():
     try:
         auth = request.headers.get("Authorization")
