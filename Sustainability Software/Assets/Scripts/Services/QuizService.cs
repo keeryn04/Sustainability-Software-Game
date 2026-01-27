@@ -77,6 +77,7 @@ public class QuizService : MonoBehaviour
     public class QuizResponse
     {
         public Quiz quiz;
+        public string error;
     }
 
     [System.Serializable]

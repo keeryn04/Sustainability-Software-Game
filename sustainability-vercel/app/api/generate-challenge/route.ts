@@ -115,19 +115,19 @@ export async function POST(request: Request) {
     }
 
     const openaiData = await openaiResponse.json();
-    const quizJsonText = openaiData.choices[0].message.content;
+    const challengeJsonText = openaiData.choices[0].message.content;
 
     //Parse quiz response
-    let quiz;
+    let challenge;
     try {
-      quiz = JSON.parse(quizJsonText);
+      challenge = JSON.parse(challengeJsonText);
     } catch {
       throw new Error("LLM returned invalid JSON");
     }
 
-    return NextResponse.json({ quiz });
+    return NextResponse.json({ challenge });
   } catch (err: unknown) {
-    console.error("Chalenge generation error:", err);
+    console.error("Challenge generation error:", err);
 
     return NextResponse.json(
       {
