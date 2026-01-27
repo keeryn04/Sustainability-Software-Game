@@ -6,15 +6,6 @@ import os
 
 #Get env variables
 load_dotenv()
-SUPABASE_URL = os.getenv("SUPABASE_URI")
-SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
-OPENAI_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_URL = "https://api.openai.com/v1/chat/completions"
-
-if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
-    raise ValueError("Missing Supabase connection info")
-
-supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 #Set up app with Flask
 app = Flask(__name__)
@@ -29,10 +20,6 @@ app.config["SESSION_COOKIE_SAMESITE"] = None  #Allows cross-site cookies
 app.config["SESSION_COOKIE_SECURE"] = True  #Only over HTTPS
 app.secret_key = FLASK_SECRET_KEY
 CORS(app, origins=[APP_URL])
-
-@app.route("/", methods=["GET"])
-def root():
-    return {"status": "ok"}
 
 @app.route("/", methods=["GET"])
 def test():
