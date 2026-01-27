@@ -44,7 +44,6 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-
     public event Action<bool> OnTalkingStateChanged;
 
     private void Awake()
@@ -61,7 +60,6 @@ public class DialogueManager : MonoBehaviour
 
         OnTalkingStateChanged += HandleTalkingStateChanged;
     }
-
     private void HandleTalkingStateChanged(bool isTalking)
     {
         //Disable buttons when talking, enable after

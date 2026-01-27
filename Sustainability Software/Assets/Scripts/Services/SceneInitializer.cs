@@ -42,6 +42,10 @@ public class SceneInitializer : MonoBehaviour
                 SetupQuizScene();
                 break;
 
+            case GameStage.Challenge:
+                SetupChallengeScene();
+                break;
+
             default:
                 Debug.LogWarning("SceneInitializer called without a valid GameStage.");
                 break;
@@ -91,6 +95,13 @@ public class SceneInitializer : MonoBehaviour
     }
 
     private void SetupQuizScene()
+    {
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
+        }
+    }
+    private void SetupChallengeScene()
     {
         if (DialogueManager.Instance != null)
         {

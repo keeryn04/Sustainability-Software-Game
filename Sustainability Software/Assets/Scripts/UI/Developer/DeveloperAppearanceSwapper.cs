@@ -6,19 +6,22 @@ public class DeveloperAppearanceSwapper : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private DeveloperAppearanceSet[] appearanceSets;
+    public SustainabilityPillar pillarOverride;
 
     private void Awake()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
+
         if (MenuManager.Instance != null)
         {
-
+            if (pillarOverride == SustainabilityPillar.None)
+                ApplyAppearance(MenuManager.Instance.CurrentPillar);
+            else ApplyAppearance(pillarOverride);
         }
-        ApplyAppearance(MenuManager.Instance.CurrentPillar);
     }
 
-    private void ApplyAppearance(SustainabilityPillar pillar)
+    public void ApplyAppearance(SustainabilityPillar pillar)
     {
         foreach (var set in appearanceSets)
         {
@@ -29,6 +32,6 @@ public class DeveloperAppearanceSwapper : MonoBehaviour
             }
         }
 
-        Debug.LogWarning($"No appearance set found for pillar {pillar}");
+        Debug.LogWarning($"{name}: No appearance set found for pillar {pillar}");
     }
 }

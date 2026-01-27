@@ -14,6 +14,7 @@ public class MainMenuInitializer : MonoBehaviour
     [SerializeField] private Button technicalLearnButton;
     [SerializeField] private Button generalLearnButton;
     [SerializeField] private Button quizButton;
+    [SerializeField] private Button challengeButton;
 
 
     private void Start()
@@ -43,5 +44,6 @@ public class MainMenuInitializer : MonoBehaviour
         generalLearnButton.onClick.AddListener(MenuManager.Instance.LoadGeneralLearn);
 
         quizButton.onClick.AddListener(MenuManager.Instance.LoadQuizScene);
+        challengeButton.onClick.AddListener(MenuManager.Instance.LoadChallengeScene);
     }
 }

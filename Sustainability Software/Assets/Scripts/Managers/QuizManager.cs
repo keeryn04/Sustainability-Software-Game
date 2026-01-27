@@ -56,8 +56,6 @@ public class QuizManager : MonoBehaviour
             btn.interactable = !isTalking;
         }
     }
-
-
     void DisplayQuestion()
     {
         if (currentQuiz == null || currentQuiz.questions == null || currentQuiz.questions.Count == 0)

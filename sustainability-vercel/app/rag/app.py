@@ -6,6 +6,15 @@ import os
 
 #Get env variables
 load_dotenv()
+SUPABASE_URL = os.getenv("SUPABASE_URI")
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+
+if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
+    raise ValueError("Missing Supabase connection info")
+
+supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 #Set up app with Flask
 app = Flask(__name__)
@@ -25,7 +34,11 @@ CORS(app, origins=[APP_URL])
 def root():
     return {"status": "ok"}
 
-@app.route("/query", methods=["POST"])
+@app.route("/", methods=["GET"])
+def test():
+    return jsonify({"status": "All Good!"})
+
+@app.route("/api/generate-test", methods=["POST"])
 def query():
     try:
         auth = request.headers.get("Authorization")
