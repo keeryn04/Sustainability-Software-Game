@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { query, numQuestions = 5 } = await request.json();
+    const { query, numQuestions } = await request.json();
 
     //RAG context from AWS
-    const ragResponse = await fetch(process.env.RAG_API_URL!, {
+    const ragResponse = await fetch(`${process.env.RAG_API_URL!}/query`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

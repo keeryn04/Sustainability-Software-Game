@@ -8,7 +8,11 @@ using UnityEngine.Networking;
 
 public class QuizService : MonoBehaviour
 {
-    private static readonly string apiUrl = EnvLoader.Get("QUIZ_API_URL");
+    public int numQuestions = 5;
+    private static string apiUrl = "/api/generate-test";
+
+    public Action<Quiz> OnQuizLoaded;
+    public Action<string> OnQuizError;
 
     public static async Task<Quiz> GenerateQuizAsync(string topic, int numQuestions = 5)
     {
@@ -18,13 +22,11 @@ public class QuizService : MonoBehaviour
             return null;
         }
 
-        var quizRequest = new QuizRequest
+        string jsonBody = JsonUtility.ToJson(new QuizRequest
         {
             query = topic,
             numQuestions = numQuestions
-        };
-
-        string jsonBody = JsonUtility.ToJson(quizRequest);
+        });
 
         using (UnityWebRequest www = new UnityWebRequest(apiUrl, "POST"))
         {
@@ -32,21 +34,21 @@ public class QuizService : MonoBehaviour
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
-            www.SetRequestHeader("Authorization", "Bearer " + EnvLoader.Get("RAG_API_KEY"));
 
             var asyncOp = www.SendWebRequest();
             while (!asyncOp.isDone) await Task.Yield();
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError($"QuizService: Failed to contact server: {www.responseCode} - {www.error}");
-                Debug.LogError("Response body: " + www.downloadHandler.text);
+                Debug.LogError($"QuizService: Failed to contact server: {www.error}");
                 return null;
             }
 
             try
             {
+                //Parse server response
                 QuizResponse response = JsonUtility.FromJson<QuizResponse>(www.downloadHandler.text);
+
                 if (response == null || response.quiz == null || response.quiz.questions == null)
                 {
                     Debug.LogError("QuizService: Invalid server response: " + www.downloadHandler.text);
@@ -55,37 +57,36 @@ public class QuizService : MonoBehaviour
 
                 return response.quiz;
             }
-            catch (Exception ex)
+            catch
             {
                 Debug.LogError("QuizService: Failed to parse JSON: " + www.downloadHandler.text);
-                Debug.LogException(ex);
                 return null;
             }
         }
     }
 
-    [Serializable]
+    //Request payload class
+    [System.Serializable]
     private class QuizRequest
     {
         public string query;
         public int numQuestions;
     }
 
-    [Serializable]
+    [System.Serializable]
     public class QuizResponse
     {
         public Quiz quiz;
-        public string error;
     }
 
-    [Serializable]
+    [System.Serializable]
     public class Quiz
     {
-        public List<QuizQuestion> questions;
+        public List<Question> questions;
     }
 
-    [Serializable]
-    public class QuizQuestion
+    [System.Serializable]
+    public class Question
     {
         public string question;
         public List<string> options;

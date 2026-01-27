@@ -20,6 +20,18 @@ public class ChatBox : MonoBehaviour
         sendButton.onClick.AddListener(OnSendClicked);
         if (speechBubble != null)
             speechBubble.SetActive(false);
+
+        DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        DialogueManager.Instance.OnTalkingStateChanged -= HandleTalkingStateChanged;
+    }
+    private void HandleTalkingStateChanged(bool isTalking)
+    {
+        inputField.interactable = !isTalking;
+        sendButton.interactable = !isTalking;
     }
 
     private void OnSendClicked()
@@ -40,8 +52,6 @@ public class ChatBox : MonoBehaviour
         }
 
         inputField.text = "";
-        inputField.interactable = false;
-        sendButton.interactable = false;
 
         GameStage currentStage = GameStage.None;
         string context = "";
@@ -65,16 +75,6 @@ public class ChatBox : MonoBehaviour
 
         //Wait for the bot to finish typing
         yield return StartCoroutine(GetBotResponseCoroutine(currentStage, userMessage, context, botTextBox));
-
-        //Keep bubble visible for additional duration
-        yield return new WaitForSeconds(waitDuration);
-
-        speechBubble.SetActive(false);
-
-        //Re-enable inputs
-        inputField.interactable = true;
-        sendButton.interactable = true;
-        inputField.ActivateInputField();
     }
     private string GetHearMoreText()
     {
@@ -110,5 +110,9 @@ public class ChatBox : MonoBehaviour
         targetBox.text = "";
 
         yield return StartCoroutine(DialogueManager.Instance.TypeText(botResponse, targetBox));
+
+        yield return new WaitForSeconds(waitDuration);
+
+        speechBubble.SetActive(false);
     }
 }

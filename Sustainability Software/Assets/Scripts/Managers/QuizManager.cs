@@ -6,17 +6,27 @@ using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
-    public TextMeshProUGUI questionText;
-    public List<Button> optionButtons;
-    public TextMeshProUGUI explanationText;
+    [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private List<Button> optionButtons;
+    [SerializeField] private TextMeshProUGUI explanationText;
+    [SerializeField] private GameObject explanationBubble;
+    [SerializeField] private int waitDuration = 3;
 
     private QuizService.Quiz currentQuiz;
     private int currentIndex = 0;
 
-    public string topic = "Software Sustainability";
+    private List<string> topics = new List<string>
+    {
+        "Reducing energy consumption in software systems",
+        "Maintainable and scalable software architectures",
+        "Cost efficiency and resource optimization in software",
+        "Accessibility and user well-being in software"             
+    };
 
     async void Start()
     {
+        string topic = topics[Random.Range(0, topics.Count)];
+
         currentQuiz = await QuizService.GenerateQuizAsync(topic, 5);
 
         if (currentQuiz == null || currentQuiz.questions.Count == 0)
@@ -25,9 +35,12 @@ public class QuizManager : MonoBehaviour
             return;
         }
 
-        DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
-
         DisplayQuestion();
+    }
+
+    private void OnEnable()
+    {
+        DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
     }
 
     private void OnDisable()
@@ -43,12 +56,29 @@ public class QuizManager : MonoBehaviour
             btn.interactable = !isTalking;
         }
     }
-
     void DisplayQuestion()
     {
+        if (currentQuiz == null || currentQuiz.questions == null || currentQuiz.questions.Count == 0)
+        {
+            Debug.LogError("Quiz data missing or empty");
+            return;
+        }
+
+        if (currentIndex < 0 || currentIndex >= currentQuiz.questions.Count)
+        {
+            Debug.LogError($"Invalid question index: {currentIndex}");
+            return;
+        }
+
         explanationText.text = "";
         var question = currentQuiz.questions[currentIndex];
         questionText.text = question.question;
+
+        if (question.options == null || question.options.Count == 0)
+    {
+            Debug.LogError("Question options are null or empty");
+            return;
+        }
 
         for (int i = 0; i < optionButtons.Count; i++)
         {
@@ -58,7 +88,7 @@ public class QuizManager : MonoBehaviour
                 optionButtons[i].gameObject.SetActive(true);
                 int index = i;
                 optionButtons[i].onClick.RemoveAllListeners();
-                optionButtons[i].onClick.AddListener(() => CheckAnswer(index));
+                optionButtons[i].onClick.AddListener(() => StartCoroutine(CheckAnswer(index)));
             }
             else
             {
@@ -67,22 +97,32 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    void CheckAnswer(int selectedIndex)
+    private IEnumerator CheckAnswer(int selectedIndex)
     {
         var question = currentQuiz.questions[currentIndex];
+
+        //Deactivate option buttons
+        foreach (var btn in optionButtons)
+            btn.gameObject.SetActive(false);
+
+        explanationBubble.SetActive(true);
         if (selectedIndex == question.correctIndex)
         {
-            DialogueManager.Instance.TypeText("Correct! " + question.explanation, explanationText);
+            yield return StartCoroutine(DialogueManager.Instance.TypeText("Correct! " + question.explanation, explanationText));
         }
         else
         {
-            DialogueManager.Instance.TypeText("Incorrect. " + question.explanation, explanationText);
+            yield return StartCoroutine(DialogueManager.Instance.TypeText("Incorrect. " + question.explanation, explanationText));
         }
+
+        yield return new WaitForSeconds(waitDuration);
+
+        explanationBubble.SetActive(false);
 
         NextQuestion();
     }
 
-    void NextQuestion()
+    private void NextQuestion()
     {
         currentIndex++;
 

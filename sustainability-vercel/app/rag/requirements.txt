@@ -1,11 +1,9 @@
 flask
 flask-cors
-requests
 python-dotenv
 supabase
-langchain>=0.1.0
-langchain-community>=0.0.16
-sentence-transformers>=2.2.2
 gunicorn
-waitress
-nltk
+sentence-transformers==2.6.1
+cryptography
+onnxruntime
+huggingface_hub==0.16.4

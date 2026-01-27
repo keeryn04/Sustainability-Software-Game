@@ -1,0 +1,43 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'sustainability-vercel/app/api/**'
+      - 'sustainability-vercel/app/rag/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Deploy via SSH'
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd rag-service/sustainability-vercel/app/rag
+
+          # Pull latest code
+          git pull origin main
+
+          # Remove old container
+          docker stop rag-service || true
+          docker rm -f rag-service || true
+
+          docker image prune -f
+
+          # Build and run new container
+          docker build -f Dockerfile.backend -t rag-service .
+          docker run -d \
+            --restart=always \
+            --name rag-service \
+            -p 5000:5000 \
+            --env-file .env \
+            --memory=1.2g \
+            rag-service:latest

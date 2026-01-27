@@ -171,12 +171,6 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator OnChoiceSelectedRoutine(int choiceIndex)
     {
-        //Disable buttons
-        foreach (var btn in choiceButtons)
-        {
-            btn.interactable = false;
-        }
-
         string playerChoice = choiceButtons[choiceIndex].GetComponentInChildren<TextMeshProUGUI>().text;
 
         //LLM response
@@ -224,12 +218,6 @@ public class DialogueManager : MonoBehaviour
                 if (active)
                     choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = parsed.choices[i];
             }
-        }
-
-        //Enable buttons if done talking
-        foreach (var btn in choiceButtons)
-        {
-            btn.interactable = true;
         }
     }
 
