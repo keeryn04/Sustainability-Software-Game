@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 public class ChallengeService : MonoBehaviour
 {
-    private static string apiUrl = "/api/generate-challenge";
+    private static string apiUrl = "/api/generate-test";
 
     public static async Task<Challenge> GenerateChallengeAsync(string topic, int numQuestions = 5)
     {
