@@ -48,7 +48,7 @@ public class ChallengeManager : MonoBehaviour
 
     public List<DeveloperMapping> developers;
     private Dictionary<string, SustainabilityPillar> developerDict;
-    private ChallengeService.Quiz currentQuiz;
+    private ChallengeService.Challenge currentChallenge;
 
     private string selectedStrategyId;
     private string selectedDeveloper;
@@ -106,10 +106,10 @@ public class ChallengeManager : MonoBehaviour
         SetActiveDeveloper(0);
 
         //Load quiz
-        currentQuiz = await ChallengeService.GenerateChallengeAsync(currentTopic, 5);
+        currentChallenge = await ChallengeService.GenerateChallengeAsync(currentTopic, 5);
         quizLoaded = true;
 
-        if (currentQuiz == null || currentQuiz.questions.Count == 0)
+        if (currentChallenge == null || currentChallenge.questions.Count == 0)
         {
             questionText.text = "Failed to load quiz.";
             return;
@@ -188,7 +188,7 @@ public class ChallengeManager : MonoBehaviour
     private IEnumerator DisplayQuestion()
     {
         developerText.text = "";
-        var question = currentQuiz.questions[currentQuestionIndex];
+        var question = currentChallenge.questions[currentQuestionIndex];
 
 
         DialogueManager.Instance.AssignDeveloperUI(bossAnimator, bossAudio);
@@ -239,7 +239,7 @@ public class ChallengeManager : MonoBehaviour
 
     private IEnumerator CheckAnswer(string selectedDeveloper, string selectedStrategyId)
     {
-        var question = currentQuiz.questions[currentQuestionIndex];
+        var question = currentChallenge.questions[currentQuestionIndex];
 
         bool developerCorrect = selectedDeveloper == question.correctDeveloper;
         bool strategyCorrect = selectedStrategyId == question.correctStrategyId;
@@ -319,7 +319,7 @@ public class ChallengeManager : MonoBehaviour
     {
         currentQuestionIndex++;
 
-        if (currentQuestionIndex < currentQuiz.questions.Count)
+        if (currentQuestionIndex < currentChallenge.questions.Count)
         {
             StartCoroutine(DisplayQuestion());
         }
