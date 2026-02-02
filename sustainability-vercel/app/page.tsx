@@ -6,7 +6,7 @@ import senaPhoto from './images/sena.png';
 
 export default function PlayPage() {
   const [openAboutUs, setOpenAboutUs] = useState(false);
-  const [activeTab, setActiveTab] = useState("howToUse");
+  const [activeTab, setActiveTab] = useState("Intro");
 
   const renderTabContent = () => {
     switch (activeTab) {
