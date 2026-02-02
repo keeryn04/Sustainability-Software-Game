@@ -244,7 +244,7 @@ public class ChallengeManager : MonoBehaviour
         bool developerCorrect = selectedDeveloper.ToLower() == question.correctDeveloper.ToLower();
         bool strategyCorrect = selectedStrategyId.ToLower() == question.correctStrategyId.ToLower();
 
-        ApplyOutcome(developerCorrect, strategyCorrect);
+        yield return StartCoroutine(ApplyOutcome(developerCorrect, strategyCorrect));
 
         if (challengeActive)
         {
@@ -327,7 +327,7 @@ public class ChallengeManager : MonoBehaviour
         else
         {
             //Finished challenge
-            StartCoroutine(DialogueManager.Instance.TypeText("Great work! Thanks for your help!", questionText));
+            yield return StartCoroutine(DialogueManager.Instance.TypeText("Great work! Thanks for your help!", questionText));
 
             foreach (var btn in strategyButtons)
                 btn.interactable = false;

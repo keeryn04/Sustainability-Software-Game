@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slideshowType: 2
   slides:
-  - slideImage: {fileID: 21300000, guid: 202193e9c31d65247b9a8e4e02d88bd1, type: 3}
+  - slideImage: {fileID: 21300000, guid: 8d26f8292d653264a9a1d98265a050e0, type: 3}
     elements: []
   - slideImage: {fileID: 21300000, guid: 95f8841464d0f684987df3ed907b83e8, type: 3}
     elements: []
@@ -48,5 +48,5 @@ MonoBehaviour:
     elements: []
   - slideImage: {fileID: 21300000, guid: a048afbe81c2dee4cb41f64038de6825, type: 3}
     elements: []
-  - slideImage: {fileID: 21300000, guid: d52628cf5fa78784a905e4eb3a811ca0, type: 3}
+  - slideImage: {fileID: 21300000, guid: 090d10b28b9680d4096f493758d96ebe, type: 3}
     elements: []

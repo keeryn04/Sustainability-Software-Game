@@ -1,5 +1,5 @@
 import Image from "next/image";
-import seallLogo from '../images/seall.avif';
+import pluriseLogo from '../images/plurise.png';
 import keerynPhoto from '../images/KeerynJohnson.jpg';
 import ronniePhoto from '../images/SouzaSantos.jpg';
 
@@ -18,22 +18,22 @@ export default function AboutUsModal({ isOpen, onClose }: AboutUsModalProps) {
 
         <div className="about-section">
           <Image
-            src={seallLogo}
-            alt="SEALL Logo"
+            src={pluriseLogo}
+            alt="Plurise Logo"
             width={200}
             height={200}
             className="about-img"
           />
           <div>
-            <h4>SE-ALL (Software Engineering for All Lab)</h4>
+            <h4>Plurise Lab</h4>
             <p>
-              The SE-ALL (Software Engineering for All Lab) focuses 
-              on the human aspects of software engineering, including development practices, 
-              project management, software testing, fairness, and EDI. Understanding behaviors, 
-              cognitive skills, teamwork, and diverse user perspectives is vital for creating 
-              effective and innovative technology. As society becomes increasingly reliant on 
-              software across work, education, politics, and leisure, and with the rise of 
-              AI-powered systems, ensuring fairness and bias-free solutions in software is essential.
+              The Plural Software Engineering for a Plural Society lab advances a socio technical understanding 
+              of software engineering with emphasis on software processes and teamwork. 
+              The lab conducts empirical studies on how human behavior, organizational context, and development 
+              practices shape software systems, alongside research on software fairness, testing, and AI enabled 
+              technologies. As software increasingly mediates work, education, and everyday life, the lab’s 
+              research contributes evidence and conceptual frameworks that support software systems designed to 
+              account for the plurality of society.
             </p>
           </div>
         </div>
