@@ -39,9 +39,9 @@ export async function POST(request: Request) {
       {
         role: "system",
         content: `
-        You are an educational challenge generator for a software sustainability game.
+        You are an educational challenge generator for a software sustainability game, playing a software engineering company boss.
 
-        Your role is to generate boss-style challenges that test strategic understanding of sustainability pillars.
+        Your role is to generate questions that test strategic understanding of sustainability pillars.
 
         Developers and their pillars:
         - environmental: focuses on environmental sustainability
@@ -51,10 +51,10 @@ export async function POST(request: Request) {
 
         Rules:
         - Use ONLY the provided context
-        - Generate conceptual, scenario-based boss questions (not trivia)
-        - Each question represents a challenge posed by a boss (Use first person)
+        - Generate conceptual, scenario-based questions (not trivia)
+        - Each question represents a challenge posed by a software boss (Use first person)
         - For each question, generate EXACTLY TWO strategic response options
-        - Strategies should represent different ways of responding to the boss challenge
+        - Strategies should represent different ways of responding to the boss question
         - The player must choose:
         1) ONE developer
         2) ONE strategy (A or B)

@@ -35,9 +35,6 @@ public class ChallengeManager : MonoBehaviour
     [SerializeField] private GameObject bossBubble;
 
     [Header("Health Settings")]
-    [SerializeField] private float maxDeveloperHealth = 100f;
-    [SerializeField] private float maxBossHealth = 100f;
-
     [SerializeField] private float bossDamage = 25f;
     [SerializeField] private float smallPlayerDamage = 20f;
     [SerializeField] private float bigPlayerDamage = 30f;
@@ -55,6 +52,12 @@ public class ChallengeManager : MonoBehaviour
     private int currentDeveloperIndex = 0;
     private int currentQuestionIndex = 0;
 
+    private float currentDeveloperHealth;
+    private float currentBossHealth;
+    private float maxDeveloperHealth = 100f;
+    private float maxBossHealth = 100f;
+
+    private bool challengeActive = true;
     private bool quizLoaded = false;
 
     [Header("Topics")]
@@ -246,73 +249,74 @@ public class ChallengeManager : MonoBehaviour
 
         ApplyOutcome(developerCorrect, strategyCorrect);
 
-        developerText.text = "";
-        developerBubble.SetActive(false);
-
-        DialogueManager.Instance.AssignDeveloperUI(bossAnimator, bossAudio);
-
-        if (developerCorrect && strategyCorrect)
+        if (challengeActive)
         {
-            yield return StartCoroutine(DialogueManager.Instance.TypeText(
-                "Great Idea! " + question.explanation,
-                questionText
-            ));
-        }
-        else
-        {
-            string feedback = "I'm not sure on that. ";
+            developerText.text = "";
+            developerBubble.SetActive(false);
 
-            if (!developerCorrect && !strategyCorrect)
-                feedback += "I think a different developer and idea could fit for this. ";
-            else if (!developerCorrect)
-                feedback += "I think a different developer may be more fit for this question. ";
+            DialogueManager.Instance.AssignDeveloperUI(bossAnimator, bossAudio);
+
+            if (developerCorrect && strategyCorrect)
+            {
+                yield return StartCoroutine(DialogueManager.Instance.TypeText(
+                    "Great Idea! " + question.explanation,
+                    questionText
+                ));
+            }
             else
-                feedback += "Maybe a different strategy could work better here. ";
+            {
+                string feedback = "I'm not sure on that. ";
 
-            feedback += question.explanation;
+                if (!developerCorrect && !strategyCorrect)
+                    feedback += "I think a different developer and idea could fit for this. ";
+                else if (!developerCorrect)
+                    feedback += "I think a different developer may be more fit for this question. ";
+                else
+                    feedback += "Maybe a different strategy could work better here. ";
 
-            yield return StartCoroutine(DialogueManager.Instance.TypeText(feedback, questionText));
+                feedback += question.explanation;
+
+                yield return StartCoroutine(DialogueManager.Instance.TypeText(feedback, questionText));
+            }
+
+            yield return new WaitForSeconds(hearDuration);
+
+            foreach (var btn in strategyButtons)
+                btn.interactable = true;
+
+            yield return StartCoroutine(NextQuestion());
         }
-
-        yield return new WaitForSeconds(hearDuration);
-
-        foreach (var btn in strategyButtons)
-            btn.interactable = true;
-
-        StartCoroutine(NextQuestion());
     }
 
-    private void ApplyOutcome(bool developerCorrect, bool strategyCorrect)
+    private IEnumerator ApplyOutcome(bool developerCorrect, bool strategyCorrect)
     {
-        float newDeveloperHealth = developerBar.value;
-        float newBossHealth = bossBar.value;
+        float developerDamage = 0f;
+        float bossDamageAmount = 0f;
 
-        //Correct Developer, Correct Attack
         if (developerCorrect && strategyCorrect)
-        {
-            newBossHealth -= bossDamage;
-        }
-        //Correct Developer, Correct Defend
-        else if (developerCorrect && !strategyCorrect)
-        {
-            newDeveloperHealth -= smallPlayerDamage;
-        }
-        //Incorrect Developer, Correct Attack or Defend
+            bossDamageAmount = bossDamage;
         else if (!developerCorrect && strategyCorrect)
-        {
-            newDeveloperHealth -= smallPlayerDamage;
-        }
-        //Incorrect Developer, Incorrect Attack or Defend
+            developerDamage = smallPlayerDamage;
+        else if (developerCorrect && !strategyCorrect)
+            developerDamage = smallPlayerDamage;
         else
+            developerDamage = bigPlayerDamage;
+
+        currentDeveloperHealth = Mathf.Clamp(currentDeveloperHealth - developerDamage, 0, maxDeveloperHealth);
+        currentBossHealth = Mathf.Clamp(currentBossHealth - bossDamageAmount, 0, maxBossHealth);
+
+        yield return StartCoroutine(SmoothFill(developerBar, currentDeveloperHealth));
+        yield return StartCoroutine(SmoothFill(bossBar, currentBossHealth));
+
+        if (currentDeveloperHealth <= 0)
         {
-            newDeveloperHealth -= bigPlayerDamage;
+            //Failed challenge
+            challengeActive = false;
+            yield return StartCoroutine(DialogueManager.Instance.TypeText("I appreciate your help, but I think I might ask another developer for some help. Thanks anyways!", questionText));
+            yield return new WaitForSeconds(hearDuration);
+
+            bossBubble.SetActive(false);
         }
-
-        newDeveloperHealth = Mathf.Clamp(newDeveloperHealth, 0, maxDeveloperHealth);
-        newBossHealth = Mathf.Clamp(newBossHealth, 0, maxBossHealth);
-
-        StartCoroutine(SmoothFill(developerBar, newDeveloperHealth));
-        StartCoroutine(SmoothFill(bossBar, newBossHealth));
     }
 
     private IEnumerator NextQuestion()
@@ -325,6 +329,7 @@ public class ChallengeManager : MonoBehaviour
         }
         else
         {
+            //Finished challenge
             StartCoroutine(DialogueManager.Instance.TypeText("Great work! Thanks for your help!", questionText));
 
             yield return new WaitForSeconds(hearDuration);
