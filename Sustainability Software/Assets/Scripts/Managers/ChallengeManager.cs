@@ -51,9 +51,6 @@ public class ChallengeManager : MonoBehaviour
     private string selectedDeveloper;
     private int currentDeveloperIndex = 0;
     private int currentQuestionIndex = 0;
-
-    private float currentDeveloperHealth;
-    private float currentBossHealth;
     private float maxDeveloperHealth = 100f;
     private float maxBossHealth = 100f;
 
@@ -290,25 +287,25 @@ public class ChallengeManager : MonoBehaviour
 
     private IEnumerator ApplyOutcome(bool developerCorrect, bool strategyCorrect)
     {
-        float developerDamage = 0f;
-        float bossDamageAmount = 0f;
+        float newDeveloperHealth = developerBar.value; 
+        float newBossHealth = bossBar.value; 
+        
+        //Correct Developer, Correct Attack
+        if (developerCorrect && strategyCorrect) { newBossHealth -= bossDamage; } 
+        //Correct Developer, Correct Defend
+        else if (developerCorrect && !strategyCorrect) { newDeveloperHealth -= smallPlayerDamage; } 
+        //Incorrect Developer, Correct Attack or Defend
+        else if (!developerCorrect && strategyCorrect) { newDeveloperHealth -= smallPlayerDamage; } 
+        //Incorrect Developer, Incorrect Attack or Defend
+        else { newDeveloperHealth -= bigPlayerDamage; } 
+        
+        newDeveloperHealth = Mathf.Clamp(newDeveloperHealth, 0, maxDeveloperHealth); 
+        newBossHealth = Mathf.Clamp(newBossHealth, 0, maxBossHealth); 
 
-        if (developerCorrect && strategyCorrect)
-            bossDamageAmount = bossDamage;
-        else if (!developerCorrect && strategyCorrect)
-            developerDamage = smallPlayerDamage;
-        else if (developerCorrect && !strategyCorrect)
-            developerDamage = smallPlayerDamage;
-        else
-            developerDamage = bigPlayerDamage;
+        StartCoroutine(SmoothFill(developerBar, newDeveloperHealth));
+        StartCoroutine(SmoothFill(bossBar, newBossHealth));
 
-        currentDeveloperHealth = Mathf.Clamp(currentDeveloperHealth - developerDamage, 0, maxDeveloperHealth);
-        currentBossHealth = Mathf.Clamp(currentBossHealth - bossDamageAmount, 0, maxBossHealth);
-
-        yield return StartCoroutine(SmoothFill(developerBar, currentDeveloperHealth));
-        yield return StartCoroutine(SmoothFill(bossBar, currentBossHealth));
-
-        if (currentDeveloperHealth <= 0)
+        if (newDeveloperHealth <= 0)
         {
             //Failed challenge
             challengeActive = false;
@@ -331,6 +328,14 @@ public class ChallengeManager : MonoBehaviour
         {
             //Finished challenge
             StartCoroutine(DialogueManager.Instance.TypeText("Great work! Thanks for your help!", questionText));
+
+            foreach (var btn in strategyButtons)
+                btn.interactable = false;
+
+            foreach (var btn in developerButtons)
+                btn.interactable = false;
+
+            submitButton.interactable = false;
 
             yield return new WaitForSeconds(hearDuration);
 
