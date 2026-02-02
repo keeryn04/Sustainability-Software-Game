@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Head from "next/head";
 import { useState } from "react";
 import AboutUsModal from "../app/components/AboutUsModal";
 import senaPhoto from './images/sena.png';
@@ -73,7 +74,7 @@ export default function PlayPage() {
             <li>
               <strong>Quiz Mode: </strong>
               <br />
-              This stage is designed to test your knowledge in a multiple choice, quiz like scenario. You are given four options to
+              This stage is designed to test your knowledge in a multiple choice, quiz-like scenario. You are given four options to
               choose from based on the scenario, and must choose the best response. The chat feature is also available in this stage,
               allowing you to ask any questions you may have regarding sustainability topics. 
             </li>
@@ -93,74 +94,81 @@ export default function PlayPage() {
   };
 
   return (
-    <main className="app-container">
-      {/* Header */}
-      <header className="app-header">
-        <Image
-            src={senaPhoto}
-            alt="Sena Logo"
-            width={80}
-            height={80}
+    <>
+      <Head>
+        <title>Sena</title>
+        <meta name="description" content="Sena is an interactive learning and simulation platform for software sustainability." />
+        <link rel="icon" href="./images/sena.svg" /> {/* Path to your SVG or ICO favicon */}
+      </Head>
+      <main className="app-container">
+        {/* Header */}
+        <header className="app-header">
+          <Image
+              src={senaPhoto}
+              alt="Sena Logo"
+              width={80}
+              height={80}
+            />
+          <h1>Sena</h1>
+          <div className="header-buttons">
+            <button onClick={() => setOpenAboutUs(true)}>
+              About Us
+            </button>
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="app-content">
+          {/* Info Panel */}
+          <aside className="info-panel">
+            <div className="tabs">
+              <button
+                className={activeTab === "Intro" ? "active" : ""}
+                onClick={() => setActiveTab("Intro")}
+              >
+                Intro
+              </button>
+              <button
+                className={activeTab === "Learning" ? "active" : ""}
+                onClick={() => setActiveTab("Learning")}
+              >
+                Learning
+              </button>
+              <button
+                className={activeTab === "Practicing" ? "active" : ""}
+                onClick={() => setActiveTab("Practicing")}
+              >
+                Practicing
+              </button>
+              <button
+                className={activeTab === "Applying" ? "active" : ""}
+                onClick={() => setActiveTab("Applying")}
+              >
+                Applying
+              </button>
+            </div>
+
+            <div className="tab-content">
+              {renderTabContent()}
+            </div>
+          </aside>
+
+          {/* Unity Embed */}
+          <section className="unity-panel">
+            <iframe
+              src="/unity/index.html"
+              allow="fullscreen"
+              className="unity-iframe"
+            />
+          </section>
+
+          {/* About Us Modal */}
+          <AboutUsModal
+            isOpen={openAboutUs}
+            onClose={() => setOpenAboutUs(false)}
           />
-        <h1>Sena</h1>
-        <div className="header-buttons">
-          <button onClick={() => setOpenAboutUs(true)}>
-            About Us
-          </button>
         </div>
-      </header>
-
-      {/* Content */}
-      <div className="app-content">
-        {/* Info Panel */}
-        <aside className="info-panel">
-          <div className="tabs">
-            <button
-              className={activeTab === "Intro" ? "active" : ""}
-              onClick={() => setActiveTab("Intro")}
-            >
-              Intro
-            </button>
-            <button
-              className={activeTab === "Learning" ? "active" : ""}
-              onClick={() => setActiveTab("Learning")}
-            >
-              Learning
-            </button>
-            <button
-              className={activeTab === "Practicing" ? "active" : ""}
-              onClick={() => setActiveTab("Practicing")}
-            >
-              Practicing
-            </button>
-            <button
-              className={activeTab === "Applying" ? "active" : ""}
-              onClick={() => setActiveTab("Applying")}
-            >
-              Applying
-            </button>
-          </div>
-
-          <div className="tab-content">
-            {renderTabContent()}
-          </div>
-        </aside>
-
-        {/* Unity Embed */}
-        <section className="unity-panel">
-          <iframe
-            src="/unity/index.html"
-            allow="fullscreen"
-            className="unity-iframe"
-          />
-        </section>
-
-        {/* About Us Modal */}
-        <AboutUsModal
-          isOpen={openAboutUs}
-          onClose={() => setOpenAboutUs(false)}
-        />
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
