@@ -244,8 +244,8 @@ public class ChallengeManager : MonoBehaviour
     {
         var question = currentChallenge.questions[currentQuestionIndex];
 
-        bool developerCorrect = selectedDeveloper == question.correctDeveloper;
-        bool strategyCorrect = selectedStrategyId == question.correctStrategyId;
+        bool developerCorrect = selectedDeveloper.ToLower() == question.correctDeveloper.ToLower();
+        bool strategyCorrect = selectedStrategyId.ToLower() == question.correctStrategyId.ToLower();
 
         ApplyOutcome(developerCorrect, strategyCorrect);
 
