@@ -85,14 +85,14 @@ public class QuizManager : MonoBehaviour
             if (i < question.options.Count)
             {
                 optionButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = question.options[i];
-                optionButtons[i].gameObject.SetActive(true);
+                optionButtons[i].interactable = true;
                 int index = i;
                 optionButtons[i].onClick.RemoveAllListeners();
                 optionButtons[i].onClick.AddListener(() => StartCoroutine(CheckAnswer(index)));
             }
             else
             {
-                optionButtons[i].gameObject.SetActive(false);
+                optionButtons[i].interactable = false;
             }
         }
     }
@@ -100,10 +100,6 @@ public class QuizManager : MonoBehaviour
     private IEnumerator CheckAnswer(int selectedIndex)
     {
         var question = currentQuiz.questions[currentIndex];
-
-        //Deactivate option buttons
-        foreach (var btn in optionButtons)
-            btn.gameObject.SetActive(false);
 
         explanationBubble.SetActive(true);
         if (selectedIndex == question.correctIndex)
@@ -134,7 +130,7 @@ public class QuizManager : MonoBehaviour
         {
             questionText.text = "Quiz complete!";
             foreach (var btn in optionButtons)
-                btn.gameObject.SetActive(false);
+                btn.interactable = false;
         }
     }
 }
