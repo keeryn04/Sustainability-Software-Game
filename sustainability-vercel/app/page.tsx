@@ -18,12 +18,12 @@ export default function PlayPage() {
               Sena is an interactive learning and simulation platform designed to explore the principles of software sustainability. 
               It helps users understand how decisions in software development impact not only the technical quality of a system but 
               also its environmental, social, and long-term economic sustainability.
-
+              <br /><br />
               Sena is intended for students, educators, and professionals in software engineering, computer science, and related fields
               who want to deepen their understanding of sustainable development practices. Through guided learning, hands-on simulations,
               and reflective exercises, Sena allows users to experiment with real-world scenarios, see the consequences of their decisions,
               and develop the skills needed to create software that is efficient, responsible, and future-ready.
-
+              <br /><br />
               Whether you are learning the fundamentals of sustainable software design or exploring complex trade-offs in advanced projects, 
               Sena provides a safe, interactive environment to test ideas, gain insights, and build sustainable thinking into your 
               development practice.

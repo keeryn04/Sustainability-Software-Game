@@ -105,6 +105,19 @@ body, html {
   border-radius: 4px;
 }
 
+.tab-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+  background: var(--panel-background);
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+  background-color: var(--background-color);
+  border-radius: 4px;
+}
+
 .unity-panel {
   flex: 1;
   display: flex;
