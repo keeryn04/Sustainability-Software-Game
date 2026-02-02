@@ -10,8 +10,9 @@ export default function PlayPage() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case: "Intro":
+      case "Intro":
         return (
+          <>
             <strong>Welcome to Sena! </strong>
             <p>
               Sena is an interactive learning and simulation platform designed to explore the principles of software sustainability. 
@@ -27,6 +28,7 @@ export default function PlayPage() {
               Sena provides a safe, interactive environment to test ideas, gain insights, and build sustainable thinking into your 
               development practice.
             </p>
+          </>
         );
       case "Learning":
         return (
