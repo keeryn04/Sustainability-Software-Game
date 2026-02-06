@@ -223,6 +223,8 @@ public class DialogueManager : MonoBehaviour
 
     public IEnumerator BeginReflection()
     {
+        if (reflectionTitle == null) Debug.LogWarning("reflectionTitle is null!");
+
         reflectionTitle.text = GameManager.Instance.gameStatus;
 
         if (!string.IsNullOrEmpty(currentScenario.reflectionFeedback) && clientText != null)

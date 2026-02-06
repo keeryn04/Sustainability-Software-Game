@@ -37,7 +37,7 @@ public class HearMoreManager : MonoBehaviour
         if (hearMoreBubble == null || textBox == null) yield break;
 
         // Disable button while talking
-        if (triggerButton != null)
+        if (triggerButton != null && triggerButton.gameObject != null)
             triggerButton.interactable = false;
 
         // Look up HearMore text
@@ -59,7 +59,7 @@ public class HearMoreManager : MonoBehaviour
         hearMoreBubble.SetActive(false);
 
         // Re-enable button
-        if (triggerButton != null)
+        if (triggerButton != null && triggerButton.gameObject != null)
             triggerButton.interactable = true;
     }
 

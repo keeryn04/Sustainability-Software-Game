@@ -86,11 +86,28 @@ public class SceneInitializer : MonoBehaviour
 
     private void SetupReflectionScene()
     {
-        if (DialogueManager.Instance != null)
+        if (DialogueManager.Instance == null)
         {
-            DialogueManager.Instance.AssignReflectionUI(reflectionFeedbackText, speechBubble, reflectionGrid, reflectionText);
-            DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
+            Debug.LogWarning("DialogueManager.Instance is null!");
+            return;
+        }
+
+        // Guard all UI references
+        if (reflectionFeedbackText == null) Debug.LogWarning("reflectionFeedbackText is null!");
+        if (speechBubble == null) Debug.LogWarning("speechBubble prefab is null!");
+        if (reflectionGrid == null) Debug.LogWarning("reflectionGrid is null!");
+        if (reflectionText == null) Debug.LogWarning("reflectionText is null!");
+
+        DialogueManager.Instance.AssignReflectionUI(reflectionFeedbackText, speechBubble, reflectionGrid, reflectionText);
+        DialogueManager.Instance.AssignDeveloperUI(typingAnimator, audioSource);
+
+        if (reflectionFeedbackText != null && speechBubble != null && reflectionGrid != null && reflectionText != null)
+        {
             StartCoroutine(DialogueManager.Instance.BeginReflection());
+        }
+        else
+        {
+            Debug.LogWarning("Cannot start reflection because UI references are missing!");
         }
     }
 
