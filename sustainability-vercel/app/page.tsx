@@ -98,7 +98,7 @@ export default function PlayPage() {
       <Head>
         <title>Sena</title>
         <meta name="description" content="Sena is an interactive learning and simulation platform for software sustainability." />
-        <link rel="icon" href="./images/sena.svg" /> {/* Path to your SVG or ICO favicon */}
+        <link rel="icon" href="./images/sena.svg" />
       </Head>
       <main className="app-container">
         {/* Header */}

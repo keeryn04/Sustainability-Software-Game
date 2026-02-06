@@ -32,7 +32,7 @@ public class HearMoreManager : MonoBehaviour
         StartCoroutine(LoadHearMoreRoutine(speechID, textBox, triggerButton));
     }
 
-    private IEnumerator LoadHearMoreRoutine(string speechID, TextMeshProUGUI textBox, Button triggerButton = null)
+    private IEnumerator LoadHearMoreRoutine(string speechID, TextMeshProUGUI textBox, Button triggerButton)
     {
         if (hearMoreBubble == null || textBox == null) yield break;
 

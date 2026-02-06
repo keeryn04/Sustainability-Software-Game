@@ -225,9 +225,19 @@ public class DialogueManager : MonoBehaviour
     {
         reflectionTitle.text = GameManager.Instance.gameStatus;
 
-        yield return StartCoroutine(TypeText(currentScenario.reflectionFeedback, clientText));
+        if (!string.IsNullOrEmpty(currentScenario.reflectionFeedback) && clientText != null)
+        {
+            yield return StartCoroutine(TypeText(currentScenario.reflectionFeedback, clientText));
+        }
+        else
+        {
+            Debug.LogWarning("Reflection feedback or clientText is null!");
+        }
 
-        yield return StartCoroutine(DisplayReflectionsSequentially(playerDecisions));
+        if (playerDecisions != null && playerDecisions.Count > 0)
+        {
+            yield return StartCoroutine(DisplayReflectionsSequentially(playerDecisions));
+        }
     }
 
     public IEnumerator DisplayReflectionsSequentially(List<ChoiceData> playerDecisions)
@@ -242,8 +252,12 @@ public class DialogueManager : MonoBehaviour
             {
                 string text = $"Choice: {decision.choiceText}\nReflection: {decision.reflection}";
 
-                //Wait for last bubble to finish before starting next
-                yield return StartCoroutine(TypeText(text, bubbleText));
+                if (!string.IsNullOrEmpty(text))
+                    yield return StartCoroutine(TypeText(text, bubbleText));
+            }
+            else
+            {
+                Debug.LogWarning("bubbleText is null on instantiated speech bubble!");
             }
         }
     }
