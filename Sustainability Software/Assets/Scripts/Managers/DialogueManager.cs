@@ -63,9 +63,12 @@ public class DialogueManager : MonoBehaviour
     private void HandleTalkingStateChanged(bool isTalking)
     {
         //Disable buttons when talking, enable after
-        foreach (var btn in choiceButtons)
+        if (MenuManager.Instance != null && MenuManager.Instance.CurrentStage != GameStage.Reflection)
         {
-            btn.interactable = !isTalking;
+            foreach (var btn in choiceButtons)
+            {
+                btn.interactable = !isTalking;
+            }
         }
     }
 
@@ -171,6 +174,12 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator OnChoiceSelectedRoutine(int choiceIndex)
     {
+        for (int i = 0; i < choiceButtons.Length; i++)
+        {
+            if (choiceButtons[i] != null && choiceButtons[i].gameObject != null)
+                choiceButtons[i].interactable = false;
+        }
+
         string playerChoice = choiceButtons[choiceIndex].GetComponentInChildren<TextMeshProUGUI>().text;
 
         //LLM response
@@ -180,6 +189,12 @@ public class DialogueManager : MonoBehaviour
         if (llmTask.IsFaulted)
         {
             Debug.LogError("LLM task failed: " + llmTask.Exception);
+            //Re-enable buttons if something went wrong
+            for (int i = 0; i < choiceButtons.Length; i++)
+            {
+                if (choiceButtons[i] != null && choiceButtons[i].gameObject != null)
+                    choiceButtons[i].interactable = true;
+            }
             yield break;
         }
 
@@ -198,6 +213,7 @@ public class DialogueManager : MonoBehaviour
         GameManager.Instance.RegisterDecision(parsed.resourceImpact);
         if (MenuManager.Instance.CurrentStage == GameStage.Reflection) //If game is over
         {
+            yield return StartCoroutine(TypeText(parsed.clientResponse, clientText));
             yield break; 
         }
 
@@ -214,9 +230,13 @@ public class DialogueManager : MonoBehaviour
             if (MenuManager.Instance.CurrentStage != GameStage.Reflection) //Don't assign new options if game is over
             {
                 bool active = i < parsed.choices.Length;
-                choiceButtons[i].gameObject.SetActive(active);
-                if (active)
-                    choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = parsed.choices[i];
+                if (choiceButtons[i] != null && choiceButtons[i].gameObject != null)
+                {
+                    choiceButtons[i].gameObject.SetActive(active);
+                    choiceButtons[i].interactable = active; // Re-enable only if active
+                    if (active)
+                        choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = parsed.choices[i];
+                }
             }
         }
     }
