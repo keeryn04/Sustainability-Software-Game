@@ -22,12 +22,16 @@ body, html {
 }
 
 .app-header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background-color: var(--header-background);
-  border-bottom: 1px solid #333;
+  padding: 0 24px;
+}
+
+.header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .header-buttons button {

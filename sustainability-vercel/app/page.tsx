@@ -109,7 +109,7 @@ export default function PlayPage() {
               width={80}
               height={80}
             />
-          <h1>Sena</h1>
+          <h1 className="header-title">Sena</h1>
           {/* <div className="header-buttons">
             <button onClick={() => setOpenAboutUs(true)}>
               About Us
