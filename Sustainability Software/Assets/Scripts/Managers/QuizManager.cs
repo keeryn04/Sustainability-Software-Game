@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,17 +16,18 @@ public class QuizManager : MonoBehaviour
     private QuizService.Quiz currentQuiz;
     private int currentIndex = 0;
 
-    private List<string> topics = new List<string>
+    private Dictionary<SustainabilityPillar, string> topics = new Dictionary<SustainabilityPillar, string>
     {
-        "Reducing energy consumption in software systems",
-        "Maintainable and scalable software architectures",
-        "Cost efficiency and resource optimization in software",
-        "Accessibility and user well-being in software"             
+        { SustainabilityPillar.Environmental, "Reducing energy consumption in software systems"},
+        { SustainabilityPillar.Technical, "Maintainable and scalable software architectures"},
+        { SustainabilityPillar.Economic, "Cost efficiency and resource optimization in software"},
+        { SustainabilityPillar.Social, "Accessibility and user well-being in software"}             
     };
 
     async void Start()
     {
-        string topic = topics[Random.Range(0, topics.Count)];
+
+        string topic = ChooseRandomTopic();
 
         currentQuiz = await QuizService.GenerateQuizAsync(topic, 5);
 
@@ -55,6 +57,16 @@ public class QuizManager : MonoBehaviour
         {
             btn.interactable = !isTalking;
         }
+    }
+
+    private string ChooseRandomTopic()
+    {
+        List<SustainabilityPillar> pillarsVisited = MenuManager.Instance.PillarsVisited;
+
+        SustainabilityPillar chosenPillar = pillarsVisited[Random.Range(0, pillarsVisited.Count)]; //Pick pillar based on what user has already learned
+        string topic = topics[chosenPillar];
+
+        return topic;
     }
     void DisplayQuestion()
     {

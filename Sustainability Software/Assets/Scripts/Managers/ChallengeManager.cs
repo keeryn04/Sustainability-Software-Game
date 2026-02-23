@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -56,22 +57,23 @@ public class ChallengeManager : MonoBehaviour
 
     private bool challengeActive = true;
     private bool quizLoaded = false;
+    private bool quizFailed = false;
 
     [Header("Topics")]
-    [SerializeField] private List<string> topics = new List<string>
+    [SerializeField] private Dictionary<SustainabilityPillar, string> topics = new Dictionary<SustainabilityPillar, string>
     {
-        "Reducing energy consumption in software systems",
-        "Maintainable and scalable software architectures",
-        "Cost efficiency and resource optimization in software",
-        "Accessibility and user well-being in software"
+        { SustainabilityPillar.Environmental, "Reducing energy consumption in software systems"},
+        { SustainabilityPillar.Technical, "Maintainable and scalable software architectures"},
+        { SustainabilityPillar.Economic, "Cost efficiency and resource optimization in software"},
+        { SustainabilityPillar.Social, "Accessibility and user well-being in software"}
     };
 
     private string currentTopic;
 
-    async void Start()
+    private async void Start()
     {
         //Choose random topic
-        currentTopic = topics[Random.Range(0, topics.Count)];
+        currentTopic = ChooseRandomTopic();
         cutsceneController.SetTopic(currentTopic);
 
         //Turn off buttons for cutscene
@@ -106,13 +108,20 @@ public class ChallengeManager : MonoBehaviour
         SetActiveDeveloper(0);
 
         //Load quiz
-        currentChallenge = await ChallengeService.GenerateChallengeAsync(currentTopic, 5);
-        quizLoaded = true;
-
-        if (currentChallenge == null || currentChallenge.questions.Count == 0)
+        try
         {
-            questionText.text = "Failed to load quiz.";
-            return;
+            currentChallenge = await ChallengeService.GenerateChallengeAsync(currentTopic, 5);
+            if (currentChallenge == null || currentChallenge.questions.Count == 0)
+                quizFailed = true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            quizFailed = true;
+        }
+        finally
+        {
+            quizLoaded = true;
         }
 
         DialogueManager.Instance.OnTalkingStateChanged += HandleTalkingStateChanged;
@@ -131,6 +140,12 @@ public class ChallengeManager : MonoBehaviour
         yield return new WaitUntil(() =>
             cutsceneController.IsFinished && quizLoaded
         );
+
+        if (quizFailed)
+        {
+            questionText.text = "Actually, I'm having some trouble coming up with questions right now. Could we try again later?";
+            yield break;
+        }
 
         StartCoroutine(DisplayQuestion());
     }
@@ -159,7 +174,17 @@ public class ChallengeManager : MonoBehaviour
             submitButton.interactable = !isTalking;
         }
     }
+    private string ChooseRandomTopic()
+    {
+        List<SustainabilityPillar> pillarsVisited = MenuManager.Instance.PillarsVisited;
+        Debug.Log(pillarsVisited[0]);
+        Debug.Log(pillarsVisited[1]);
 
+        SustainabilityPillar chosenPillar = pillarsVisited[UnityEngine.Random.Range(0, pillarsVisited.Count)]; //Pick pillar based on what user has already learned
+        string topic = topics[chosenPillar];
+
+        return topic;
+    }
     void SetActiveDeveloper(int index)
     {
         currentDeveloperIndex = (index + developers.Count) % developers.Count;

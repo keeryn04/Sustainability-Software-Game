@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,10 +23,12 @@ public class MenuManager : MonoBehaviour
     private ScenarioData currentScenario;
     private GameStage currentStage = GameStage.None;
     private SustainabilityPillar currentPillar = SustainabilityPillar.General;
+    private List<SustainabilityPillar> pillarsVisited = new List<SustainabilityPillar>();
 
     public GameStage CurrentStage => currentStage;
     public ScenarioData CurrentScenario => currentScenario;
     public SustainabilityPillar CurrentPillar => currentPillar;
+    public List<SustainabilityPillar> PillarsVisited => pillarsVisited;
 
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class MenuManager : MonoBehaviour
     public void LoadLearning(SustainabilityPillar learnType)
     {
         currentPillar = learnType; //Store current pillar type
+        pillarsVisited.Add(learnType); //Save learning pillars visited
         currentStage = GameStage.Learning;
 
         SceneManager.sceneLoaded += OnSceneInitialized;
