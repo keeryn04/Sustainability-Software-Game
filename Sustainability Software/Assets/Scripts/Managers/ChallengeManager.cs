@@ -177,8 +177,16 @@ public class ChallengeManager : MonoBehaviour
     private string ChooseRandomTopic()
     {
         List<SustainabilityPillar> pillarsVisited = MenuManager.Instance.PillarsVisited;
+        SustainabilityPillar chosenPillar;
 
-        SustainabilityPillar chosenPillar = pillarsVisited[UnityEngine.Random.Range(0, pillarsVisited.Count)]; //Pick pillar based on what user has already learned
+        if (pillarsVisited.Count > 0)
+        {
+            chosenPillar = pillarsVisited[UnityEngine.Random.Range(0, pillarsVisited.Count)];
+        } else
+        {
+            chosenPillar = SustainabilityPillar.Environmental; //Default to environmental if no lessons visited
+        }
+
         string topic = topics[chosenPillar];
 
         return topic;
