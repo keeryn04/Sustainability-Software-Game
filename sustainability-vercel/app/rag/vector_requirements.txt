@@ -7,7 +7,7 @@ langchain==0.1.2
 langchain-community==0.0.33
 
 # PDF parsing
-unstructured==0.9.4
+unstructured==0.10.0
 python-magic==0.4.27
 pdfminer.six==20221105
 
