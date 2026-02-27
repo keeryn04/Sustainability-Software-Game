@@ -23,6 +23,7 @@ RUN pip install --no-cache-dir \
 #Copy only runtime files
 COPY app.py database_connector.py ./
 COPY models ./models
+COPY data ./data
 
 RUN mkdir -p rag_helpers
 COPY rag_helpers/paper_query.py ./rag_helpers/

@@ -5,16 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'sustainability-vercel/app/papers/**/*.pdf'
+      - 'sustainability-vercel/app/rag/papers/**/*.pdf'
   workflow_dispatch:
 
 jobs:
   embed:
     runs-on: ubuntu-latest
-
-    env:
-      SUPABASE_URI: ${{ secrets.SUPABASE_URI }}
-      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
 
     steps:
     - name: Checkout code

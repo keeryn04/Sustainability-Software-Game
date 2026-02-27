@@ -1,27 +1,33 @@
 import os
+import pickle
+import numpy as np
 from sentence_transformers import SentenceTransformer
-from database_connector import get_db_connection
+import faiss
 
-db = get_db_connection()
+DATA_DIR = "data"
 
-# Point HuggingFace and transformers caches to a temp location
-os.environ["TRANSFORMERS_CACHE"] = "/tmp/transformers_cache"
-os.environ["HF_HOME"] = "/tmp/huggingface_cache"
+model = SentenceTransformer("models/all-MiniLM-L6-v2", device="cpu")
 
-# Cache the model
-MODEL_PATH = "models/all-MiniLM-L6-v2"
-model = SentenceTransformer(MODEL_PATH, device="cpu")
+#Load FAISS index and texts once at startup
+try:
+    index = faiss.read_index(f"{DATA_DIR}/faiss_index.bin")
+    with open(f"{DATA_DIR}/texts.pkl", "rb") as f:
+        stored_texts = pickle.load(f)
+except FileNotFoundError:
+    print("FAISS index or texts.pkl not found in data folder")
+    raise
 
-# Query Supabase using vector embeddings
 def query_papers(query, top_k=5):
-    query_embedding = model.encode(query).tolist()
+    query_embedding = np.array(model.encode([query])).astype("float32")
+    query_embedding = query_embedding / np.linalg.norm(query_embedding, axis=1, keepdims=True)
 
-    response = db.rpc("match_paper_chunks", {
-        "query_embedding": query_embedding,
-        "match_count": top_k
-    }).execute()
+    distances, indices = index.search(query_embedding, top_k)
 
     results = []
-    for row in response.data:
-        results.append({"text": row['text'], "similarity": row["similarity"]})
+    for i, dist in zip(indices[0], distances[0]):
+        results.append({
+            "text": stored_texts[i],
+            "similarity": float(dist)
+        })
+
     return results
