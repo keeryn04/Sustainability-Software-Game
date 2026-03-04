@@ -172,15 +172,6 @@ export default function PlayPage() {
             onClose={() => setOpenAboutUs(false)}
           />
         </div>
-        <footer className="app-footer">
-          <a
-            href="https://www.vecteezy.com/free-png/pile-of-books"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pile Of Books PNGs by Vecteezy
-          </a>
-        </footer>
       </main>
     </>
   );
