@@ -1,7 +1,7 @@
 import Image from "next/image";
-import pluriseLogo from '../images/plurise.png';
-import keerynPhoto from '../images/KeerynJohnson.jpg';
-import ronniePhoto from '../images/SouzaSantos.jpg';
+import pluriseLogo from '../public/plurise.png';
+import keerynPhoto from '../public/KeerynJohnson.jpg';
+import ronniePhoto from '../public/SouzaSantos.jpg';
 
 interface AboutUsModalProps {
   isOpen: boolean;

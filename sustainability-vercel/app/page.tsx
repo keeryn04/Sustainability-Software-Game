@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import Head from "next/head";
 import { useState } from "react";
 import AboutUsModal from "../app/components/AboutUsModal";
-import senaPhoto from './images/sena.png';
+import senaPhoto from './public/sena.png';
 
 export default function PlayPage() {
   const [openAboutUs, setOpenAboutUs] = useState(false);
@@ -95,11 +94,6 @@ export default function PlayPage() {
 
   return (
     <>
-      <Head>
-        <title>Sena</title>
-        <meta name="description" content="Sena is an interactive learning and simulation platform for software sustainability." />
-        <link rel="icon" href="./images/sena.svg" />
-      </Head>
       <main className="app-container">
         {/* Header */}
         <header className="app-header">
@@ -168,6 +162,15 @@ export default function PlayPage() {
             onClose={() => setOpenAboutUs(false)}
           />
         </div>
+        <footer className="app-footer">
+          <a
+            href="https://www.vecteezy.com/free-png/pile-of-books"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pile Of Books PNGs by Vecteezy
+          </a>
+        </footer>
       </main>
     </>
   );
