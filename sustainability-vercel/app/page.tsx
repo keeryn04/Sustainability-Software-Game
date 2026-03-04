@@ -145,6 +145,16 @@ export default function PlayPage() {
             <div className="tab-content">
               {renderTabContent()}
             </div>
+
+            <div className="reference">
+              <a
+                href="https://www.vecteezy.com/free-png/pile-of-books"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Featured in Logo: Pile of Books PNGs by Vecteezy
+              </a>
+            </div>
           </aside>
 
           {/* Unity Embed */}
