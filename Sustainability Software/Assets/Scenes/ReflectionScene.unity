@@ -764,7 +764,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1882682277471673006, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_Name
-      value: SpeechBubbleText
+      value: ChatBubbleText
       objectReference: {fileID: 0}
     - target: {fileID: 2757810341163253020, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_PreferredWidth
@@ -852,7 +852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886618452072230514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_Name
-      value: SpeechBubble
+      value: ChatBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202166283804466321, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
+      propertyPath: m_text
+      value: Chat Text
       objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchorMax.y
