@@ -1048,6 +1048,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Hear More Text
       objectReference: {fileID: 0}
+    - target: {fileID: 6202166283804466321, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202166283804466321, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 9150799236949798514, guid: 7c4fe77779040564daabfc1fb773733d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2465,6 +2473,10 @@ PrefabInstance:
       propertyPath: speechBubble
       value: 
       objectReference: {fileID: 891174695}
+    - target: {fileID: 4130781100136572952, guid: 7f607b3993174204a996c80406bf0f3f, type: 3}
+      propertyPath: waitDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6765348138782542293, guid: 7f607b3993174204a996c80406bf0f3f, type: 3}
       propertyPath: m_Name
       value: Chatbox
